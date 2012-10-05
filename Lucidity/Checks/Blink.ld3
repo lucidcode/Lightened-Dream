@@ -1,0 +1,51 @@
+<Check>
+  <Title>Blink</Title>
+  <Description>
+  </Description>
+  <Sequence>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Speak</Type>
+      <Details>Open and close your eyes repeatedly.</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Speak</Type>
+      <Details>Do you notice anything strange?</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>Blink</Details>
+    </Item>
+  </Sequence>
+</Check>

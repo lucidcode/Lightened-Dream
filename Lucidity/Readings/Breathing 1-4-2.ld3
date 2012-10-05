@@ -1,0 +1,73 @@
+<Reading>
+  <Title>Breathing 1-4-2</Title>
+  <Description>
+  </Description>
+  <Interval>1000</Interval>
+  <Width>-1</Width>
+  <Height>-1</Height>
+  <Background>-12156236</Background>
+  <Text>-1</Text>
+  <Size>72</Size>
+  <Messages>
+    <Message>Inhale 8</Message>
+    <Message>Inhale 7</Message>
+    <Message>Inhale 6</Message>
+    <Message>Inhale 5</Message>
+    <Message>Inhale 4</Message>
+    <Message>Inhale 3</Message>
+    <Message>Inhale 2</Message>
+    <Message>Inhale 1</Message>
+    <Message>Hold 32</Message>
+    <Message>Hold 31</Message>
+    <Message>Hold 30</Message>
+    <Message>Hold 29</Message>
+    <Message>Hold 28</Message>
+    <Message>Hold 27</Message>
+    <Message>Hold 26</Message>
+    <Message>Hold 25</Message>
+    <Message>Hold 24</Message>
+    <Message>Hold 23</Message>
+    <Message>Hold 22</Message>
+    <Message>Hold 21</Message>
+    <Message>Hold 20</Message>
+    <Message>Hold 19</Message>
+    <Message>Hold 18</Message>
+    <Message>Hold 17</Message>
+    <Message>Hold 16 </Message>
+    <Message>Hold 15</Message>
+    <Message>Hold 14</Message>
+    <Message>Hold 13</Message>
+    <Message>Hold 12</Message>
+    <Message>Hold 11</Message>
+    <Message>Hold 10</Message>
+    <Message>Hold 09</Message>
+    <Message>Hold 08</Message>
+    <Message>Hold 07</Message>
+    <Message>Hold 06</Message>
+    <Message>Hold 05</Message>
+    <Message>Hold 04</Message>
+    <Message>Hold 03</Message>
+    <Message>Hold 02</Message>
+    <Message>Hold 01</Message>
+    <Message>Exhale 16</Message>
+    <Message>Exhale 15</Message>
+    <Message>Exhale 14</Message>
+    <Message>Exhale 13</Message>
+    <Message>Exhale 12</Message>
+    <Message>Exhale 11</Message>
+    <Message>Exhale 10</Message>
+    <Message>Exhale 9</Message>
+    <Message>Exhale 8</Message>
+    <Message>Exhale 7</Message>
+    <Message>Exhale 6</Message>
+    <Message>Exhale 5</Message>
+    <Message>Exhale 4</Message>
+    <Message>Exhale 3</Message>
+    <Message>Exhale 2</Message>
+    <Message>Exhale 1</Message>
+    <Message>
+    </Message>
+    <Message>
+    </Message>
+  </Messages>
+</Reading>

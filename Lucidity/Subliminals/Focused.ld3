@@ -1,0 +1,32 @@
+<Subliminal>
+  <Title>Focused</Title>
+  <Description>
+  </Description>
+  <Interval>2000</Interval>
+  <Duration>750</Duration>
+  <Transparency>50</Transparency>
+  <Background>-12156236</Background>
+  <Text>-1</Text>
+  <Size>16</Size>
+  <Messages>
+    <Message>I am focused</Message>
+    <Message>I am aware</Message>
+    <Message>I am relaxed</Message>
+    <Message>I am calm</Message>
+    <Message>I am strong</Message>
+    <Message>I am watching</Message>
+    <Message>I am observing</Message>
+    <Message>I am focusing</Message>
+    <Message>I am concentrating</Message>
+    <Message>I am learning</Message>
+    <Message>I am growing</Message>
+    <Message>I am expanding</Message>
+    <Message>I am experiencing</Message>
+    <Message>I am feeling</Message>
+    <Message>I am thinking</Message>
+    <Message>I am breathing</Message>
+    <Message>I am content</Message>
+    <Message>I am grateful</Message>
+    <Message>I am loving</Message>
+  </Messages>
+</Subliminal>

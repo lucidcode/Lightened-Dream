@@ -1,0 +1,22 @@
+<Subliminal>
+  <Title>Reality Checks</Title>
+  <Description>Runs every 30 minutes</Description>
+  <Interval>1800000</Interval>
+  <Duration>5000</Duration>
+  <Transparency>10</Transparency>
+  <Background>-12156236</Background>
+  <Text>-1</Text>
+  <Size>16</Size>
+  <Messages>
+    <Message>Are you dreaming right now?</Message>
+    <Message>Look at the time. Does it change?</Message>
+    <Message>Look at your hands. Are you dreaming?</Message>
+    <Message>What would be different in a dream?</Message>
+    <Message>What did you do an hour ago?</Message>
+    <Message>What will you be doing in an hour?</Message>
+    <Message>Can you breathe through your hand?</Message>
+    <Message>Can you see with your eyes closed?</Message>
+    <Message>Can you make the light brighter?</Message>
+    <Message>Can you float in the air?</Message>
+  </Messages>
+</Subliminal>

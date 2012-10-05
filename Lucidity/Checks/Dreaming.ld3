@@ -1,0 +1,27 @@
+<Check>
+  <Title>Dreaming</Title>
+  <Description>
+  </Description>
+  <Sequence>
+    <Item>
+      <Type>Act</Type>
+      <Details>GetAttention</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>GetAttentionContinued</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>GetAttentionContinued</Details>
+    </Item>
+    <Item>
+      <Type>Speak</Type>
+      <Details>Are you dreaming right now?</Details>
+    </Item>
+    <Item>
+      <Type>Act</Type>
+      <Details>GetAttentionReturn</Details>
+    </Item>
+  </Sequence>
+</Check>

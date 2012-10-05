@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B57775D3-47AD-4C86-8779-BBBF02555E7D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>lucidcode.LightenedDream.Lucidity</RootNamespace>
+    <AssemblyName>lucidcode.LightenedDream.Lucidity</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>lucidcode.LightenedDream.Lucidity.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>lucidcode.LightenedDream.Lucidity.xml</DocumentationFile>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <DocumentationFile>lucidcode.LightenedDream.Lucidity.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>_MYFORMS=True</DefineConstants>
+    <DocumentationFile>lucidcode.LightenedDream.Lucidity.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AxInterop.AgentObjects, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\AxInterop.AgentObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\AxInterop.WMPLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.AgentObjects, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Interop.AgentObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="lucidcode.Controls, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\lucidcode.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="lucidcode.Controls.ColorPicker, Version=1.0.3816.26238, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\lucidcode.Controls.ColorPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="Spell Checker, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\Spell Checker.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Speech">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\References\System.Windows.Forms.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="FIELDForm.Designer.vb">
+      <DependentUpon>FIELDForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FIELDForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemClearControl.Designer.vb">
+      <DependentUpon>MemClearControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MemClearControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WhyLDForm.Designer.vb">
+      <DependentUpon>WhyLDForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WhyLDForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlashesForm.Designer.vb">
+      <DependentUpon>FlashesForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FlashesForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExcercisesFolderViewControl.Designer.vb">
+      <DependentUpon>ExcercisesFolderViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExcercisesFolderViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LucidityControl.Designer.vb">
+      <DependentUpon>LucidityControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LucidityControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FolderViewControl.Designer.vb">
+      <DependentUpon>FolderViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FolderViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MonthListControl.Designer.vb">
+      <DependentUpon>MonthListControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MonthListControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RecordingViewControl.Designer.vb">
+      <DependentUpon>RecordingViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RecordingViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpeedReadingViewControl.Designer.vb">
+      <DependentUpon>SpeedReadingViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SpeedReadingViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MerlinItemControl.Designer.vb">
+      <DependentUpon>MerlinItemControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MerlinItemControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SubliminalViewControl.Designer.vb">
+      <DependentUpon>SubliminalViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubliminalViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MerlinViewControl.Designer.vb">
+      <DependentUpon>MerlinViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MerlinViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ItemViewControl.Designer.vb">
+      <DependentUpon>ItemViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ItemViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpeedReadingForm.Designer.vb">
+      <DependentUpon>SpeedReadingForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SpeedReadingForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RealityCheckControl.Designer.vb">
+      <DependentUpon>RealityCheckControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RealityCheckControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="SubliminalForm.Designer.vb">
+      <DependentUpon>SubliminalForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SubliminalForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WILDForm.Designer.vb">
+      <DependentUpon>WILDForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="WILDForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tags.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="REMCyclesControl.Designer.vb">
+      <DependentUpon>REMCyclesControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="REMCyclesControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ExcerciseViewControl.Designer.vb">
+      <DependentUpon>ExcerciseViewControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ExcerciseViewControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="YearListControl.Designer.vb">
+      <DependentUpon>YearListControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="YearListControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="YearsListControl.Designer.vb">
+      <DependentUpon>YearsListControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="YearsListControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FIELDForm.resx">
+      <DependentUpon>FIELDForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MemClearControl.resx">
+      <DependentUpon>MemClearControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WhyLDForm.resx">
+      <DependentUpon>WhyLDForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlashesForm.resx">
+      <DependentUpon>FlashesForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcercisesFolderViewControl.resx">
+      <DependentUpon>ExcercisesFolderViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LucidityControl.resx">
+      <DependentUpon>LucidityControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FolderViewControl.resx">
+      <DependentUpon>FolderViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MonthListControl.resx">
+      <DependentUpon>MonthListControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordingViewControl.resx">
+      <DependentUpon>RecordingViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpeedReadingViewControl.resx">
+      <DependentUpon>SpeedReadingViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MerlinItemControl.resx">
+      <DependentUpon>MerlinItemControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubliminalViewControl.resx">
+      <DependentUpon>SubliminalViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MerlinViewControl.resx">
+      <DependentUpon>MerlinViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemViewControl.resx">
+      <DependentUpon>ItemViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SpeedReadingForm.resx">
+      <DependentUpon>SpeedReadingForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RealityCheckControl.resx">
+      <DependentUpon>RealityCheckControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="REMCyclesControl.resx">
+      <DependentUpon>REMCyclesControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubliminalForm.resx">
+      <DependentUpon>SubliminalForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ExcerciseViewControl.resx">
+      <DependentUpon>ExcerciseViewControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WILDForm.resx">
+      <DependentUpon>WILDForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YearListControl.resx">
+      <DependentUpon>YearListControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="YearsListControl.resx">
+      <DependentUpon>YearsListControl.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dreams\Dreams.vbproj">
+      <Project>{3CBCDCC5-6CE6-4D50-AD8C-B60F73EF489D}</Project>
+      <Name>Dreams</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

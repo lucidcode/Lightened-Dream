@@ -1,6 +1,12 @@
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-bin
-obj
+bin/
+obj/
+debug/
+release/
+
+#User Specific Files
+*.user
+*.suo
 
 # mstest test results
 TestResults
