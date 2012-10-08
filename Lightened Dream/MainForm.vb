@@ -337,8 +337,17 @@ Public Class MainForm
 
                     ' Load each dream
                     For Each strDreamFile As String In Directory.GetFiles(strMonthFolder, "*.ld3")
-                        trvDream = New TreeNode(New FileInfo(strDreamFile).Name.Replace(".ld3", ""))
                         Dim objDreamTag As New Dreams.Tags.DreamFile(strDreamFile)
+                        Dim dreamTitle = New FileInfo(strDreamFile).Name.Replace(".ld3", "")
+
+                        ' Check for special characters in the title and load them from within the file
+                        If dreamTitle.Contains("_") Then
+                            Dim xmlDream As New XmlDocument
+                            xmlDream.Load(strDreamFile)
+                            dreamTitle = dreamTitle.Substring(0, 3) & xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
+                        End If
+
+                        trvDream = New TreeNode(dreamTitle)
                         trvDream.Tag = objDreamTag
                         trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
                         trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
@@ -472,7 +481,7 @@ Public Class MainForm
             xmlCategory.Load(strCatgeoryFile)
             For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
                 Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-                Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + xmlDreamNode.Attributes("Title").InnerText + ".ld3")
+                Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
                 trvDream.Tag = objDreamTag
                 trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
                 trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
@@ -737,11 +746,15 @@ Public Class MainForm
                 m_objDreamViewControl.Dock = DockStyle.Fill
                 pnlContainer.Controls.Add(m_objDreamViewControl)
                 Application.DoEvents()
-                m_objDreamViewControl.LoadDream(CType(trvMain.SelectedNode.Tag, Dreams.Tags.DreamFile).Path)
+
+                Dim locked As Boolean = True
                 If Not TypeOf (trvMain.SelectedNode.Parent.Tag) Is Categories.Tags.CategoryFile Then
                     toolSave.Enabled = True
                     toolDelete.Enabled = True
+                    locked = False
                 End If
+
+                m_objDreamViewControl.LoadDream(CType(trvMain.SelectedNode.Tag, Dreams.Tags.DreamFile).Path, locked)
                 If m_objDreamViewControl.Words = 1 Then
                     lblStatus.Text = m_objDreamViewControl.Words.ToString + " Word"
                 Else
@@ -1213,7 +1226,7 @@ Public Class MainForm
         xmlCategory.Load(strFileName)
         For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
             Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-            Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + xmlDreamNode.Attributes("Title").InnerText + ".ld3")
+            Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
             trvDream.Tag = objDreamTag
             trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
             trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
@@ -1249,8 +1262,17 @@ Public Class MainForm
 
             If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Then
                 m_objDreamViewControl.Save()
-                'm_objDreamViewControl.UpdateView()
-                trvMain.SelectedNode.Text = New FileInfo(m_objDreamViewControl.FileName).Name.Replace(".ld3", "")
+
+                Dim dreamTitle = New FileInfo(m_objDreamViewControl.FileName).Name.Replace(".ld3", "")
+
+                ' Check for special characters in the title and load them from within the file
+                If dreamTitle.Contains("_") Then
+                    Dim xmlDream As New XmlDocument
+                    xmlDream.Load(m_objDreamViewControl.FileName)
+                    dreamTitle = dreamTitle.Substring(0, 3) & xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
+                End If
+
+                trvMain.SelectedNode.Text = dreamTitle
                 trvMain.SelectedNode.Tag = New Dreams.Tags.DreamFile(m_objDreamViewControl.FileName)
                 Dim trvNewFolder As TreeNode = GetDreamFolder(m_objDreamViewControl.dtDate.Value)
                 If Not trvNewFolder Is trvMain.SelectedNode.Parent Then
@@ -1292,7 +1314,7 @@ Public Class MainForm
                     trvMain.SelectedNode.Nodes.Clear()
                     For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
                         Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-                        Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + xmlDreamNode.Attributes("Title").InnerText + ".ld3")
+                        Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
                         trvDream.Tag = objDreamTag
                         trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
                         trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
@@ -1506,7 +1528,7 @@ Public Class MainForm
         xmlCategory.Load(FileName)
         For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
             Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-            Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + xmlDreamNode.Attributes("Title").InnerText + ".ld3")
+            Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
             trvDream.Tag = objDreamTag
             trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
             trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
@@ -1810,7 +1832,7 @@ Public Class MainForm
             For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
                 If Format(Convert.ToDateTime(xmlDreamNode.Attributes("Date").InnerText), "dd") + " " + xmlDreamNode.Attributes("Title").InnerText <> trvNode.Parent.Text Then
                     Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-                    Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + xmlDreamNode.Attributes("Title").InnerText + ".ld3")
+                    Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
                     trvDream.Tag = objDreamTag
                     trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
                     trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")

@@ -33,12 +33,21 @@ Public Class DreamViewControl
         NHunspellTextBoxExtender1.SetSpellCheckEnabled(txtDream, False)
     End Sub
 
-    Public Sub LoadDream(ByVal strFileName As String)
+    Public Sub LoadDream(ByVal strFileName As String, ByVal locked As Boolean)
         Try
             If FileName <> strFileName Then
                 m_objSpeechSynthesizer.SpeakAsyncCancelAll()
                 Playing = False
             End If
+
+            txtTitle.ReadOnly = locked
+            cmbLucidity.Enabled = Not locked
+            dtDate.Enabled = Not locked
+            dtStart.Enabled = Not locked
+            dtEnd.Enabled = Not locked
+            objDreamSlider.Enabled = Not locked
+            txtDream.Enabled = Not locked
+            lstUnassigned.Enabled = Not locked
 
             m_boolLoading = True
             Dim xmlDoc As New XmlDocument
@@ -233,7 +242,7 @@ Public Class DreamViewControl
         End Try
     End Sub
 
-    Private Function SafeFilename(ByVal fileName As String) As String
+    Public Function SafeFilename(ByVal fileName As String) As String
         For i As Integer = 0 To Path.GetInvalidFileNameChars().Length - 1
             fileName = fileName.Replace(Path.GetInvalidFileNameChars()(i), "_")
         Next

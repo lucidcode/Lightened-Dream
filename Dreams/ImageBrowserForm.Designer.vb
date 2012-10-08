@@ -22,13 +22,13 @@ Partial Class ImageBrowserForm
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImageBrowserForm))
-        Dim MySettings2 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea
-        Dim CustomLabel3 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel
-        Dim CustomLabel4 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series
+        Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ImageBrowserForm))
+        Dim MySettings1 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea
+        Dim CustomLabel1 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel
+        Dim CustomLabel2 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series
         Me.Panel3D1 = New lucidcode.Controls.Panel3D
         Me.btnSearch = New System.Windows.Forms.Button
         Me.lstImgTlb = New System.Windows.Forms.ImageList(Me.components)
@@ -38,7 +38,7 @@ Partial Class ImageBrowserForm
         Me.btnCancel = New System.Windows.Forms.Button
         Me.tmrSearching = New System.Windows.Forms.Timer(Me.components)
         Me.Panel3D2 = New lucidcode.Controls.Panel3D
-        Me.lstImages = New ListViewNF
+        Me.lstImages = New lucidcode.LightenedDream.Dreams.ListViewNF
         Me.lstImg = New System.Windows.Forms.ImageList(Me.components)
         Me.pnlSearching = New lucidcode.Controls.Panel3D
         Me.graph = New System.Windows.Forms.DataVisualization.Charting.Chart
@@ -94,18 +94,18 @@ Partial Class ImageBrowserForm
         '
         Me.Panel3D3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        MySettings2.Font = New System.Drawing.Font("Verdana", 8.25!)
-        MySettings2.FormBackColor = System.Drawing.Color.LightSteelBlue
-        MySettings2.FormForeColor = System.Drawing.Color.MidnightBlue
-        MySettings2.LastAsleep = New Date(CType(0, Long))
-        MySettings2.LastAwake = New Date(CType(0, Long))
-        MySettings2.SettingsKey = ""
-        MySettings2.TextBackColor = System.Drawing.Color.White
-        MySettings2.TitleBackColor = System.Drawing.Color.SteelBlue
-        MySettings2.TitleForeColor = System.Drawing.Color.White
-        Me.Panel3D3.BackColor = MySettings2.TitleBackColor
+        MySettings1.Font = New System.Drawing.Font("Verdana", 8.25!)
+        MySettings1.FormBackColor = System.Drawing.Color.LightSteelBlue
+        MySettings1.FormForeColor = System.Drawing.Color.MidnightBlue
+        MySettings1.LastAsleep = New Date(CType(0, Long))
+        MySettings1.LastAwake = New Date(CType(0, Long))
+        MySettings1.SettingsKey = ""
+        MySettings1.TextBackColor = System.Drawing.Color.White
+        MySettings1.TitleBackColor = System.Drawing.Color.SteelBlue
+        MySettings1.TitleForeColor = System.Drawing.Color.White
+        Me.Panel3D3.BackColor = MySettings1.TitleBackColor
         Me.Panel3D3.Controls.Add(Me.Label7)
-        Me.Panel3D3.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings2, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.Panel3D3.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings1, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.Panel3D3.Location = New System.Drawing.Point(0, 0)
         Me.Panel3D3.Name = "Panel3D3"
         Me.Panel3D3.Size = New System.Drawing.Size(720, 24)
@@ -212,65 +212,65 @@ Partial Class ImageBrowserForm
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.graph.BackColor = System.Drawing.Color.Transparent
-        ChartArea2.Area3DStyle.Enable3D = True
-        ChartArea2.Area3DStyle.Inclination = 10
-        ChartArea2.Area3DStyle.IsClustered = True
-        ChartArea2.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic
-        ChartArea2.Area3DStyle.PointDepth = 200
-        ChartArea2.Area3DStyle.PointGapDepth = 0
-        ChartArea2.Area3DStyle.Rotation = 10
-        ChartArea2.Area3DStyle.WallWidth = 0
-        ChartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
-        ChartArea2.AxisX.IsLabelAutoFit = False
-        ChartArea2.AxisX.LabelStyle.Angle = 90
-        ChartArea2.AxisX.LabelStyle.Enabled = False
-        ChartArea2.AxisX.LabelStyle.Interval = 0
-        ChartArea2.AxisX.LineColor = System.Drawing.Color.Transparent
-        ChartArea2.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
-        ChartArea2.AxisX.LineWidth = 0
-        ChartArea2.AxisX.MajorGrid.Enabled = False
-        ChartArea2.AxisX.MajorGrid.LineWidth = 0
-        ChartArea2.AxisX.MajorTickMark.Enabled = False
-        ChartArea2.AxisX.MajorTickMark.LineWidth = 0
-        ChartArea2.AxisX.MajorTickMark.Size = 0.0!
-        ChartArea2.AxisX.MinorGrid.LineWidth = 0
-        ChartArea2.AxisX.MinorTickMark.LineWidth = 0
-        ChartArea2.AxisX.MinorTickMark.Size = 0.0!
-        ChartArea2.AxisX.TitleForeColor = System.Drawing.Color.LightSteelBlue
-        CustomLabel3.Text = "x"
-        CustomLabel4.Text = "x"
-        ChartArea2.AxisX2.CustomLabels.Add(CustomLabel3)
-        ChartArea2.AxisX2.CustomLabels.Add(CustomLabel4)
-        ChartArea2.AxisX2.LineWidth = 0
-        ChartArea2.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
-        ChartArea2.AxisY.LabelStyle.Enabled = False
-        ChartArea2.AxisY.LineWidth = 0
-        ChartArea2.AxisY.MajorGrid.Enabled = False
-        ChartArea2.AxisY.MajorTickMark.Enabled = False
-        ChartArea2.AxisY.TitleForeColor = System.Drawing.Color.LightSteelBlue
-        ChartArea2.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
-        ChartArea2.AxisY2.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount
-        ChartArea2.AxisY2.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
-        ChartArea2.AxisY2.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
-        ChartArea2.AxisY2.LineWidth = 0
-        ChartArea2.AxisY2.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash
-        ChartArea2.AxisY2.Maximum = 11
-        ChartArea2.AxisY2.Minimum = -11
-        ChartArea2.AxisY2.ScaleBreakStyle.BreakLineStyle = System.Windows.Forms.DataVisualization.Charting.BreakLineStyle.Wave
-        ChartArea2.AxisY2.ScaleBreakStyle.Enabled = True
-        ChartArea2.BackColor = System.Drawing.Color.LightSteelBlue
-        ChartArea2.BackImageTransparentColor = System.Drawing.Color.White
-        ChartArea2.BackSecondaryColor = System.Drawing.Color.Transparent
-        ChartArea2.BorderColor = System.Drawing.Color.LightSteelBlue
-        ChartArea2.BorderWidth = 0
-        ChartArea2.Name = "ChartArea1"
-        ChartArea2.ShadowColor = System.Drawing.Color.Transparent
-        Me.graph.ChartAreas.Add(ChartArea2)
+        ChartArea1.Area3DStyle.Enable3D = True
+        ChartArea1.Area3DStyle.Inclination = 10
+        ChartArea1.Area3DStyle.IsClustered = True
+        ChartArea1.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic
+        ChartArea1.Area3DStyle.PointDepth = 200
+        ChartArea1.Area3DStyle.PointGapDepth = 0
+        ChartArea1.Area3DStyle.Rotation = 10
+        ChartArea1.Area3DStyle.WallWidth = 0
+        ChartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+        ChartArea1.AxisX.IsLabelAutoFit = False
+        ChartArea1.AxisX.LabelStyle.Angle = 90
+        ChartArea1.AxisX.LabelStyle.Enabled = False
+        ChartArea1.AxisX.LabelStyle.Interval = 0
+        ChartArea1.AxisX.LineColor = System.Drawing.Color.Transparent
+        ChartArea1.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
+        ChartArea1.AxisX.LineWidth = 0
+        ChartArea1.AxisX.MajorGrid.Enabled = False
+        ChartArea1.AxisX.MajorGrid.LineWidth = 0
+        ChartArea1.AxisX.MajorTickMark.Enabled = False
+        ChartArea1.AxisX.MajorTickMark.LineWidth = 0
+        ChartArea1.AxisX.MajorTickMark.Size = 0.0!
+        ChartArea1.AxisX.MinorGrid.LineWidth = 0
+        ChartArea1.AxisX.MinorTickMark.LineWidth = 0
+        ChartArea1.AxisX.MinorTickMark.Size = 0.0!
+        ChartArea1.AxisX.TitleForeColor = System.Drawing.Color.LightSteelBlue
+        CustomLabel1.Text = "x"
+        CustomLabel2.Text = "x"
+        ChartArea1.AxisX2.CustomLabels.Add(CustomLabel1)
+        ChartArea1.AxisX2.CustomLabels.Add(CustomLabel2)
+        ChartArea1.AxisX2.LineWidth = 0
+        ChartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+        ChartArea1.AxisY.LabelStyle.Enabled = False
+        ChartArea1.AxisY.LineWidth = 0
+        ChartArea1.AxisY.MajorGrid.Enabled = False
+        ChartArea1.AxisY.MajorTickMark.Enabled = False
+        ChartArea1.AxisY.TitleForeColor = System.Drawing.Color.LightSteelBlue
+        ChartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+        ChartArea1.AxisY2.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount
+        ChartArea1.AxisY2.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
+        ChartArea1.AxisY2.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
+        ChartArea1.AxisY2.LineWidth = 0
+        ChartArea1.AxisY2.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash
+        ChartArea1.AxisY2.Maximum = 11
+        ChartArea1.AxisY2.Minimum = -11
+        ChartArea1.AxisY2.ScaleBreakStyle.BreakLineStyle = System.Windows.Forms.DataVisualization.Charting.BreakLineStyle.Wave
+        ChartArea1.AxisY2.ScaleBreakStyle.Enabled = True
+        ChartArea1.BackColor = System.Drawing.Color.LightSteelBlue
+        ChartArea1.BackImageTransparentColor = System.Drawing.Color.White
+        ChartArea1.BackSecondaryColor = System.Drawing.Color.Transparent
+        ChartArea1.BorderColor = System.Drawing.Color.LightSteelBlue
+        ChartArea1.BorderWidth = 0
+        ChartArea1.Name = "ChartArea1"
+        ChartArea1.ShadowColor = System.Drawing.Color.Transparent
+        Me.graph.ChartAreas.Add(ChartArea1)
         Me.graph.Location = New System.Drawing.Point(3, 3)
         Me.graph.Name = "graph"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Name = "Series1"
-        Me.graph.Series.Add(Series2)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Name = "Series1"
+        Me.graph.Series.Add(Series1)
         Me.graph.Size = New System.Drawing.Size(600, 33)
         Me.graph.TabIndex = 283
         '
@@ -320,19 +320,19 @@ Partial Class ImageBrowserForm
         Me.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.lucidcode.LightenedDream.Dreams.My.MySettings.Default, "FormForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.Font = Global.lucidcode.LightenedDream.Dreams.My.MySettings.Default.Font
         Me.ForeColor = Global.lucidcode.LightenedDream.Dreams.My.MySettings.Default.FormForeColor
-    Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-    Me.Name = "ImageBrowserForm"
-    Me.Text = "Image Browser"
-    Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-    Me.Panel3D1.ResumeLayout(False)
-    Me.Panel3D1.PerformLayout()
-    Me.Panel3D3.ResumeLayout(False)
-    Me.Panel3D2.ResumeLayout(False)
-    Me.pnlSearching.ResumeLayout(False)
-    CType(Me.graph, System.ComponentModel.ISupportInitialize).EndInit()
-    Me.ResumeLayout(False)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "ImageBrowserForm"
+        Me.Text = "Image Browser"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
+        Me.Panel3D1.ResumeLayout(False)
+        Me.Panel3D1.PerformLayout()
+        Me.Panel3D3.ResumeLayout(False)
+        Me.Panel3D2.ResumeLayout(False)
+        Me.pnlSearching.ResumeLayout(False)
+        CType(Me.graph, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
 
-  End Sub
+    End Sub
   Friend WithEvents Panel3D1 As lucidcode.Controls.Panel3D
   Friend WithEvents Panel3D3 As lucidcode.Controls.Panel3D
   Public WithEvents Label7 As System.Windows.Forms.Label
