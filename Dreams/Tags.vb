@@ -4,7 +4,8 @@
     Public Path As String = ""
 
     Public Sub New(ByVal Folder As String)
-      Path = Folder
+            Path = Folder
+
     End Sub
   End Class
 

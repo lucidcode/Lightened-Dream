@@ -75,7 +75,7 @@ Partial Class DreamViewControl
         Me.lblTitle = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
         Me.lstImg = New System.Windows.Forms.ImageList(Me.components)
-        Me.NHunspellTextBoxExtender1 = New Spell_Checker.NHunspellTextBoxExtender
+        Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender
         Me.lstImgDreams = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel3D1.SuspendLayout()
@@ -817,7 +817,7 @@ Partial Class DreamViewControl
         '
         Me.NHunspellTextBoxExtender1.Language = "English"
         Me.NHunspellTextBoxExtender1.MaintainUserChoice = False
-        Me.NHunspellTextBoxExtender1.NumberofSuggestions = Spell_Checker.NHunspellTextBoxExtender.SuggestionNumbers.Five
+        Me.NHunspellTextBoxExtender1.NumberofSuggestions = NHunspellTextBoxExtender.SuggestionNumbers.Five
         Me.NHunspellTextBoxExtender1.ShortcutKey = System.Windows.Forms.Shortcut.F7
         Me.NHunspellTextBoxExtender1.SpellAsYouType = True
         '
@@ -934,7 +934,7 @@ Partial Class DreamViewControl
     Public WithEvents dtDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents objDreamSlider As lucidcode.Controls.MultiSliderControl.SliderControl
     Friend WithEvents cmbLucidity As System.Windows.Forms.ComboBox
-    Friend WithEvents NHunspellTextBoxExtender1 As Spell_Checker.NHunspellTextBoxExtender
+    Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender
     Friend WithEvents pnlDreamImage As lucidcode.Controls.Panel3D
     Friend WithEvents pbDream As System.Windows.Forms.PictureBox
     Friend WithEvents pnlText As lucidcode.Controls.Panel3D

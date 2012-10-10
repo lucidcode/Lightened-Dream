@@ -31,7 +31,7 @@ Partial Class ItemViewControl
         Me.lblTitle = New System.Windows.Forms.Label
         Me.txtTitle = New System.Windows.Forms.TextBox
         Me.Label2 = New System.Windows.Forms.Label
-        Me.NHunspellTextBoxExtender1 = New Spell_Checker.NHunspellTextBoxExtender
+        Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender
         Me.objRecordingViewControl = New lucidcode.LightenedDream.Lucidity.RecordingViewControl
         Me.objSpeedReadingControl = New lucidcode.LightenedDream.Lucidity.SpeedReadingViewControl
         Me.objMerlinViewControl = New lucidcode.LightenedDream.Lucidity.MerlinViewControl
@@ -138,7 +138,7 @@ Partial Class ItemViewControl
         '
         Me.NHunspellTextBoxExtender1.Language = "English"
         Me.NHunspellTextBoxExtender1.MaintainUserChoice = False
-        Me.NHunspellTextBoxExtender1.NumberofSuggestions = Spell_Checker.NHunspellTextBoxExtender.SuggestionNumbers.Five
+        Me.NHunspellTextBoxExtender1.NumberofSuggestions = NHunspellTextBoxExtender.SuggestionNumbers.Five
         Me.NHunspellTextBoxExtender1.ShortcutKey = System.Windows.Forms.Shortcut.F7
         Me.NHunspellTextBoxExtender1.SpellAsYouType = True
         '
@@ -226,6 +226,6 @@ Partial Class ItemViewControl
     Friend WithEvents objMerlinViewControl As lucidcode.LightenedDream.Lucidity.MerlinViewControl
     Friend WithEvents objSpeedReadingControl As lucidcode.LightenedDream.Lucidity.SpeedReadingViewControl
     Friend WithEvents objRecordingViewControl As lucidcode.LightenedDream.Lucidity.RecordingViewControl
-  Friend WithEvents NHunspellTextBoxExtender1 As Spell_Checker.NHunspellTextBoxExtender
+    Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender
 
 End Class

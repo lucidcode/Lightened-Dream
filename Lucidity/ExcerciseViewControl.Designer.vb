@@ -38,7 +38,7 @@ Partial Class ExerciseViewControl
     Me.lblTitle = New System.Windows.Forms.Label
     Me.Label2 = New System.Windows.Forms.Label
     Me.lstImg = New System.Windows.Forms.ImageList(Me.components)
-    Me.NHunspellTextBoxExtender1 = New Spell_Checker.NHunspellTextBoxExtender
+        Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender
     Me.Panel3D2.SuspendLayout()
     Me.Panel3D4.SuspendLayout()
     CType(Me.NHunspellTextBoxExtender1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -204,7 +204,7 @@ Partial Class ExerciseViewControl
     '
     Me.NHunspellTextBoxExtender1.Language = "English"
     Me.NHunspellTextBoxExtender1.MaintainUserChoice = False
-    Me.NHunspellTextBoxExtender1.NumberofSuggestions = Spell_Checker.NHunspellTextBoxExtender.SuggestionNumbers.Five
+        Me.NHunspellTextBoxExtender1.NumberofSuggestions = NHunspellTextBoxExtender.SuggestionNumbers.Five
     Me.NHunspellTextBoxExtender1.ShortcutKey = System.Windows.Forms.Shortcut.F7
     Me.NHunspellTextBoxExtender1.SpellAsYouType = True
     '
@@ -239,7 +239,7 @@ Partial Class ExerciseViewControl
   Public WithEvents dtDate As System.Windows.Forms.DateTimePicker
   Public WithEvents txtExercise As System.Windows.Forms.TextBox
   Friend WithEvents cmbLucidity As System.Windows.Forms.ComboBox
-  Friend WithEvents NHunspellTextBoxExtender1 As Spell_Checker.NHunspellTextBoxExtender
+    Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender
   Public WithEvents txtTask As System.Windows.Forms.TextBox
 
 End Class
