@@ -162,13 +162,20 @@ Public Class ViewControl
 
         Public Event RandomWord(ByVal Word As String)
 
+        Private Class SafeFilename
+            Public Filename As String
+            Public Guid As String
+        End Class
+
         Public Sub DoSave()
             Try
-                'If tbcMain.SelectedTab.Name = "tbpDreams" Then
+
+                Dim safeFilenames As New List(Of SafeFilename)
+
                 Dim strXml As String
                 strXml = "<Category>"
 
-                strXml += "<Name>" + Name + "</Name>"
+                strXml += "<Name></Name>"
                 strXml += "<Description>" + Description + "</Description>"
                 strXml += "<Names>"
 
@@ -210,7 +217,13 @@ Public Class ViewControl
                                 For Each strKeyWord As String In arrKeywords
                                     If strWord = strKeyWord Then
                                         RaiseEvent RandomWord(xmlDream.DocumentElement.SelectSingleNode("Title").InnerText)
-                                        strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + xmlDream.DocumentElement.SelectSingleNode("Title").InnerText + "' />"
+
+                                        Dim safeFilename As New SafeFilename
+                                        safeFilename.Guid = Guid.NewGuid.ToString
+                                        safeFilename.Filename = xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
+
+                                        safeFilenames.Add(safeFilename)
+                                        strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + safeFilename.Guid + "' />"
                                         boolFound = True
                                         Exit For
                                     End If
@@ -230,6 +243,17 @@ Public Class ViewControl
 
                 Dim xmlDoc As New XmlDocument
                 xmlDoc.LoadXml(strXml)
+
+                xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = Name
+
+                For Each xmlDream As XmlNode In xmlDoc.DocumentElement.SelectNodes("//Dream")
+                    For Each safeFilename As SafeFilename In safeFilenames
+                        If safeFilename.Guid = xmlDream.Attributes("Title").InnerText Then
+                            xmlDream.Attributes("Title").InnerText = safeFilename.Filename
+                        End If
+                    Next
+                Next
+
                 xmlDoc.Save(FileName)
 
                 Completed = True

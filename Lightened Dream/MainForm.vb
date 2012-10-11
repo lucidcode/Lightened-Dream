@@ -1153,7 +1153,14 @@ Public Class MainForm
         CreateNewCategory(CType(sender, ToolStripMenuItem).Text)
     End Sub
 
+    Private Class SafeFilename
+        Public Filename As String
+        Public Guid As String
+    End Class
+
     Private Sub CreateNewCategory(ByVal Type As String, Optional ByVal Name As String = "")
+        Dim safeFilenames As New List(Of SafeFilename)
+
         If Name = "" Then
             Name = "New " + Type
         End If
@@ -1174,7 +1181,7 @@ Public Class MainForm
 
         Dim strXml As String
         strXml = "<Category>"
-        strXml += "<Name>" + strTitle + "</Name>"
+        strXml += "<Name></Name>"
         strXml += "<Description></Description>"
         strXml += "<Names></Names>"
         strXml += "<Dreams>"
@@ -1188,7 +1195,14 @@ Public Class MainForm
                     Dim xmlDream As New XmlDocument
                     xmlDream.Load(strDreamFile)
                     If (xmlDream.DocumentElement.SelectSingleNode("Dream").InnerText.ToLower.Contains(strTitle.ToLower)) Then
-                        strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + xmlDream.DocumentElement.SelectSingleNode("Title").InnerText + "' />"
+
+                        Dim safeFilename As New SafeFilename
+                        safeFilename.Guid = Guid.NewGuid.ToString
+                        safeFilename.Filename = xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
+
+                        safeFilenames.Add(safeFilename)
+
+                        strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + safeFilename.Guid + "' />"
                     End If
                 Next
                 strXml += "</Month>"
@@ -1200,6 +1214,17 @@ Public Class MainForm
 
         Dim xmlDoc As New XmlDocument
         xmlDoc.LoadXml(strXml)
+
+        xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = strTitle
+
+        For Each xmlDream As XmlNode In xmlDoc.DocumentElement.SelectNodes("//Dream")
+            For Each safeFilename As SafeFilename In safeFilenames
+                If safeFilename.Guid = xmlDream.Attributes("Title").InnerText Then
+                    xmlDream.Attributes("Title").InnerText = safeFilename.Filename
+                End If
+            Next
+        Next
+
         xmlDoc.Save(strFileName)
 
         ' Update Tree   
