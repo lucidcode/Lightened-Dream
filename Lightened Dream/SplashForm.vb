@@ -254,7 +254,17 @@ Public Class SplashForm
             m_formMain.LoadImport()
 
         Catch ex As Exception
-            MessageBox.Show(ex.Message, "LightenedDream.Splash.LoadGraph()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            If ex.Message.Contains("80040154") Then
+                If MessageBox.Show("Lightened Dream requires Windows Media Player, which can be downloaded for free from Microsoft. Would you like to download it now?", "Lightened Dream", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+                    Try
+                        System.Diagnostics.Process.Start("http://windows.microsoft.com/en-us/windows/download-windows-media-player")
+                    Catch mediaException As Exception
+                        MessageBox.Show(mediaException.Message, "LightenedDream.MediaPlayer.Download()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End Try
+                End If
+            Else
+                MessageBox.Show(ex.Message, "LightenedDream.Splash.LoadGraph()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
             Application.Exit()
         End Try
     End Sub
