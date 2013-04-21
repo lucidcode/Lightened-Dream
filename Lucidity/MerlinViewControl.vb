@@ -1,29 +1,30 @@
 ﻿Imports System.Xml
+Imports System.Threading
 
 Public Class MerlinViewControl
 
-  Public FileName As String
-  Private m_formSubliminal As SubliminalForm
-  Friend objMerlin As New AxAgentObjects.AxAgent
-  Private m_intPos As Integer = 0
-  Private m_boolStop As Boolean = False
-  Private m_intHeight As Integer = 26
-  Public Changed As Boolean
+    Public FileName As String
+    Private m_formSubliminal As SubliminalForm
+    Friend objMerlin As New AxAgentObjects.AxAgent
+    Private m_intPos As Integer = 0
+    Private m_boolStop As Boolean = False
+    Private m_intHeight As Integer = 26
+    Public Changed As Boolean
 
-  Public Sub LoadFile(ByVal strFileName As String)
-    Try
-      Dim xmlDoc As New XmlDocument
-      FileName = strFileName
-      xmlDoc.Load(FileName)
+    Public Sub LoadFile(ByVal strFileName As String)
+        Try
+            Dim xmlDoc As New XmlDocument
+            FileName = strFileName
+            xmlDoc.Load(FileName)
 
-      m_intPos = 0
-      pnlContainer.Controls.Clear()
-      For Each xmlItem As XmlNode In xmlDoc.DocumentElement.SelectNodes("Sequence/Item")
-        AddItem(xmlItem.SelectSingleNode("Type").InnerText, xmlItem.SelectSingleNode("Details").InnerText)
-      Next
-      Changed = False
+            m_intPos = 0
+            pnlContainer.Controls.Clear()
+            For Each xmlItem As XmlNode In xmlDoc.DocumentElement.SelectNodes("Sequence/Item")
+                AddItem(xmlItem.SelectSingleNode("Type").InnerText, xmlItem.SelectSingleNode("Details").InnerText)
+            Next
+            Changed = False
 
-    Catch ex As Exception
+        Catch ex As Exception
             MessageBox.Show(ex.Message, "LightenedDream.Lucidity.Check.Load()", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
@@ -63,6 +64,7 @@ Public Class MerlinViewControl
 
             If Not objMerlin.Characters("Merlin").Visible Then
                 objMerlin.Characters("Merlin").Show()
+                objMerlin.Characters("Merlin").IdleOn = False
             End If
 
             m_boolStop = False
@@ -70,10 +72,12 @@ Public Class MerlinViewControl
                 If m_boolStop Then Return
 
                 If objMerlinItem.lblType.Text = "Act" Then
-                    Dim arrActions() As String = cmbAct.Text.Split(" ")
                     objMerlin.Characters("Merlin").Play(objMerlinItem.lblDescription.Text)
                 ElseIf objMerlinItem.lblType.Text = "Speak" Then
                     objMerlin.Characters("Merlin").Speak(objMerlinItem.lblDescription.Text)
+                ElseIf objMerlinItem.lblType.Text = "Fly" Then
+                    Dim arrCoordinates = objMerlinItem.lblDescription.Text.Split(", ")
+                    objMerlin.Characters("Merlin").MoveTo(arrCoordinates(0), arrCoordinates(1), arrCoordinates(2))
                 End If
             Next
 
@@ -101,6 +105,8 @@ Public Class MerlinViewControl
                 objMerlin.Characters("Merlin").Play(arrActions(0))
             ElseIf optSpeak.Checked Then
                 objMerlin.Characters("Merlin").Speak(txtSpeak.Text)
+            ElseIf optFly.Checked Then
+                objMerlin.Characters("Merlin").MoveTo(txtX.Text, txtY.Text, cmbSpeed.Text)
             End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, "LightenedDream.Lucidity.Check.Test()", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -114,6 +120,8 @@ Public Class MerlinViewControl
                 AddItem("Act", arrActions(0))
             ElseIf optSpeak.Checked Then
                 AddItem("Speak", txtSpeak.Text)
+            ElseIf optFly.Checked Then
+                AddItem("Fly", txtX.Text & ", " & txtY.Text & ", " & cmbSpeed.Text)
             End If
             pnlAdd.Visible = False
             Changed = True
@@ -143,24 +151,24 @@ Public Class MerlinViewControl
         End Try
     End Sub
 
-  Private Sub objMerlinItem_Deleted(ByRef Item As MerlinItemControl)
-    pnlContainer.Controls.Remove(Item)
-    m_intPos = 0
+    Private Sub objMerlinItem_Deleted(ByRef Item As MerlinItemControl)
+        pnlContainer.Controls.Remove(Item)
+        m_intPos = 0
 
-    For Each objMerlinItem As MerlinItemControl In pnlContainer.Controls
-      objMerlinItem.Location = New System.Drawing.Point(2, 2 + m_intPos * (m_intHeight + 4))
-      objMerlinItem.Size = New System.Drawing.Size(pnlContainer.Width - 8, m_intHeight)
-      m_intPos += 1
-    Next
-    Changed = True
+        For Each objMerlinItem As MerlinItemControl In pnlContainer.Controls
+            objMerlinItem.Location = New System.Drawing.Point(2, 2 + m_intPos * (m_intHeight + 4))
+            objMerlinItem.Size = New System.Drawing.Size(pnlContainer.Width - 8, m_intHeight)
+            m_intPos += 1
+        Next
+        Changed = True
 
-  End Sub
+    End Sub
 
-  Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-    pnlAdd.Visible = False
-  End Sub
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        pnlAdd.Visible = False
+    End Sub
 
-  Private Sub btnAddItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddItem.Click
-    pnlAdd.Visible = True
-  End Sub
+    Private Sub btnAddItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddItem.Click
+        pnlAdd.Visible = True
+    End Sub
 End Class
