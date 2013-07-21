@@ -95,21 +95,7 @@ Public Class REMCyclesControl
                     If objAnnotation.Tag.ToString.StartsWith("MP3::") Then
 
                         textWriter.WriteAttributeString("Name", New FileInfo(objAnnotation.Tag.ToString.Replace("MP3::", "")).Name)
-
-                        textWriter.WriteStartElement("FILE")
-                        Dim objFS As New FileStream(objAnnotation.Tag.ToString.Replace("MP3::", ""), FileMode.Open)
-
-                        Dim readByte As Integer = 0
-                        Dim buffer(1023) As Byte
-
-                        ' Set the file pointer to the end.
-
-                        Do
-                            readByte = objFS.Read(buffer, 0, 1023)
-                            textWriter.WriteBase64(buffer, 0, readByte)
-                        Loop While (1023 <= readByte)
-                        textWriter.WriteEndElement()
-                        objFS.Close()
+                        textWriter.WriteAttributeString("Path", objAnnotation.Tag.ToString.Replace("MP3::", ""))
 
                     ElseIf objAnnotation.Tag.ToString.StartsWith("MEM::MP3::") Then
                         ' Read the item from the loaded xml doc
@@ -120,13 +106,11 @@ Public Class REMCyclesControl
                             boolFound = reader.ReadToFollowing("Item")
                             If boolFound Then
 
-                                'reader.ReadString()
                                 If objAnnotation.Tag.ToString.Replace("MEM::MP3::", "") = reader.GetAttribute("Name") Then
                                     reader.Read()
                                     If reader.Name() = "" Then
                                         reader.Read()
                                     End If
-                                    'reader.ReadToDescendant()
                                     Exit Do
                                 End If
 
@@ -134,8 +118,6 @@ Public Class REMCyclesControl
                                 Exit Do
                             End If
                         Loop
-                        'boolFound = reader.ReadToFollowing("@Name='" + objAnnotation.Tag.ToString.Replace("MEM::", "") + "'")
-
                         textWriter.WriteAttributeString("Name", objAnnotation.Tag.ToString.Replace("MEM::MP3::", ""))
 
                         ' Insert loaded xml doc item into REM
@@ -309,16 +291,22 @@ Public Class REMCyclesControl
                         strName = reader.Value
                     End If
 
-                    reader.Read()
-                    reader.Read()
-                    strFirstChildName = reader.Name
-
                     objCalloutCloud.Text = strName & " (" + strPosition + ")"
                     objCalloutCloud.ToolTip = objCalloutCloud.Text
-                    If strFirstChildName = "FILE" Then
-                        objCalloutCloud.Tag = "MEM::MP3::" & strName
-                    Else ' Recording
-                        objCalloutCloud.Tag = "MEM::" & strName
+
+                    boolFound = reader.MoveToAttribute("Path")
+                    If boolFound Then
+                        strName = reader.Value
+                        objCalloutCloud.Tag = "MP3::" & strName
+                    Else
+                        reader.Read()
+                        reader.Read()
+                        strFirstChildName = reader.Name
+                        If strFirstChildName = "FILE" Then
+                            objCalloutCloud.Tag = "MEM::MP3::" & strName
+                        Else ' Recording
+                            objCalloutCloud.Tag = "MEM::" & strName
+                        End If
                     End If
                     For Each point As DataPoint In graph.Series("REM").Points
                         If point.ToolTip = strPosition Then
@@ -373,17 +361,24 @@ Public Class REMCyclesControl
                 objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
                 objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
                 objCalloutCloud.Text = xmlItem.Attributes("Name").InnerText & " (" + xmlItem.Attributes("Position").InnerText + ")"
-                If xmlItem.FirstChild.Name = "FILE" Then
-                    objCalloutCloud.Tag = "MEM::MP3::" & xmlItem.Attributes("Name").InnerText
-                Else ' Recording
-                    objCalloutCloud.Tag = "MEM::" & xmlItem.Attributes("Name").InnerText
+
+                If Not xmlItem.Attributes("Path") Is Nothing Then
+                    objCalloutCloud.Tag = "MP3::" & xmlItem.Attributes("Path").InnerText
+                Else
+                    If xmlItem.FirstChild.Name = "FILE" Then
+                        objCalloutCloud.Tag = "MEM::MP3::" & xmlItem.Attributes("Name").InnerText
+                    Else ' Recording
+                        objCalloutCloud.Tag = "MEM::" & xmlItem.Attributes("Name").InnerText
+                    End If
                 End If
+
                 For Each point As DataPoint In graph.Series("REM").Points
                     If point.ToolTip = xmlItem.Attributes("Position").InnerText Then
                         objCalloutCloud.AnchorDataPoint = point
                         objCalloutCloud.AnchorAlignment = ContentAlignment.MiddleCenter
                     End If
                 Next point
+
                 Me.graph.Annotations.Add(objCalloutCloud)
                 intCount += 1
 
