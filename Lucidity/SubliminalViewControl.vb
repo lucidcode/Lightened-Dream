@@ -3,7 +3,7 @@
 Public Class SubliminalViewControl
 
   Public FileName As String
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\Lucidity\Subliminals"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\Lucidity\Subliminals"
     Private m_formSubliminal As SubliminalForm
     Public Changed As Boolean
     Public Playing As Boolean = False

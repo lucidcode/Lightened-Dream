@@ -6,8 +6,8 @@ Imports System.IO
 Public Class SplashForm
 
     Private m_formMain As MainForm
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
-    Private m_strOldPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Liquid Dream III\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
+    Private m_strOldPath As String = DataDirectory.GetFolderPath() + "\Liquid Dream III\"
     Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
 
     Private Sub SplashForm3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -36,9 +36,9 @@ Public Class SplashForm
         End Try
 
         Try
-            strDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\lucidcode"
+            strDirectory = DataDirectory.GetFolderPath()
             If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) & "\lucidcode\Lightened Dream"
+            strDirectory = DataDirectory.GetFolderPath() & "\Lightened Dream"
             If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
 
             strDirectory = m_strPath & "Dreams"

@@ -5,7 +5,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class REMCyclesControl
 
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Public FileName As String
     Private m_dtStartTime As DateTime
     Private m_intLastMinute As Integer = -1
@@ -623,510 +623,510 @@ Public Class REMCyclesControl
         End Try
     End Sub
 
-  Private Function GetReaderValue(ByVal Reader As XmlReader, ByVal Node As String) As String
-    Reader.ReadToFollowing(Node)
-    Reader.Read()
-    Return Reader.Value
-  End Function
+    Private Function GetReaderValue(ByVal Reader As XmlReader, ByVal Node As String) As String
+        Reader.ReadToFollowing(Node)
+        Reader.Read()
+        Return Reader.Value
+    End Function
 
-  Private Function GetHour(ByVal StartTime As String) As Int32
-    Return Split(StartTime, ":")(0)
-  End Function
+    Private Function GetHour(ByVal StartTime As String) As Int32
+        Return Split(StartTime, ":")(0)
+    End Function
 
-  Private Function GetMinute(ByVal StartTime As String) As Int32
-    Return Split(StartTime, ":")(1)
-  End Function
+    Private Function GetMinute(ByVal StartTime As String) As Int32
+        Return Split(StartTime, ":")(1)
+    End Function
 
-  Private Sub dtStart_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub dtStart_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
-    '   Dim x As Microsoft.Visua
+        '   Dim x As Microsoft.Visua
 
-  End Sub
+    End Sub
 
-  Private m_boolUp As Boolean = False
+    Private m_boolUp As Boolean = False
 
-  Private Sub DrawGraph()
-    Try
-      Dim intPos As Double = 0.5
-      graph.ChartAreas(0).AxisX.CustomLabels.Clear()
-      graph.Series.Clear()
+    Private Sub DrawGraph()
+        Try
+            Dim intPos As Double = 0.5
+            graph.ChartAreas(0).AxisX.CustomLabels.Clear()
+            graph.Series.Clear()
 
-      Dim intCycles As Integer = 6
-      Dim intLength As Integer = 6
+            Dim intCycles As Integer = 6
+            Dim intLength As Integer = 6
 
-      Try
-        If cmbCycles.Text <> "" Then
-          intCycles = Convert.ToInt32(cmbCycles.Text)
-        End If
-      Catch ex As Exception
-      End Try
-      Try
-        If cmbCycles.Text <> "" Then
-          intLength = Convert.ToInt32(cmbCycleLength.Text)
-        End If
-      Catch ex As Exception
-      End Try
+            Try
+                If cmbCycles.Text <> "" Then
+                    intCycles = Convert.ToInt32(cmbCycles.Text)
+                End If
+            Catch ex As Exception
+            End Try
+            Try
+                If cmbCycles.Text <> "" Then
+                    intLength = Convert.ToInt32(cmbCycleLength.Text)
+                End If
+            Catch ex As Exception
+            End Try
 
-      Dim objLabel As Charting.CustomLabel
-      Dim dtTime As DateTime = DateTime.Now
+            Dim objLabel As Charting.CustomLabel
+            Dim dtTime As DateTime = DateTime.Now
 
-      Dim objSeriesView As Series = graph.Series.Add("View")
-      objSeriesView.ChartType = SeriesChartType.SplineArea
+            Dim objSeriesView As Series = graph.Series.Add("View")
+            objSeriesView.ChartType = SeriesChartType.SplineArea
 
-      Dim objSeries As Series = graph.Series.Add("REM")
-      objSeries.ChartType = SeriesChartType.Column  'SeriesChartType.Column 
+            Dim objSeries As Series = graph.Series.Add("REM")
+            objSeries.ChartType = SeriesChartType.Column  'SeriesChartType.Column 
 
-      objSeries.Color = Color.FromArgb(0, 65, 140, 240)
-      objSeries("BarLabelStyle") = "Center"
-      objSeriesView.Color = Color.FromArgb(200, 65, 140, 240)
-      objSeriesView.BorderWidth = 2
-      objSeriesView.Points.AddXY(1, intLength - (intLength / 3))
+            objSeries.Color = Color.FromArgb(0, 65, 140, 240)
+            objSeries("BarLabelStyle") = "Center"
+            objSeriesView.Color = Color.FromArgb(200, 65, 140, 240)
+            objSeriesView.BorderWidth = 2
+            objSeriesView.Points.AddXY(1, intLength - (intLength / 3))
 
-      Dim x As Integer = 2
-      For iCycle As Integer = 0 To intCycles - 1
-        If m_boolUp Then
-          m_boolUp = False
-        Else
-          m_boolUp = True
-        End If
+            Dim x As Integer = 2
+            For iCycle As Integer = 0 To intCycles - 1
+                If m_boolUp Then
+                    m_boolUp = False
+                Else
+                    m_boolUp = True
+                End If
 
-        objSeriesView.Points.AddXY(x, intLength - (intLength / 3))
+                objSeriesView.Points.AddXY(x, intLength - (intLength / 3))
 
-        Dim boolDirChanged As Boolean = False
-        Dim boolDirDrawn As Boolean = False
+                Dim boolDirChanged As Boolean = False
+                Dim boolDirDrawn As Boolean = False
 
-        For iMinute As Integer = 1 To intLength + 1
+                For iMinute As Integer = 1 To intLength + 1
 
-          If iMinute <= intLength / 2 Then
-            x = objSeries.Points.AddY(intLength - iMinute + 1 - (intLength / 3))
-          Else
-            boolDirChanged = True
-            x = objSeries.Points.AddY(iMinute - (intLength / 3))
-          End If
+                    If iMinute <= intLength / 2 Then
+                        x = objSeries.Points.AddY(intLength - iMinute + 1 - (intLength / 3))
+                    Else
+                        boolDirChanged = True
+                        x = objSeries.Points.AddY(iMinute - (intLength / 3))
+                    End If
 
-          If boolDirChanged Then
-            If Not boolDirDrawn Then
-              boolDirDrawn = True
-              objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos - 5, intPos + 5, Format(dtTime, "HH:mm"))
-              objSeriesView.Points.AddXY(x, intLength / 2 - (intLength / 3))
+                    If boolDirChanged Then
+                        If Not boolDirDrawn Then
+                            boolDirDrawn = True
+                            objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos - 5, intPos + 5, Format(dtTime, "HH:mm"))
+                            objSeriesView.Points.AddXY(x, intLength / 2 - (intLength / 3))
+                        End If
+                    End If
+
+
+                    objSeries.Points(objSeries.Points.Count - 1).ToolTip = objSeries.Points.Count - 1
+                    intPos += 1
+                    dtTime = dtTime.AddMinutes(1)
+                Next
+
+                objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos - 5, intPos + 5, Format(dtTime, "HH:mm"))
+            Next
+
+
+            'For intCycle As Integer = 1 To intCycles
+
+            '  For intSubCycle As Integer = 1 To 30
+
+            '  Next
+
+            '  intPoint = objSeries.Points.AddY(4)
+            '  intPos = intPos + 1
+            '  intPoint = objSeries.Points.AddY(2)
+            '  intPos = intPos + 1
+            '  intPoint = objSeries.Points.AddY(6)
+            '  intPos = intPos + 1
+            '  intPoint = objSeries.Points.AddY(4)
+            '  intPos = intPos + 1
+
+            '  dtTime = dtTime.AddMinutes(90)
+
+            '  intPoint = objSeries.Points.AddY(10 + intCycle)
+            '  objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
+            '  intPos = intPos + 1
+            'Next
+
+            'Dim intREMLength As Integer = cmbCycleLength.Text
+            'For intCycle As Integer = 1 To intCycles
+
+            '  For intSubCycle As Integer = 1 To intREMLength
+            '    dtTime = dtTime.AddMinutes(1)
+            '    intPoint = objSeries.Points.AddY(12)
+            '    objSeries.Points(intPoint).Tag = dtTime.ToString()
+            '    objSeries.Points(intPoint).Color = Color.FromArgb(0, 0, 0, 32)
+            '    intPos = intPos + 1
+            '  Next
+            '  'intPoint = objSeries.Points.AddY(10)
+
+            'Next
+
+
+            'For intCycle As Integer = 1 To intCycles
+
+            '  For intSubCycle As Integer = 1 To 30
+            '    intPoint = objSeries.Points.AddY(4)
+            '    intPos = intPos + 1
+            '    dtTime = dtTime.AddMinutes(1)
+            '  Next
+            '  'objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
+
+            '  For intSubCycle As Integer = 1 To 30
+            '    intPoint = objSeries.Points.AddY(2)
+            '    intPos = intPos + 1
+            '    dtTime = dtTime.AddMinutes(1)
+            '  Next
+            '  'objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
+
+            '  For intSubCycle As Integer = 1 To 30
+            '    intPoint = objSeries.Points.AddY(6)
+            '    intPos = intPos + 1
+            '    dtTime = dtTime.AddMinutes(1)
+            '  Next
+
+            '  intPoint = objSeries.Points.AddY(10 + intCycle)
+            '  objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
+            '  intPos = intPos + 1
+            'Next
+
+            'LoadREM(FileName)
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub tmrWatch_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrWatch.Tick
+        Dim dtTime As TimeSpan = DateTime.Now.Subtract(m_dtStartTime)
+        Dim intCurrentMinute As Integer = dtTime.TotalMinutes - 0.5
+        txtTime.Text = Format(dtTime.Hours, "00") & ":" & Format(dtTime.Minutes, "00") & ":" & Format(dtTime.Seconds, "00")
+
+        If m_intLastMinute <> Convert.ToInt32(intCurrentMinute) Then
+            m_intLastMinute = intCurrentMinute
+            If graph.Series("REM").Points.Count - 1 >= intCurrentMinute Then
+                m_objNow.SetAnchor(graph.Series("REM").Points(intCurrentMinute), graph.Series("REM").Points(intCurrentMinute))
+                For Each objAnnotation As Annotation In graph.Annotations
+                    If TypeOf (objAnnotation) Is CalloutAnnotation Then
+                        If objAnnotation.AnchorDataPoint Is graph.Series("REM").Points(intCurrentMinute) Then
+                            objAnnotation.BackColor = Color.LightSteelBlue
+                            objAnnotation.ForeColor = Color.White
+                            Application.DoEvents()
+                            Execute(objAnnotation.Tag)
+                            objAnnotation.BackColor = Color.SteelBlue
+                            objAnnotation.ForeColor = Color.White
+                        End If
+                    End If
+                Next
+            Else
+                tmrWatch.Enabled = False
+                Return
             End If
-          End If
+            'graph.Series("REM").Points(dtTime.TotalMinutes - 1).Color = Color.FromArgb(0, 0, 0, 0)
+            'graph.Series("REM").Points(intCurrentMinute).Color = Color.SteelBlue
+
+        End If
+
+    End Sub
+
+    Private Sub graph_AnnotationPlaced(ByVal sender As Object, ByVal e As System.EventArgs) Handles graph.AnnotationPlaced
+    End Sub
+
+    Private Function FindNearestDataPoint(ByVal X As Double, ByVal Y As Double) As PointF
+        ' get the int portion of the X value
+        Dim curIndex As Integer = CInt(Math.Round(X))
+
+        ' if curIndex is less than 1 curIndex is set to 1
+        curIndex = CInt(Math.Max(curIndex, 1))
+
+        ' if curIndex is greater than 11 curIndex is set to 11 (X Value of max point in series)
+        curIndex = CInt(Math.Min(curIndex, graph.Series("REM").Points.Count - 5))
+
+        ' return the point value of the nearest point
+        Return New PointF(curIndex, CSng(graph.Series("REM").Points(curIndex - 1).YValues(0)))
+    End Function
 
 
-          objSeries.Points(objSeries.Points.Count - 1).ToolTip = objSeries.Points.Count - 1
-          intPos += 1
-          dtTime = dtTime.AddMinutes(1)
-        Next
+    Private m_objSelectedAnnotation As Annotation
 
-        objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos - 5, intPos + 5, Format(dtTime, "HH:mm"))
-      Next
-
-
-      'For intCycle As Integer = 1 To intCycles
-
-      '  For intSubCycle As Integer = 1 To 30
-
-      '  Next
-
-      '  intPoint = objSeries.Points.AddY(4)
-      '  intPos = intPos + 1
-      '  intPoint = objSeries.Points.AddY(2)
-      '  intPos = intPos + 1
-      '  intPoint = objSeries.Points.AddY(6)
-      '  intPos = intPos + 1
-      '  intPoint = objSeries.Points.AddY(4)
-      '  intPos = intPos + 1
-
-      '  dtTime = dtTime.AddMinutes(90)
-
-      '  intPoint = objSeries.Points.AddY(10 + intCycle)
-      '  objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
-      '  intPos = intPos + 1
-      'Next
-
-      'Dim intREMLength As Integer = cmbCycleLength.Text
-      'For intCycle As Integer = 1 To intCycles
-
-      '  For intSubCycle As Integer = 1 To intREMLength
-      '    dtTime = dtTime.AddMinutes(1)
-      '    intPoint = objSeries.Points.AddY(12)
-      '    objSeries.Points(intPoint).Tag = dtTime.ToString()
-      '    objSeries.Points(intPoint).Color = Color.FromArgb(0, 0, 0, 32)
-      '    intPos = intPos + 1
-      '  Next
-      '  'intPoint = objSeries.Points.AddY(10)
-
-      'Next
-
-
-      'For intCycle As Integer = 1 To intCycles
-
-      '  For intSubCycle As Integer = 1 To 30
-      '    intPoint = objSeries.Points.AddY(4)
-      '    intPos = intPos + 1
-      '    dtTime = dtTime.AddMinutes(1)
-      '  Next
-      '  'objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
-
-      '  For intSubCycle As Integer = 1 To 30
-      '    intPoint = objSeries.Points.AddY(2)
-      '    intPos = intPos + 1
-      '    dtTime = dtTime.AddMinutes(1)
-      '  Next
-      '  'objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
-
-      '  For intSubCycle As Integer = 1 To 30
-      '    intPoint = objSeries.Points.AddY(6)
-      '    intPos = intPos + 1
-      '    dtTime = dtTime.AddMinutes(1)
-      '  Next
-
-      '  intPoint = objSeries.Points.AddY(10 + intCycle)
-      '  objLabel = graph.ChartAreas(0).AxisX.CustomLabels.Add(intPos, intPos + 1, Format(dtTime, "HH:mm"))
-      '  intPos = intPos + 1
-      'Next
-
-      'LoadREM(FileName)
-
-    Catch ex As Exception
-
-    End Try
-  End Sub
-
-  Private Sub tmrWatch_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrWatch.Tick
-    Dim dtTime As TimeSpan = DateTime.Now.Subtract(m_dtStartTime)
-    Dim intCurrentMinute As Integer = dtTime.TotalMinutes - 0.5
-    txtTime.Text = Format(dtTime.Hours, "00") & ":" & Format(dtTime.Minutes, "00") & ":" & Format(dtTime.Seconds, "00")
-
-    If m_intLastMinute <> Convert.ToInt32(intCurrentMinute) Then
-      m_intLastMinute = intCurrentMinute
-      If graph.Series("REM").Points.Count - 1 >= intCurrentMinute Then
-        m_objNow.SetAnchor(graph.Series("REM").Points(intCurrentMinute), graph.Series("REM").Points(intCurrentMinute))
-        For Each objAnnotation As Annotation In graph.Annotations
-          If TypeOf (objAnnotation) Is CalloutAnnotation Then
-            If objAnnotation.AnchorDataPoint Is graph.Series("REM").Points(intCurrentMinute) Then
-              objAnnotation.BackColor = Color.LightSteelBlue
-              objAnnotation.ForeColor = Color.White
-              Application.DoEvents()
-              Execute(objAnnotation.Tag)
-              objAnnotation.BackColor = Color.SteelBlue
-              objAnnotation.ForeColor = Color.White
-            End If
-          End If
-        Next
-      Else
-        tmrWatch.Enabled = False
+    Private Sub graph_AnnotationPositionChanging(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataVisualization.Charting.AnnotationPositionChangingEventArgs) Handles graph.AnnotationPositionChanging
+        m_objSelectedAnnotation = e.Annotation
         Return
-      End If
-      'graph.Series("REM").Points(dtTime.TotalMinutes - 1).Color = Color.FromArgb(0, 0, 0, 0)
-      'graph.Series("REM").Points(intCurrentMinute).Color = Color.SteelBlue
+    End Sub
 
-    End If
-
-  End Sub
-
-  Private Sub graph_AnnotationPlaced(ByVal sender As Object, ByVal e As System.EventArgs) Handles graph.AnnotationPlaced
-  End Sub
-
-  Private Function FindNearestDataPoint(ByVal X As Double, ByVal Y As Double) As PointF
-    ' get the int portion of the X value
-    Dim curIndex As Integer = CInt(Math.Round(X))
-
-    ' if curIndex is less than 1 curIndex is set to 1
-    curIndex = CInt(Math.Max(curIndex, 1))
-
-    ' if curIndex is greater than 11 curIndex is set to 11 (X Value of max point in series)
-    curIndex = CInt(Math.Min(curIndex, graph.Series("REM").Points.Count - 5))
-
-    ' return the point value of the nearest point
-    Return New PointF(curIndex, CSng(graph.Series("REM").Points(curIndex - 1).YValues(0)))
-  End Function
-
-
-  Private m_objSelectedAnnotation As Annotation
-
-  Private Sub graph_AnnotationPositionChanging(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataVisualization.Charting.AnnotationPositionChangingEventArgs) Handles graph.AnnotationPositionChanging
-    m_objSelectedAnnotation = e.Annotation
-    Return
-  End Sub
-
-  Private Sub graph_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseDown
-    If e.Button = Windows.Forms.MouseButtons.Right Then
-      m_ptPaste = New Point(e.X, e.Y)
-      Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
-      If result.ChartElementType = ChartElementType.Annotation Then
-        If TypeOf result.Object Is CalloutAnnotation Then
-          m_objClickedAnnotation = result.Object
-          mnuAnnotationPlay.Enabled = True
-          mnuAnnotationCopy.Enabled = True
-          mnuAnnotationDelete.Enabled = True
-          If m_objCopiedAnnotation Is Nothing Then
-            mnuAnnotationPaste.Enabled = False
-          Else
-            mnuAnnotationPaste.Enabled = True
-          End If
-          mnuAnnotation.Show(graph, e.X, e.Y)
+    Private Sub graph_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            m_ptPaste = New Point(e.X, e.Y)
+            Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
+            If result.ChartElementType = ChartElementType.Annotation Then
+                If TypeOf result.Object Is CalloutAnnotation Then
+                    m_objClickedAnnotation = result.Object
+                    mnuAnnotationPlay.Enabled = True
+                    mnuAnnotationCopy.Enabled = True
+                    mnuAnnotationDelete.Enabled = True
+                    If m_objCopiedAnnotation Is Nothing Then
+                        mnuAnnotationPaste.Enabled = False
+                    Else
+                        mnuAnnotationPaste.Enabled = True
+                    End If
+                    mnuAnnotation.Show(graph, e.X, e.Y)
+                End If
+            Else
+                mnuAnnotationPlay.Enabled = False
+                mnuAnnotationCopy.Enabled = False
+                mnuAnnotationDelete.Enabled = False
+                If m_objCopiedAnnotation Is Nothing Then
+                    mnuAnnotationPaste.Enabled = False
+                Else
+                    mnuAnnotationPaste.Enabled = True
+                End If
+                mnuAnnotation.Show(graph, e.X, e.Y)
+            End If
         End If
-      Else
-        mnuAnnotationPlay.Enabled = False
-        mnuAnnotationCopy.Enabled = False
-        mnuAnnotationDelete.Enabled = False
-        If m_objCopiedAnnotation Is Nothing Then
-          mnuAnnotationPaste.Enabled = False
-        Else
-          mnuAnnotationPaste.Enabled = True
-        End If
-        mnuAnnotation.Show(graph, e.X, e.Y)
-      End If
-    End If
-  End Sub
+    End Sub
 
-  Private m_ptPaste As Point
+    Private m_ptPaste As Point
 
-  Private m_objCopiedAnnotation As Charting.CalloutAnnotation
-  Private m_objClickedAnnotation As Charting.CalloutAnnotation
+    Private m_objCopiedAnnotation As Charting.CalloutAnnotation
+    Private m_objClickedAnnotation As Charting.CalloutAnnotation
 
-  Private Sub mnuAnnotationCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationCopy.Click
-    mnuAnnotationPaste.Enabled = True
-    m_objCopiedAnnotation = m_objClickedAnnotation
-  End Sub
+    Private Sub mnuAnnotationCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationCopy.Click
+        mnuAnnotationPaste.Enabled = True
+        m_objCopiedAnnotation = m_objClickedAnnotation
+    End Sub
 
-  Private Sub mnuAnnotationPaste_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationPaste.Click
-    PasteAnnotation()
-  End Sub
-
-  Private Sub PasteAnnotation()
-    If Not m_objCopiedAnnotation Is Nothing Then
-      Dim objCalloutCloud As New Charting.CalloutAnnotation
-      'objCalloutCloud.ClipToChartArea = "ChartArea1"
-      objCalloutCloud.AllowAnchorMoving = True
-      objCalloutCloud.AllowSelecting = True
-      objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-      objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
-      objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
-      objCalloutCloud.Name = Guid.NewGuid.ToString
-      objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
-      objCalloutCloud.ShadowOffset = 1
-      objCalloutCloud.Text = m_objCopiedAnnotation.Text
-      objCalloutCloud.Tag = m_objCopiedAnnotation.Tag
-      objCalloutCloud.AnchorDataPoint = m_objCopiedAnnotation.AnchorDataPoint
-      objCalloutCloud.SmartLabelStyle.Enabled = True
-      objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
-      objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
-      objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
-      Me.graph.Annotations.Add(objCalloutCloud)
-      Changed = True
-    End If
-  End Sub
-
-  Private Sub cmbCycles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCycles.SelectedIndexChanged
-    DrawGraph()
-  End Sub
-
-  Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCycleLength.SelectedIndexChanged
-    DrawGraph()
-  End Sub
-
-  Private m_intLastX As Integer
-  Private m_intLastY As Integer
-  Private m_intLastTag As DateTime
-
-  Dim m_intPoint As Integer = 0
-  Private Sub graph_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseMove
-    Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
-
-    If m_objSelectedAnnotation Is Nothing Then
-      Return
-    End If
-
-    If m_intPoint > -1 Then
-      'graph.Series("REM").Points(m_intPoint).Color = Color.FromArgb(200, 65, 140, 240) ' Color.LightSteelBlue
-    End If
-
-    m_intPoint = 0
-    If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
-      If result.Series.Name.StartsWith("REM") Then
-        m_intPoint = result.PointIndex
-        'result.Series.Points(result.PointIndex).Color = Color.FromArgb(255, 65, 140, 240) ' Color.LightSteelBlue
-        If TypeOf (m_objSelectedAnnotation) Is CalloutAnnotation Then
-
-          If m_objSelectedAnnotation.Tag.ToString.StartsWith("MP3::") Then
-            CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag.ToString.Replace("MP3::", "")).Name & " (" & m_intPoint & ")"
-          ElseIf m_objSelectedAnnotation.Tag.ToString.StartsWith("MEM::") Then
-            CType(m_objSelectedAnnotation, CalloutAnnotation).Text = m_objSelectedAnnotation.Tag.ToString.Replace("MEM::", "") & " (" & m_intPoint & ")"
-          Else
-            CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag).Name.Replace(".ld3", "") & " (" & m_intPoint & ")"
-          End If
-        End If
-      End If
-    Else
-      If TypeOf (m_objSelectedAnnotation) Is CalloutAnnotation Then
-
-        If m_objSelectedAnnotation.Tag.ToString.StartsWith("MP3::") Then
-          CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag.ToString.Replace("MP3::", "")).Name & " (" & 0 & ")"
-        ElseIf m_objSelectedAnnotation.Tag.ToString.StartsWith("MEM::") Then
-          CType(m_objSelectedAnnotation, CalloutAnnotation).Text = m_objSelectedAnnotation.Tag.ToString.Replace("MEM::", "") & " (" & 0 & ")"
-        Else
-          CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag).Name.Replace(".ld3", "") & " (" & 0 & ")"
-        End If
-      End If
-    End If
-
-    Return
-  End Sub
-
-  Private Sub graph_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles graph.DragDrop
-
-  End Sub
-
-  Private Sub graph_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles graph.DragEnter
-    If e.Data.GetDataPresent("System.Windows.Forms.TreeNode()") Then
-      e.Effect = DragDropEffects.Link
-    Else
-      e.Effect = DragDropEffects.None
-    End If
-  End Sub
-
-  Private Sub graph_DragOver(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles graph.DragOver
-    If e.Data.GetDataPresent("System.Windows.Forms.TreeNode()") Then
-      e.Effect = DragDropEffects.Link
-    Else
-      e.Effect = DragDropEffects.None
-    End If
-  End Sub
-
-  Private Sub graph_AnnotationPositionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles graph.AnnotationPositionChanged
-    If Not m_objSelectedAnnotation Is Nothing Then
-      Dim objCalloutCloud As New Charting.CalloutAnnotation
-      objCalloutCloud.AllowSelecting = True
-      objCalloutCloud.AllowAnchorMoving = True
-      objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-      objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
-      objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
-      objCalloutCloud.Name = Guid.NewGuid.ToString
-      objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
-      objCalloutCloud.ShadowOffset = 1
-      objCalloutCloud.Tag = m_objSelectedAnnotation.Tag
-      objCalloutCloud.IsSizeAlwaysRelative = False
-      objCalloutCloud.AnchorAlignment = ContentAlignment.MiddleCenter
-      objCalloutCloud.SmartLabelStyle.Enabled = True
-      objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
-      objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
-      objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
-      Changed = True
-      If m_objSelectedAnnotation.Tag.ToString.StartsWith("MP3::") Then
-        objCalloutCloud.Text = New FileInfo(m_objSelectedAnnotation.Tag.ToString.Replace("MP3::", "")).Name & " (" & m_intPoint & ")"
-      ElseIf m_objSelectedAnnotation.Tag.ToString.StartsWith("MEM::") Then
-        objCalloutCloud.Text = m_objSelectedAnnotation.Tag.ToString.Replace("MEM::", "") & " (" & m_intPoint & ")"
-      Else
-        objCalloutCloud.Text = New FileInfo(m_objSelectedAnnotation.Tag).Name.Replace(".ld3", "") & " (" & m_intPoint & ")"
-      End If
-      objCalloutCloud.AnchorDataPoint = graph.Series("REM").Points(m_intPoint)
-      graph.Annotations.Remove(m_objSelectedAnnotation)
-      Me.graph.Annotations.Add(objCalloutCloud)
-      m_objSelectedAnnotation = Nothing
-      Return
-    End If
-
-    m_objSelectedAnnotation = Nothing
-  End Sub
-
-  Private Sub mnuAnnotationDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationDelete.Click
-    DeleteAnnotation()
-  End Sub
-
-  Private Sub graph_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles graph.KeyDown
-    If e.Control Then
-      If e.KeyCode = Keys.V Then
+    Private Sub mnuAnnotationPaste_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationPaste.Click
         PasteAnnotation()
-      End If
-    End If
-  End Sub
+    End Sub
 
-  Private Sub DeleteAnnotation()
-    For Each objAnnotation As Annotation In graph.Annotations
-      If objAnnotation.IsSelected Then
-        graph.Annotations.Remove(objAnnotation)
+    Private Sub PasteAnnotation()
+        If Not m_objCopiedAnnotation Is Nothing Then
+            Dim objCalloutCloud As New Charting.CalloutAnnotation
+            'objCalloutCloud.ClipToChartArea = "ChartArea1"
+            objCalloutCloud.AllowAnchorMoving = True
+            objCalloutCloud.AllowSelecting = True
+            objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+            objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
+            objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
+            objCalloutCloud.Name = Guid.NewGuid.ToString
+            objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
+            objCalloutCloud.ShadowOffset = 1
+            objCalloutCloud.Text = m_objCopiedAnnotation.Text
+            objCalloutCloud.Tag = m_objCopiedAnnotation.Tag
+            objCalloutCloud.AnchorDataPoint = m_objCopiedAnnotation.AnchorDataPoint
+            objCalloutCloud.SmartLabelStyle.Enabled = True
+            objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
+            objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
+            objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
+            Me.graph.Annotations.Add(objCalloutCloud)
+            Changed = True
+        End If
+    End Sub
+
+    Private Sub cmbCycles_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCycles.SelectedIndexChanged
+        DrawGraph()
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbCycleLength.SelectedIndexChanged
+        DrawGraph()
+    End Sub
+
+    Private m_intLastX As Integer
+    Private m_intLastY As Integer
+    Private m_intLastTag As DateTime
+
+    Dim m_intPoint As Integer = 0
+    Private Sub graph_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseMove
+        Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
+
+        If m_objSelectedAnnotation Is Nothing Then
+            Return
+        End If
+
+        If m_intPoint > -1 Then
+            'graph.Series("REM").Points(m_intPoint).Color = Color.FromArgb(200, 65, 140, 240) ' Color.LightSteelBlue
+        End If
+
+        m_intPoint = 0
+        If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
+            If result.Series.Name.StartsWith("REM") Then
+                m_intPoint = result.PointIndex
+                'result.Series.Points(result.PointIndex).Color = Color.FromArgb(255, 65, 140, 240) ' Color.LightSteelBlue
+                If TypeOf (m_objSelectedAnnotation) Is CalloutAnnotation Then
+
+                    If m_objSelectedAnnotation.Tag.ToString.StartsWith("MP3::") Then
+                        CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag.ToString.Replace("MP3::", "")).Name & " (" & m_intPoint & ")"
+                    ElseIf m_objSelectedAnnotation.Tag.ToString.StartsWith("MEM::") Then
+                        CType(m_objSelectedAnnotation, CalloutAnnotation).Text = m_objSelectedAnnotation.Tag.ToString.Replace("MEM::", "") & " (" & m_intPoint & ")"
+                    Else
+                        CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag).Name.Replace(".ld3", "") & " (" & m_intPoint & ")"
+                    End If
+                End If
+            End If
+        Else
+            If TypeOf (m_objSelectedAnnotation) Is CalloutAnnotation Then
+
+                If m_objSelectedAnnotation.Tag.ToString.StartsWith("MP3::") Then
+                    CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag.ToString.Replace("MP3::", "")).Name & " (" & 0 & ")"
+                ElseIf m_objSelectedAnnotation.Tag.ToString.StartsWith("MEM::") Then
+                    CType(m_objSelectedAnnotation, CalloutAnnotation).Text = m_objSelectedAnnotation.Tag.ToString.Replace("MEM::", "") & " (" & 0 & ")"
+                Else
+                    CType(m_objSelectedAnnotation, CalloutAnnotation).Text = New FileInfo(m_objSelectedAnnotation.Tag).Name.Replace(".ld3", "") & " (" & 0 & ")"
+                End If
+            End If
+        End If
+
+        Return
+    End Sub
+
+    Private Sub graph_DragDrop(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles graph.DragDrop
+
+    End Sub
+
+    Private Sub graph_DragEnter(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles graph.DragEnter
+        If e.Data.GetDataPresent("System.Windows.Forms.TreeNode()") Then
+            e.Effect = DragDropEffects.Link
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
+
+    Private Sub graph_DragOver(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles graph.DragOver
+        If e.Data.GetDataPresent("System.Windows.Forms.TreeNode()") Then
+            e.Effect = DragDropEffects.Link
+        Else
+            e.Effect = DragDropEffects.None
+        End If
+    End Sub
+
+    Private Sub graph_AnnotationPositionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles graph.AnnotationPositionChanged
+        If Not m_objSelectedAnnotation Is Nothing Then
+            Dim objCalloutCloud As New Charting.CalloutAnnotation
+            objCalloutCloud.AllowSelecting = True
+            objCalloutCloud.AllowAnchorMoving = True
+            objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+            objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
+            objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
+            objCalloutCloud.Name = Guid.NewGuid.ToString
+            objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
+            objCalloutCloud.ShadowOffset = 1
+            objCalloutCloud.Tag = m_objSelectedAnnotation.Tag
+            objCalloutCloud.IsSizeAlwaysRelative = False
+            objCalloutCloud.AnchorAlignment = ContentAlignment.MiddleCenter
+            objCalloutCloud.SmartLabelStyle.Enabled = True
+            objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
+            objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
+            objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
+            Changed = True
+            If m_objSelectedAnnotation.Tag.ToString.StartsWith("MP3::") Then
+                objCalloutCloud.Text = New FileInfo(m_objSelectedAnnotation.Tag.ToString.Replace("MP3::", "")).Name & " (" & m_intPoint & ")"
+            ElseIf m_objSelectedAnnotation.Tag.ToString.StartsWith("MEM::") Then
+                objCalloutCloud.Text = m_objSelectedAnnotation.Tag.ToString.Replace("MEM::", "") & " (" & m_intPoint & ")"
+            Else
+                objCalloutCloud.Text = New FileInfo(m_objSelectedAnnotation.Tag).Name.Replace(".ld3", "") & " (" & m_intPoint & ")"
+            End If
+            objCalloutCloud.AnchorDataPoint = graph.Series("REM").Points(m_intPoint)
+            graph.Annotations.Remove(m_objSelectedAnnotation)
+            Me.graph.Annotations.Add(objCalloutCloud)
+            m_objSelectedAnnotation = Nothing
+            Return
+        End If
+
+        m_objSelectedAnnotation = Nothing
+    End Sub
+
+    Private Sub mnuAnnotationDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationDelete.Click
+        DeleteAnnotation()
+    End Sub
+
+    Private Sub graph_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles graph.KeyDown
+        If e.Control Then
+            If e.KeyCode = Keys.V Then
+                PasteAnnotation()
+            End If
+        End If
+    End Sub
+
+    Private Sub DeleteAnnotation()
+        For Each objAnnotation As Annotation In graph.Annotations
+            If objAnnotation.IsSelected Then
+                graph.Annotations.Remove(objAnnotation)
+                Changed = True
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub mnuAnnotationAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationAdd.Click
+
+    End Sub
+
+    Private Sub mnuLuciditySubItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Dim objMenu As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
+        AddFile(objMenu.Tag, objMenu.Text)
+    End Sub
+
+    Private Sub AddFile(ByVal Lucidity As String, ByVal FileName As String)
+        Dim objCalloutCloud As New Charting.CalloutAnnotation
+        'objCalloutCloud.ClipToChartArea = "ChartArea1"
+        objCalloutCloud.AllowAnchorMoving = True
+        objCalloutCloud.AllowSelecting = True
+        objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+        objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
+        objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
+        objCalloutCloud.Name = Guid.NewGuid.ToString
+        objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
+        objCalloutCloud.ShadowOffset = 1
+        objCalloutCloud.Text = New FileInfo(FileName).Name.Replace(".ld3", "")
+        objCalloutCloud.Tag = Lucidity
+        objCalloutCloud.AnchorDataPoint = graph.Series("REM").Points(0)
+        objCalloutCloud.SmartLabelStyle.Enabled = True
+        objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
+        objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
+        objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
+        Me.graph.Annotations.Add(objCalloutCloud)
+
         Changed = True
-        Exit For
-      End If
-    Next
-  End Sub
+    End Sub
 
-  Private Sub mnuAnnotationAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationAdd.Click
+    Private Sub mnuLucidity_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuChecks.DropDownOpening, mnuSubliminals.DropDownOpening, mnuRecordings.DropDownOpening, mnuReadings.DropDownOpening
+        Dim objMenu As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
+        objMenu.DropDownItems.Clear()
 
-  End Sub
+        For Each strFile As String In Directory.GetFiles(m_strPath & "Lucidity\" & objMenu.Tag, "*.ld3")
+            Dim objMenuSubItem As ToolStripMenuItem = objMenu.DropDownItems.Add(New FileInfo(strFile).Name.Replace(".ld3", ""), objMenu.Image, AddressOf mnuLuciditySubItem_Click)
+            objMenuSubItem.Tag = strFile
+        Next
+    End Sub
 
-  Private Sub mnuLuciditySubItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    Dim objMenu As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
-    AddFile(objMenu.Tag, objMenu.Text)
-  End Sub
+    Private Sub mnuAddSoundFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        If objOpenFileDialog.ShowDialog = DialogResult.OK Then
+            Dim objCalloutCloud As New Charting.CalloutAnnotation
+            'objCalloutCloud.ClipToChartArea = "ChartArea1"
+            objCalloutCloud.AllowAnchorMoving = True
+            objCalloutCloud.AllowSelecting = True
+            objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+            objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
+            objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
+            objCalloutCloud.Name = Guid.NewGuid.ToString
+            objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
+            objCalloutCloud.ShadowOffset = 1
+            objCalloutCloud.Text = New FileInfo(objOpenFileDialog.FileName).Name
+            objCalloutCloud.Tag = "MP3::" & objOpenFileDialog.FileName
+            objCalloutCloud.AnchorDataPoint = graph.Series("REM").Points(0)
+            objCalloutCloud.SmartLabelStyle.Enabled = True
+            objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
+            objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
+            objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
+            Me.graph.Annotations.Add(objCalloutCloud)
 
-  Private Sub AddFile(ByVal Lucidity As String, ByVal FileName As String)
-    Dim objCalloutCloud As New Charting.CalloutAnnotation
-    'objCalloutCloud.ClipToChartArea = "ChartArea1"
-    objCalloutCloud.AllowAnchorMoving = True
-    objCalloutCloud.AllowSelecting = True
-    objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-    objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-    objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
-    objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
-    objCalloutCloud.Name = Guid.NewGuid.ToString
-    objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
-    objCalloutCloud.ShadowOffset = 1
-    objCalloutCloud.Text = New FileInfo(FileName).Name.Replace(".ld3", "")
-    objCalloutCloud.Tag = Lucidity
-    objCalloutCloud.AnchorDataPoint = graph.Series("REM").Points(0)
-    objCalloutCloud.SmartLabelStyle.Enabled = True
-    objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
-    objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
-    objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
-    Me.graph.Annotations.Add(objCalloutCloud)
+            Changed = True
+        End If
+    End Sub
 
-    Changed = True
-  End Sub
-
-  Private Sub mnuLucidity_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuChecks.DropDownOpening, mnuSubliminals.DropDownOpening, mnuRecordings.DropDownOpening, mnuReadings.DropDownOpening
-    Dim objMenu As ToolStripMenuItem = CType(sender, ToolStripMenuItem)
-    objMenu.DropDownItems.Clear()
-
-    For Each strFile As String In Directory.GetFiles(m_strPath & "Lucidity\" & objMenu.Tag, "*.ld3")
-      Dim objMenuSubItem As ToolStripMenuItem = objMenu.DropDownItems.Add(New FileInfo(strFile).Name.Replace(".ld3", ""), objMenu.Image, AddressOf mnuLuciditySubItem_Click)
-      objMenuSubItem.Tag = strFile
-    Next
-  End Sub
-
-  Private Sub mnuAddSoundFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-    If objOpenFileDialog.ShowDialog = DialogResult.OK Then
-      Dim objCalloutCloud As New Charting.CalloutAnnotation
-      'objCalloutCloud.ClipToChartArea = "ChartArea1"
-      objCalloutCloud.AllowAnchorMoving = True
-      objCalloutCloud.AllowSelecting = True
-      objCalloutCloud.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-      objCalloutCloud.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      objCalloutCloud.ForeColor = System.Drawing.Color.SteelBlue
-      objCalloutCloud.LineColor = System.Drawing.Color.LightSteelBlue
-      objCalloutCloud.Name = Guid.NewGuid.ToString
-      objCalloutCloud.ShadowColor = System.Drawing.Color.SteelBlue
-      objCalloutCloud.ShadowOffset = 1
-      objCalloutCloud.Text = New FileInfo(objOpenFileDialog.FileName).Name
-      objCalloutCloud.Tag = "MP3::" & objOpenFileDialog.FileName
-      objCalloutCloud.AnchorDataPoint = graph.Series("REM").Points(0)
-      objCalloutCloud.SmartLabelStyle.Enabled = True
-      objCalloutCloud.SmartLabelStyle.IsMarkerOverlappingAllowed = True
-      objCalloutCloud.SmartLabelStyle.IsOverlappedHidden = False
-      objCalloutCloud.SmartLabelStyle.AllowOutsidePlotArea = LabelOutsidePlotAreaStyle.Yes
-      Me.graph.Annotations.Add(objCalloutCloud)
-
-      Changed = True
-    End If
-  End Sub
-
-  Private Sub mnuAnnotationPlay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationPlay.Click
-    If Not m_objClickedAnnotation Is Nothing Then
-      Execute(m_objClickedAnnotation.Tag)
-    End If
-  End Sub
+    Private Sub mnuAnnotationPlay_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuAnnotationPlay.Click
+        If Not m_objClickedAnnotation Is Nothing Then
+            Execute(m_objClickedAnnotation.Tag)
+        End If
+    End Sub
 End Class

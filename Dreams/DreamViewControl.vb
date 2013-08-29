@@ -5,7 +5,7 @@ Public Class DreamViewControl
 
     Public Words As Integer
     Public FileName As String
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
     Private m_boolLoading As Boolean = False
     Private m_objSpeechSynthesizer As New System.Speech.Synthesis.SpeechSynthesizer()
@@ -307,7 +307,7 @@ Public Class DreamViewControl
         Public Dream As String
         Public Completed As Boolean
         Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
-        Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+        Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
 
         Public Event RandomWord(ByVal Word As String)
         Public Event AddCategoryItem(ByVal Category As String, ByVal Item As String)

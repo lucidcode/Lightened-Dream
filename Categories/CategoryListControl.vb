@@ -4,7 +4,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class CategoryListControl
 
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strFileName As String
     Public Category As String
 

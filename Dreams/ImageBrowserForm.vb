@@ -148,7 +148,7 @@ Public Class ImageBrowserForm
         Dim intStart As Integer = 0
         Dim intEnd As Integer = 0
 
-        intStart = strSource.IndexOf("istock.search.Handler.fireNewResultEvents", intStart)
+        intStart = strSource.IndexOf("istock.search.event.fire", intStart)
 
         Do
           Dim intLastIndex = intStart

@@ -9,7 +9,7 @@ Imports System.Threading
 Public Class MainForm
 
     Public Loaded As Boolean = False
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
     Private m_arrCategories As New List(Of String)
     Private m_arrBackHistory As New List(Of TreeNode)
@@ -2526,11 +2526,8 @@ Public Class MainForm
         'End Try
     End Sub
 
-    Private Sub MainForm_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles Me.KeyPress
-
-    End Sub
-
-    Private Sub MainForm_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyUp
-
+    Private Sub mnuToolsDataDirectory_Click(sender As System.Object, e As System.EventArgs) Handles mnuToolsDataDirectory.Click
+        Dim formDataDirectory As New DataDirectoryForm
+        formDataDirectory.ShowDialog()
     End Sub
 End Class

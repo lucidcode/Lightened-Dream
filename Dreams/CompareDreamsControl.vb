@@ -12,7 +12,7 @@ Public Class CompareDreamsControl
 
     Public OnlyCategories As Boolean = False
 
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
     Private m_boolSearching As Boolean = False
 

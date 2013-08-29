@@ -120,6 +120,7 @@
     <Compile Include="CategoryListControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DataDirectory.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>

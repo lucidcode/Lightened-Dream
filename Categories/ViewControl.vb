@@ -5,7 +5,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class ViewControl
 
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Public FileName As String
     Public Event SelectDream(ByVal DreamDate As String, ByVal Title As String)
     Private m_strCategory As String
@@ -158,7 +158,7 @@ Public Class ViewControl
         Public Description As String
         Public Keywords As String
         Public FileName As String
-        Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+        Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
 
         Public Event RandomWord(ByVal Word As String)
 
@@ -267,75 +267,75 @@ Public Class ViewControl
 
     End Class
 
-  Private Sub lstDreams_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstDreams.DoubleClick
-    If lstDreams.SelectedItems.Count = 0 Then Return
-    RaiseEvent SelectDream(lstDreams.SelectedItems(0).Text, lstDreams.SelectedItems(0).SubItems(1).Text)
-  End Sub
+    Private Sub lstDreams_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lstDreams.DoubleClick
+        If lstDreams.SelectedItems.Count = 0 Then Return
+        RaiseEvent SelectDream(lstDreams.SelectedItems(0).Text, lstDreams.SelectedItems(0).SubItems(1).Text)
+    End Sub
 
-  Private Sub graph_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseDown
-    If e.Button = Windows.Forms.MouseButtons.Left Then
-      Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
-      Dim point As DataPoint
-      If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
-        If result.Series.Name.StartsWith("DreamSeries") Then
-          ' Set cursor type 
-          Me.Cursor = Cursors.Hand
+    Private Sub graph_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+            Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
+            Dim point As DataPoint
+            If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
+                If result.Series.Name.StartsWith("DreamSeries") Then
+                    ' Set cursor type 
+                    Me.Cursor = Cursors.Hand
 
-          ' Find selected data point
-          point = result.Series.Points(result.PointIndex)
-          RaiseEvent SelectDream(point.Tag, point.ToolTip)
+                    ' Find selected data point
+                    point = result.Series.Points(result.PointIndex)
+                    RaiseEvent SelectDream(point.Tag, point.ToolTip)
+                End If
+            End If
         End If
-      End If
-    End If
-  End Sub
+    End Sub
 
-  Private Sub graph_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseMove
-    Try
-      Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
+    Private Sub graph_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseMove
+        Try
+            Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
 
-      ' Reset Data Point Attributes
-      Dim point As DataPoint
-      For Each objSeries In graph.Series
-        If objSeries.Name.StartsWith("DreamSeries") Then
-          For Each point In objSeries.Points
-            point.Color = Color.FromArgb(200, 65, 140, 240)
-          Next point
-        End If
-      Next
+            ' Reset Data Point Attributes
+            Dim point As DataPoint
+            For Each objSeries In graph.Series
+                If objSeries.Name.StartsWith("DreamSeries") Then
+                    For Each point In objSeries.Points
+                        point.Color = Color.FromArgb(200, 65, 140, 240)
+                    Next point
+                End If
+            Next
 
-      If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
-        If result.Series.Name.StartsWith("DreamSeries") Then
+            If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
+                If result.Series.Name.StartsWith("DreamSeries") Then
 
-          ' Set cursor type 
-          Me.Cursor = Cursors.Hand
+                    ' Set cursor type 
+                    Me.Cursor = Cursors.Hand
 
-          ' Find selected data point
-          point = result.Series.Points(result.PointIndex)
-          point.Color = Color.FromArgb(255, 65, 140, 240) ' Color.LightSteelBlue
-        Else
-          ' Set default cursor
-          Me.Cursor = Cursors.Default
-        End If
-      Else
-        ' Set default cursor
-        Me.Cursor = Cursors.Default
-      End If
+                    ' Find selected data point
+                    point = result.Series.Points(result.PointIndex)
+                    point.Color = Color.FromArgb(255, 65, 140, 240) ' Color.LightSteelBlue
+                Else
+                    ' Set default cursor
+                    Me.Cursor = Cursors.Default
+                End If
+            Else
+                ' Set default cursor
+                Me.Cursor = Cursors.Default
+            End If
 
-    Catch ex As Exception
+        Catch ex As Exception
 
-    End Try
-  End Sub
+        End Try
+    End Sub
 
-  Private Sub txtName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtName.TextChanged
-    lblTitle.Text = "Categories - " + m_strCategory + "s - " + txtName.Text
-    Changed = True
-  End Sub
+    Private Sub txtName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtName.TextChanged
+        lblTitle.Text = "Categories - " + m_strCategory + "s - " + txtName.Text
+        Changed = True
+    End Sub
 
-  Private Sub txtKeywords_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtKeywords.TextChanged
-    Changed = True
-  End Sub
+    Private Sub txtKeywords_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtKeywords.TextChanged
+        Changed = True
+    End Sub
 
-  Private Sub txtDescription_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDescription.TextChanged
-    Changed = True
-  End Sub
+    Private Sub txtDescription_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDescription.TextChanged
+        Changed = True
+    End Sub
 End Class

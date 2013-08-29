@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("lucidcode")> 
 <Assembly: AssemblyProduct("Categories")> 
-<Assembly: AssemblyCopyright("Copyright © lucidcode 2012")> 
+<Assembly: AssemblyCopyright("Copyright © lucidcode 2013")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -30,5 +30,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("3.2.4")> 
-<Assembly: AssemblyFileVersion("3.2.4.0")> 
+<Assembly: AssemblyVersion("3.2.6")> 
+<Assembly: AssemblyFileVersion("3.2.6.0")> 

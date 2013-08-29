@@ -124,6 +124,7 @@
     <Compile Include="CompareDreamsControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="DataDirectory.vb" />
     <Compile Include="DreamSignControl.Designer.vb">
       <DependentUpon>DreamSignControl.vb</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@ Imports System.IO
 Public Class ItemViewControl
 
   Public FileName As String
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\Lucidity\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\Lucidity\"
     Private m_strType As String
     Private m_boolSpelling As Boolean = False
 

@@ -3,7 +3,7 @@ Imports System.Xml
 
 Public Class FIELDForm
 
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_boolMouseDown As Boolean
     Private m_boolStartTime As DateTime
 

@@ -5,7 +5,7 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Public Class YearsListControl
 
   Public Event MonthSelected(ByVal Month As String)
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
   Private m_boolSearching As Boolean = False
   Private objDreamSeries As Series
 

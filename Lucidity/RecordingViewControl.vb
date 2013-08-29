@@ -5,7 +5,7 @@ Imports Microsoft.VisualBasic.Devices
 Public Class RecordingViewControl
 
   Public FileName As String
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strTitle As String
     Private m_strFile As String
     Private Declare Ansi Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" (ByVal lpstrCommand As String, ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCallback As Integer) As Integer

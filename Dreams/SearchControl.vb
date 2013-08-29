@@ -7,7 +7,7 @@ Public Class SearchControl
   Public Event MonthSelected(ByVal Month As String)
   Public Event CategoryFileSelected(ByVal Category As String, ByVal Item As String)
   Public Event CategoryFileCreated(ByVal Category As String, ByVal Item As String)
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
   Private m_boolSearching As Boolean = False
   Private objDreamSeries As Series
 

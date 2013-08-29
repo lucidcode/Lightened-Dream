@@ -4,7 +4,7 @@ Imports System.IO
 Public Class FolderViewControl
 
   Public FileName As String
-    Private m_strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\Lightened Dream\Lucidity\"
+    Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\Lucidity\"
     Private m_strFolder As String
     Public Playing As Boolean = False
 
