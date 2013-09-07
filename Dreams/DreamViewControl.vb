@@ -349,6 +349,24 @@ Public Class DreamViewControl
                     Next
                 End If
 
+                For Each objCategoryItem As CategoryItem In arrCategoryItems
+                    Dim strName As String = objCategoryItem.Name
+
+                    If strName.Contains(" ") Then
+                        If Dream.ToLower().Contains(strName.ToLower()) Then
+                            RaiseEvent AddCategoryItem(objCategoryItem.Category, strName)
+                            RaiseEvent RandomWord(strName)
+
+                            arrAssigned.Add(strName.ToLower)
+
+                            For Each strSubItem As String In objCategoryItem.SubItems
+                                arrAssigned.Add(strSubItem.ToLower)
+                            Next
+
+                        End If
+                    End If
+                Next
+
                 For Each strWord As String In Dreams.Dreaming.GetWords(Dream)
                     Threading.Thread.Sleep(2)
                     Dim boolExists As Boolean = False
@@ -370,6 +388,7 @@ Public Class DreamViewControl
                         Dim boolCatgegorized As Boolean = False
                         For Each objCategoryItem As CategoryItem In arrCategoryItems
                             Dim strName As String = objCategoryItem.Name
+
                             If strName.ToLower = strWord.ToLower Then
                                 boolCatgegorized = True
                                 lstItem.Tag = objCategoryItem.Category
@@ -383,15 +402,8 @@ Public Class DreamViewControl
                                         arrAssigned.Add(strSubItem.ToLower)
                                     Next
 
-                                    ' Now update the item
-
-
                                 Catch ex As Exception
                                 End Try
-                                Exit For
-                            End If
-
-                            If boolCatgegorized Then
                                 Exit For
                             End If
                         Next

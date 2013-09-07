@@ -124,6 +124,8 @@ Public Class ViewControl
     Public Sub Save()
         Changed = False
         If txtName.Text <> lblTitle.Tag Then
+            Dim newFileName = m_strPath + "Categories\" + m_strCategory + "s\" + txtName.Text + ".ld3"
+            File.Move(FileName, newFileName)
             FileName = m_strPath + "Categories\" + m_strCategory + "s\" + txtName.Text + ".ld3"
         End If
 
@@ -192,7 +194,7 @@ Public Class ViewControl
                 arrKeywords.Add(Name)
                 For Each strKeyWord As String In Keywords.Split(", ")
                     If strKeyWord <> "" Then
-                        arrKeywords.Add(strKeyWord.Trim(" "))
+                        arrKeywords.Add(strKeyWord.ToLower().Trim(" "))
                     End If
                 Next
 
@@ -210,26 +212,34 @@ Public Class ViewControl
                             Dim xmlDream As New XmlDocument
                             xmlDream.Load(strDreamFile)
 
-                            For Each strWord As String In Dreams.Dreaming.GetWords(xmlDream.DocumentElement.SelectSingleNode("Dream").InnerText.ToLower)
-
+                            For Each strKeyWord As String In arrKeywords
                                 Dim boolFound As Boolean = False
 
-                                For Each strKeyWord As String In arrKeywords
-                                    If strWord = strKeyWord Then
-                                        RaiseEvent RandomWord(xmlDream.DocumentElement.SelectSingleNode("Title").InnerText)
-
-                                        Dim safeFilename As New SafeFilename
-                                        safeFilename.Guid = Guid.NewGuid.ToString
-                                        safeFilename.Filename = xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
-
-                                        safeFilenames.Add(safeFilename)
-                                        strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + safeFilename.Guid + "' />"
+                                If (strKeyWord.Contains(" ")) Then
+                                    If (xmlDream.DocumentElement.SelectSingleNode("Dream").InnerText.ToLower.Contains(strKeyWord)) Then
                                         boolFound = True
-                                        Exit For
                                     End If
-                                Next
+                                Else
+                                    For Each strWord As String In Dreams.Dreaming.GetWords(xmlDream.DocumentElement.SelectSingleNode("Dream").InnerText.ToLower)
+                                        If strWord = strKeyWord Then
+                                                boolFound = True
+                                            Exit For
+                                        End If
+                                    Next
+                                End If
 
-                                If boolFound Then Exit For
+                                If boolFound Then
+                                    RaiseEvent RandomWord(xmlDream.DocumentElement.SelectSingleNode("Title").InnerText)
+
+                                    Dim safeFilename As New SafeFilename
+                                    safeFilename.Guid = Guid.NewGuid.ToString
+                                    safeFilename.Filename = xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
+
+                                    safeFilenames.Add(safeFilename)
+                                    strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + safeFilename.Guid + "' />"
+
+                                    Exit For
+                                End If
 
                             Next
 
