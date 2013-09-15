@@ -1159,109 +1159,114 @@ Public Class MainForm
     End Class
 
     Private Sub CreateNewCategory(ByVal Type As String, Optional ByVal Name As String = "")
-        Dim safeFilenames As New List(Of SafeFilename)
+        Try
+            Dim safeFilenames As New List(Of SafeFilename)
 
-        If Name = "" Then
-            Name = "New " + Type
-        End If
-        Dim strTitle As String = Name
-        Dim strFileName As String
-        strFileName = m_strPath + "\Categories\" + Type + "s\" + strTitle + ".ld3"
-
-        Dim intPos As Integer = 2
-        Do
-            If (File.Exists(strFileName)) Then
-                strTitle = "New " + Type + " " + intPos.ToString
-                strFileName = m_strPath + "\Categories\" + Type + "s\" + strTitle + ".ld3"
-                intPos += 1
-            Else
-                Exit Do
+            If Name = "" Then
+                Name = "New " + Type
             End If
-        Loop
+            Dim strTitle As String = Name
+            Dim strFileName As String
+            strFileName = m_strPath + "\Categories\" + Type + "s\" + strTitle + ".ld3"
 
-        Dim strXml As String
-        strXml = "<Category>"
-        strXml += "<Name></Name>"
-        strXml += "<Description></Description>"
-        strXml += "<Names></Names>"
-        strXml += "<Dreams>"
-        For Each strYearFolder As String In Directory.GetDirectories(m_strPath + "Dreams")
-            strXml += "<Year Value='" + New DirectoryInfo(strYearFolder).Name + "'>"
-            ' Load each month
-            For Each strMonthFolder As String In Directory.GetDirectories(strYearFolder)
-                strXml += "<Month Value='" + New DirectoryInfo(strMonthFolder).Name + "'>"
-                ' Load each dream
-                For Each strDreamFile As String In Directory.GetFiles(strMonthFolder, "*.ld3")
-                    Dim xmlDream As New XmlDocument
-                    xmlDream.Load(strDreamFile)
-                    If (xmlDream.DocumentElement.SelectSingleNode("Dream").InnerText.ToLower.Contains(strTitle.ToLower)) Then
+            Dim intPos As Integer = 2
+            Do
+                If (File.Exists(strFileName)) Then
+                    strTitle = "New " + Type + " " + intPos.ToString
+                    strFileName = m_strPath + "\Categories\" + Type + "s\" + strTitle + ".ld3"
+                    intPos += 1
+                Else
+                    Exit Do
+                End If
+            Loop
 
-                        Dim safeFilename As New SafeFilename
-                        safeFilename.Guid = Guid.NewGuid.ToString
-                        safeFilename.Filename = xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
+            Dim strXml As String
+            strXml = "<Category>"
+            strXml += "<Name></Name>"
+            strXml += "<Description></Description>"
+            strXml += "<Names></Names>"
+            strXml += "<Dreams>"
+            For Each strYearFolder As String In Directory.GetDirectories(m_strPath + "Dreams")
+                strXml += "<Year Value='" + New DirectoryInfo(strYearFolder).Name + "'>"
+                ' Load each month
+                For Each strMonthFolder As String In Directory.GetDirectories(strYearFolder)
+                    strXml += "<Month Value='" + New DirectoryInfo(strMonthFolder).Name + "'>"
+                    ' Load each dream
+                    For Each strDreamFile As String In Directory.GetFiles(strMonthFolder, "*.ld3")
+                        Dim xmlDream As New XmlDocument
+                        xmlDream.Load(strDreamFile)
+                        If (xmlDream.DocumentElement.SelectSingleNode("Dream").InnerText.ToLower.Contains(strTitle.ToLower)) Then
 
-                        safeFilenames.Add(safeFilename)
+                            Dim safeFilename As New SafeFilename
+                            safeFilename.Guid = Guid.NewGuid.ToString
+                            safeFilename.Filename = xmlDream.DocumentElement.SelectSingleNode("Title").InnerText
 
-                        strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + safeFilename.Guid + "' />"
+                            safeFilenames.Add(safeFilename)
+
+                            strXml += "<Dream Date='" + xmlDream.DocumentElement.SelectSingleNode("Date").InnerText + "' Title='" + safeFilename.Guid + "' />"
+                        End If
+                    Next
+                    strXml += "</Month>"
+                Next
+                strXml += "</Year>"
+            Next
+            strXml += "</Dreams>"
+            strXml += "</Category>"
+
+            Dim xmlDoc As New XmlDocument
+            xmlDoc.LoadXml(strXml)
+
+            xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = strTitle
+
+            For Each xmlDream As XmlNode In xmlDoc.DocumentElement.SelectNodes("//Dream")
+                For Each safeFilename As SafeFilename In safeFilenames
+                    If safeFilename.Guid = xmlDream.Attributes("Title").InnerText Then
+                        xmlDream.Attributes("Title").InnerText = safeFilename.Filename
                     End If
                 Next
-                strXml += "</Month>"
             Next
-            strXml += "</Year>"
-        Next
-        strXml += "</Dreams>"
-        strXml += "</Category>"
 
-        Dim xmlDoc As New XmlDocument
-        xmlDoc.LoadXml(strXml)
+            xmlDoc.Save(strFileName)
 
-        xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = strTitle
+            ' Update Tree   
+            Dim trvCategoryItem As New TreeNode(New FileInfo(strFileName).Name.Replace(".ld3", ""))
+            Dim objCategoryTag As New Categories.Tags.CategoryFile(strFileName, Type)
+            trvCategoryItem.Tag = objCategoryTag
+            trvCategoryItem.ImageIndex = 2
+            trvCategoryItem.SelectedImageIndex = 2
+            If lstImgTrv.Images.IndexOfKey("File." & Type + "s") <> -1 Then
+                trvCategoryItem.ImageIndex = lstImgTrv.Images.IndexOfKey("File." & Type + "s")
+                trvCategoryItem.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("File." & Type + "s")
+            End If
 
-        For Each xmlDream As XmlNode In xmlDoc.DocumentElement.SelectNodes("//Dream")
-            For Each safeFilename As SafeFilename In safeFilenames
-                If safeFilename.Guid = xmlDream.Attributes("Title").InnerText Then
-                    xmlDream.Attributes("Title").InnerText = safeFilename.Filename
-                End If
+            ' Add Item
+            If FindNode(trvMain.Nodes(1), Type + "s") IsNot Nothing Then
+                FindNode(trvMain.Nodes(1), Type + "s").Nodes.Add(trvCategoryItem)
+            End If
+
+            ' Select Item
+            trvMain.SelectedNode = trvCategoryItem
+
+            ' Load each dream
+            Dim xmlCategory As New Xml.XmlDocument
+            xmlCategory.Load(strFileName)
+            For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
+                Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
+                Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
+                trvDream.Tag = objDreamTag
+                trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
+                trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
+                trvCategoryItem.Nodes.Add(trvDream)
+                ' Add the loading node
+                Dim trvLoading As New TreeNode("Loading Categories...")
+                trvDream.Nodes.Add(trvLoading)
             Next
-        Next
 
-        xmlDoc.Save(strFileName)
+            m_objCategoryViewControl.Focus()
 
-        ' Update Tree   
-        Dim trvCategoryItem As New TreeNode(New FileInfo(strFileName).Name.Replace(".ld3", ""))
-        Dim objCategoryTag As New Categories.Tags.CategoryFile(strFileName, Type)
-        trvCategoryItem.Tag = objCategoryTag
-        trvCategoryItem.ImageIndex = 2
-        trvCategoryItem.SelectedImageIndex = 2
-        If lstImgTrv.Images.IndexOfKey("File." & Type + "s") <> -1 Then
-            trvCategoryItem.ImageIndex = lstImgTrv.Images.IndexOfKey("File." & Type + "s")
-            trvCategoryItem.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("File." & Type + "s")
-        End If
-
-        ' Add Item
-        If FindNode(trvMain.Nodes(1), Type + "s") IsNot Nothing Then
-            FindNode(trvMain.Nodes(1), Type + "s").Nodes.Add(trvCategoryItem)
-        End If
-
-        ' Select Item
-        trvMain.SelectedNode = trvCategoryItem
-
-        ' Load each dream
-        Dim xmlCategory As New Xml.XmlDocument
-        xmlCategory.Load(strFileName)
-        For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
-            Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-            Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
-            trvDream.Tag = objDreamTag
-            trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
-            trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
-            trvCategoryItem.Nodes.Add(trvDream)
-            ' Add the loading node
-            Dim trvLoading As New TreeNode("Loading Categories...")
-            trvDream.Nodes.Add(trvLoading)
-        Next
-
-        m_objCategoryViewControl.Focus()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message + "/r/n" + "Stack trace: " + ex.StackTrace, "LightenedDream.Categories.Create()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Function FindNode(ByVal Parent As TreeNode, ByVal Value As String) As TreeNode
@@ -1962,7 +1967,7 @@ Public Class MainForm
         Private Function UpdateAvailable(ByVal NewVersion As String) As Boolean
             Try
 
-                Dim OldVersion As String = Application.ProductVersion
+        Dim OldVersion As String = Application.ProductVersion
                 Dim arrOldVersion() As String = Split(Application.ProductVersion, ".") ' 2.9.9.0
                 Dim arrNewVersion() As String = Split(NewVersion, ".") '    ' 2.9.9.1
 
