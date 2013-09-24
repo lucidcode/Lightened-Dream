@@ -179,16 +179,19 @@ Public Class ViewControl
 
         strXml += "<Name></Name>"
         strXml += "<Description></Description>"
-        strXml += "<Names></Names>"
+        strXml += "<Names>"
 
-        ' Preload keywords
+        Dim strNamesXml = ""
         Dim arrKeywords As New List(Of String)
         arrKeywords.Add(Name)
         For Each strKeyWord As String In Keywords.Split(", ")
           If strKeyWord <> "" Then
-            arrKeywords.Add(strKeyWord.ToLower().Trim(" "))
+            arrKeywords.Add(strKeyWord)
+            strXml += "<Name>" + strKeyWord.TrimStart(" ") + "</Name>"
           End If
         Next
+
+        strXml += "</Names>"
 
         ' Update the list
         ' Load each year
@@ -248,14 +251,6 @@ Public Class ViewControl
 
         xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = Name
         xmlDoc.DocumentElement.SelectSingleNode("Description").InnerText = Description
-
-        Dim strNamesXml = ""
-        For Each strKeyWord As String In Keywords.Split(", ")
-          If strKeyWord <> "" Then
-            strNamesXml += "<Name>" + strKeyWord.TrimStart(" ") + "</Name>"
-          End If
-        Next
-        xmlDoc.DocumentElement.SelectSingleNode("Names").InnerText = strNamesXml
 
         For Each xmlDream As XmlNode In xmlDoc.DocumentElement.SelectNodes("//Dream")
           For Each safeFilename As SafeFilename In safeFilenames
