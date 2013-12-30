@@ -182,9 +182,11 @@ Public Class SearchControl
           point = result.Series.Points(result.PointIndex)
           point.Color = Color.FromArgb(255, point.Color.R, point.Color.G, point.Color.B)
         ElseIf result.Series.Name.StartsWith("Dreams (") Then
-          Me.Cursor = Cursors.Hand
-          point = result.Series.Points(result.PointIndex)
-          point.Color = Color.FromArgb(255, point.Color.R, point.Color.G, point.Color.B)
+          If result.PointIndex > -1 Then
+            Me.Cursor = Cursors.Hand
+            point = result.Series.Points(result.PointIndex)
+            point.Color = Color.FromArgb(255, point.Color.R, point.Color.G, point.Color.B)
+          End If
         Else
           Me.Cursor = Cursors.Default
           point = result.Series.Points(result.PointIndex)
@@ -204,35 +206,39 @@ Public Class SearchControl
       Dim point As DataPoint
       If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
         If result.Series.Name.StartsWith("Dreams (") Then
-          point = objDreamSeries.Points(result.PointIndex)
-          RaiseEvent MonthSelected(point.ToolTip)
+          If result.PointIndex > -1 Then
+            point = objDreamSeries.Points(result.PointIndex)
+            RaiseEvent MonthSelected(point.ToolTip)
+          End If
         Else
           If result.Series.Tag.ToString.Contains("\") Then
             Dim arrCategoryFile() As String = result.Series.Tag.ToString.Split("\")
             RaiseEvent CategoryFileSelected(arrCategoryFile(0), arrCategoryFile(1))
           Else
             m_strSelectedNewCategory = result.Series.Tag.ToString
-            mnuAddTo.Text = "Add '" & m_strSelectedNewCategory & "' to"
-            mnuCategories.Show(graph, e.X, e.Y)
+            If Not m_strSelectedNewCategory = "0" Then
+              mnuAddTo.Text = "Add '" & m_strSelectedNewCategory & "' to"
+              mnuCategories.Show(graph, e.X, e.Y)
+            End If
           End If
         End If
       End If
-    End If
+        End If
 
-    If e.Button = Windows.Forms.MouseButtons.Right Then
-      Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
-      If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
-        If result.Series.Name.StartsWith("Dreams (") Then
-        Else
-          If result.Series.Tag.ToString.Contains("\") Then
-          Else
-            m_strSelectedNewCategory = result.Series.Tag.ToString
-            mnuAddTo.Text = "Add '" & m_strSelectedNewCategory & "' to"
-            mnuCategories.Show(graph, e.X, e.Y)
-          End If
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
+            If result.ChartElementType = ChartElementType.DataPoint Or result.ChartElementType = ChartElementType.DataPointLabel Or result.ChartElementType = ChartElementType.LegendItem Then
+                If result.Series.Name.StartsWith("Dreams (") Then
+                Else
+                    If result.Series.Tag.ToString.Contains("\") Then
+                    Else
+                        m_strSelectedNewCategory = result.Series.Tag.ToString
+                        mnuAddTo.Text = "Add '" & m_strSelectedNewCategory & "' to"
+                        mnuCategories.Show(graph, e.X, e.Y)
+                    End If
+                End If
+            End If
         End If
-      End If
-    End If
   End Sub
 
   Private Sub txtSearch_KeyDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSearch.KeyDown

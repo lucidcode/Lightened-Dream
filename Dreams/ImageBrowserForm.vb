@@ -139,15 +139,15 @@ Public Class ImageBrowserForm
     Private m_intDownloaded As Integer = 0
 
     Public Sub DoSearchWork()
+      Dim intImageIndex As Integer = 0
+      Dim intStart As Integer = 0
+      Dim intEnd As Integer = 0
+      Dim strSource As String
+
       Try
+
         Dim objWebClient As New System.Net.WebClient
-
-        Dim strSource As String = objWebClient.DownloadString(Keywords)
-
-        Dim intImageIndex As Integer = 0
-        Dim intStart As Integer = 0
-        Dim intEnd As Integer = 0
-
+        strSource = objWebClient.DownloadString(Keywords)
         intStart = strSource.IndexOf("istock.search.event.fire", intStart)
 
         Do
@@ -165,20 +165,36 @@ Public Class ImageBrowserForm
 
           intStart = strSource.IndexOf("file_thumbview_approve", intStart)
 
+          If intStart = -1 Then
+            Exit Do
+          End If
+
           intStart = strSource.IndexOf("\/", intStart) + 2
+
+          If intStart = -1 Then
+            Exit Do
+          End If
+
           intEnd = strSource.IndexOf("\/", intStart)
 
           Dim strFileID As String = strSource.Substring(intStart, intEnd - intStart)
 
-          Dim objDownloadClass As New DownloadClass
-          objDownloadClass.Title = strTitle
-          objDownloadClass.FileID = strFileID
-          objDownloadClass.ImageIndex = intImageIndex
-          objDownloadClass.Completed = False
-          AddHandler objDownloadClass.ListItemAdded, AddressOf ListItemAddedx
+          If Not strFileID = "search" Then
 
-          Dim objThread As New Thread(AddressOf objDownloadClass.DoDownloadWork)
-          objThread.Start()
+            Dim objDownloadClass As New DownloadClass
+            objDownloadClass.Title = strTitle
+            objDownloadClass.FileID = strFileID
+            objDownloadClass.ImageIndex = intImageIndex
+            objDownloadClass.Completed = False
+            AddHandler objDownloadClass.ListItemAdded, AddressOf ListItemAddedX
+
+            Dim objThread As New Thread(AddressOf objDownloadClass.DoDownloadWork)
+            objThread.Start()
+
+            Thread.Sleep(2)
+            Application.DoEvents()
+
+          End If
 
           If Completed Then Exit Do
           intImageIndex += 1
@@ -227,6 +243,9 @@ Public Class ImageBrowserForm
       Try
         Dim objWebClient As New System.Net.WebClient
         Dim arrImage As Byte() = objWebClient.DownloadData("http://www.istockphoto.com/file_thumbview_approve/" & FileID & "/1")
+
+        Thread.Sleep(2)
+        Application.DoEvents()
 
         Dim objMem As New System.IO.MemoryStream(arrImage)
         Dim imgThumbnail As Image = Image.FromStream(objMem)

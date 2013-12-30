@@ -646,6 +646,13 @@ Public Class DreamViewControl
         Return intId
     End Function
 
+    Private Function GetRandomWord() As String
+        Randomize()
+        Dim arrWords As String() = Dreaming.GetWords(txtDream.Text)
+        Dim intId As Integer = (New Random).Next(0, arrWords.Length)
+        Return arrWords(intId)
+    End Function
+
     Private Sub pbDream_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles pbDream.MouseClick
         If e.Button = Windows.Forms.MouseButtons.Left Then
             If m_formImageBrowser Is Nothing Then
@@ -678,7 +685,8 @@ Public Class DreamViewControl
                                             m_formImageBrowser.txtKeywords.Text = lstUnassigned.Items(GetRandomItem(lstUnassigned.Items.Count)).Text
                                             m_formImageBrowser.tmrDoSearch.Enabled = True
                                         Else
-
+                                            m_formImageBrowser.txtKeywords.Text = GetRandomWord()
+                                            m_formImageBrowser.tmrDoSearch.Enabled = True
                                         End If
                                     End If
                                 End If

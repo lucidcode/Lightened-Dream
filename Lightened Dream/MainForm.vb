@@ -2535,4 +2535,13 @@ Public Class MainForm
         Dim formDataDirectory As New DataDirectoryForm
         formDataDirectory.ShowDialog()
     End Sub
+
+  Private Sub mnuToolsDreamTypeCount_Click(sender As System.Object, e As System.EventArgs) Handles mnuToolsDreamTypeCount.Click
+    trvMain.SelectedNode = trvMain.Nodes(0)
+    trvMain.SelectedNode = Nothing
+    pnlContainer.Controls.Clear()
+    m_objDreamSignListControl.Dock = DockStyle.Fill
+    pnlContainer.Controls.Add(m_objDreamSignListControl)
+    m_objDreamSignListControl.CountDreamTypes()
+  End Sub
 End Class

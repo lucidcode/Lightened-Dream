@@ -69,13 +69,13 @@ Public Class DreamSignControl
         objDreams.Points.AddY(1000)
         tmrSearching.Enabled = True
 
+        lblTitle.Text = "Dream Signs"
 
         pnlSearching.Visible = True
         graph.Height = Me.Height - graph.Top - 48
 
         Dim xmlDocIgnore As New XmlDocument
         Dim strXml As String = ""
-
 
         m_arrWords = New List(Of Word)
         m_arrIgnore = New List(Of String)
@@ -124,6 +124,50 @@ Public Class DreamSignControl
 
     End Sub
 
+    Public Sub CountDreamTypes()
+        objDreams.Points.Clear()
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(0)
+        objDreams.Points.AddY(1000)
+        tmrSearching.Enabled = True
+
+        lblTitle.Text = "Dream Types"
+
+        pnlSearching.Visible = True
+        graph.Height = Me.Height - graph.Top - 48
+
+        m_arrWords = New List(Of Word)
+        m_arrIgnore = New List(Of String)
+        m_arrTop100 = New List(Of Word)
+        m_arrTop10 = New List(Of Word)
+
+        m_arrDreamFiles = Directory.GetFiles(m_strPath & "Dreams\", "*.ld3", SearchOption.AllDirectories)
+        m_arrWords.Clear()
+
+        graph.Series.Clear()
+        graph.ChartAreas(0).AxisX.CustomLabels.Clear()
+        graph.Visible = True
+
+        m_intSelectedFile = 0
+
+        tmrDreamTypes.Enabled = True
+
+        objSeries = graph.Series.Add("DreamSigns")
+        objSeries.ChartType = SeriesChartType.Column
+
+        objSeries.Color = Color.FromArgb(200, 65, 140, 240)
+        objSeries.BorderWidth = 1
+        objSeries("BarLabelStyle") = "Center"
+    End Sub
+
     Private Sub tmrDreamSigns_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrDreamSigns.Tick
         tmrDreamSigns.Enabled = False
 
@@ -143,6 +187,57 @@ Public Class DreamSignControl
 
         m_intSelectedFile += 1
         tmrDreamSigns.Enabled = True
+    End Sub
+
+    Private Sub tmrDreamTypes_Tick(sender As System.Object, e As System.EventArgs) Handles tmrDreamTypes.Tick
+        tmrDreamTypes.Enabled = False
+
+        If m_intSelectedFile >= m_arrDreamFiles.Length Then
+            tmrDreamTypes.Enabled = False
+            pnlSearching.Visible = False
+            graph.Height = Me.Height - graph.Top - 8
+            tmrSearching.Enabled = False
+            Exit Sub
+        End If
+
+        Dim xmlDream As New XmlDocument
+        xmlDream.Load(m_arrDreamFiles(m_intSelectedFile))
+
+        Dim strDreamType As String = xmlDream.DocumentElement.SelectSingleNode("Lucidity").InnerText
+
+        Select Case strDreamType
+            Case "1" : strDreamType = "Thought"
+            Case "2" : strDreamType = "Daydream"
+            Case "3" : strDreamType = "Nightmare"
+            Case "4" : strDreamType = "Foggy Dream"
+            Case "5" : strDreamType = "Normal Dream"
+            Case "6" : strDreamType = "Vivid Dream"
+            Case "7" : strDreamType = "Lucid Dream"
+            Case "8" : strDreamType = "Epic Dream"
+            Case "9" : strDreamType = "Wake Induced"
+            Case Else : strDreamType = "Unclassified"
+        End Select
+
+        Dim boolAlreadyExists As Boolean = False
+        For Each objTopWord As Word In m_arrTop100
+            If strDreamType.ToLower = objTopWord.Name.ToLower Then
+                boolAlreadyExists = True
+                objTopWord.Count += 1
+                Exit For
+            End If
+        Next
+
+        If Not boolAlreadyExists Then
+            Dim objDreamType As New Word
+            objDreamType.Name = strDreamType
+            objDreamType.Count = 1
+            m_arrTop100.Add(objDreamType)
+        End If
+
+        LoadGraph(True)
+
+        m_intSelectedFile += 1
+        tmrDreamTypes.Enabled = True
     End Sub
 
     Private Sub Search(ByVal arrWords() As String)
@@ -236,6 +331,7 @@ Public Class DreamSignControl
     Private Sub graph_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseMove
         Try
             If tmrSearching.Enabled Then Exit Sub
+            If lblTitle.Text = "Dream Types" Then Exit Sub
 
             Dim result As HitTestResult = graph.HitTest(e.X, e.Y)
 
@@ -260,6 +356,8 @@ Public Class DreamSignControl
     End Sub
 
     Private Sub graph_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseDown
+        If lblTitle.Text = "Dream Types" Then Exit Sub
+
         tmrDreamSigns.Enabled = False
         pnlSearching.Visible = False
         graph.Height = Me.Height - graph.Top - 8
@@ -281,10 +379,10 @@ Public Class DreamSignControl
 
         For Each objWord As Word In m_arrTop100
             If objWord.Name = m_strSelectedNewCategory Then
-                m_arrTop100.Remove(objWord)
-                Exit For
+                objWord.Name = ""
             End If
         Next
+        m_arrTop10.Clear()
         LoadGraph()
     End Sub
 
@@ -293,15 +391,12 @@ Public Class DreamSignControl
         objDreams.Points.Remove(objDreams.Points(0))
     End Sub
 
-    Private Sub LoadGraph()
+    Private Sub LoadGraph(Optional ByVal DisplayCount As Boolean = False)
         objSeries.Points.Clear()
         graph.Annotations.Clear()
 
-
-
         ' Find the top 10
         For Each objWord As Word In m_arrTop100
-
             If m_arrTop10.Count < 10 Then
                 Dim boolAlreadyExists As Boolean = False
                 For Each objTopWord As Word In m_arrTop10
@@ -312,7 +407,9 @@ Public Class DreamSignControl
                 Next
 
                 If Not boolAlreadyExists Then
-                    m_arrTop10.Add(objWord)
+                    If objWord.Name <> "" Then
+                        m_arrTop10.Add(objWord)
+                    End If
                 End If
             Else
 
@@ -328,13 +425,12 @@ Public Class DreamSignControl
                     If m_arrTop10.Count > 0 Then
                         For Each objTopWord As Word In m_arrTop10
                             If objWord.Count > objTopWord.Count Then
-
-                                objTopWord.Name = objWord.Name
-                                objTopWord.Count = objWord.Count
-
-                                Application.DoEvents()
-
-                                Exit For
+                                If objWord.Name <> "" Then
+                                    objTopWord.Name = objWord.Name
+                                    objTopWord.Count = objWord.Count
+                                    Application.DoEvents()
+                                    Exit For
+                                End If
                             End If
                         Next
                     End If
@@ -362,6 +458,7 @@ Public Class DreamSignControl
             objDreamAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
             objDreamAnnotation.ShadowOffset = 1
             objDreamAnnotation.Text = objTopWord.Name
+            If DisplayCount Then objDreamAnnotation.Text = objDreamAnnotation.Text & " (" & objTopWord.Count & ")"
             objDreamAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
             objDreamAnnotation.AnchorDataPoint = objSeries.Points(objSeries.Points.Count - 1)
             Me.graph.Annotations.Add(objDreamAnnotation)
