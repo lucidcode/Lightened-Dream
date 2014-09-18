@@ -22,7 +22,36 @@ Public Class DreamViewControl
     Public Sub New()
         InitializeComponent()
         Randomize()
+        LoadDreamTypes()
         AddHandler m_objSpeechSynthesizer.SpeakCompleted, AddressOf m_objSpeechSynthesizer_SpeakCompleted
+    End Sub
+
+    Private Sub LoadDreamTypes()
+        Dim xmlDocDreamTypes As New XmlDocument
+
+        ' Make sure that the dream types file exists
+        If Not File.Exists(m_strPath & "DreamTypes.ld3") Then
+            ' Create the dream types file
+            Dim strXml As String = "<LightenedDream>"
+            strXml += "<DreamType>1 Thought</DreamType>"
+            strXml += "<DreamType>2 Daydream</DreamType>"
+            strXml += "<DreamType>3 Nightmare</DreamType>"
+            strXml += "<DreamType>4 Foggy Dream</DreamType>"
+            strXml += "<DreamType>5 Normal Dream</DreamType>"
+            strXml += "<DreamType>6 Vivid Dream</DreamType>"
+            strXml += "<DreamType>7 Lucid Dream</DreamType>"
+            strXml += "<DreamType>8 Epic Dream</DreamType>"
+            strXml += "<DreamType>9 Wake Induced</DreamType>"
+            strXml += "</LightenedDream>"
+            xmlDocDreamTypes.LoadXml(strXml)
+            xmlDocDreamTypes.Save(m_strPath & "DreamTypes.ld3")
+        End If
+
+        cmbLucidity.Items.Clear()
+        xmlDocDreamTypes.Load(m_strPath & "DreamTypes.ld3")
+        For Each xmlDreamType As XmlNode In xmlDocDreamTypes.DocumentElement.SelectNodes("DreamType")
+            cmbLucidity.Items.Add(xmlDreamType.InnerText)
+        Next
     End Sub
 
     Public Sub EnableSpellCheck()
@@ -368,7 +397,6 @@ Public Class DreamViewControl
                 Next
 
                 For Each strWord As String In Dreams.Dreaming.GetWords(Dream)
-                    Threading.Thread.Sleep(2)
                     Dim boolExists As Boolean = False
                     For Each strItem As String In arrUnassigned
                         If strItem = strWord.ToLower Then

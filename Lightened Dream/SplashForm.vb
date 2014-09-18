@@ -11,10 +11,10 @@ Public Class SplashForm
     Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
 
     Private Sub SplashForm3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        Me.Left = Screen.PrimaryScreen.Bounds.Left + (Screen.PrimaryScreen.Bounds.Width / 2) / 2
-        Me.Top = Screen.PrimaryScreen.Bounds.Top + (Screen.PrimaryScreen.Bounds.Height / 2) / 2
-        Me.Width = Screen.PrimaryScreen.Bounds.Width / 2
-        Me.Height = Screen.PrimaryScreen.Bounds.Height / 2
+        Me.Left = Screen.PrimaryScreen.Bounds.Left + (Screen.PrimaryScreen.Bounds.Width - (Screen.PrimaryScreen.Bounds.Width / 1.5)) / 2
+        Me.Top = Screen.PrimaryScreen.Bounds.Top + (Screen.PrimaryScreen.Bounds.Height - (Screen.PrimaryScreen.Bounds.Height / 1.5)) / 2
+        Me.Width = Screen.PrimaryScreen.Bounds.Width / 1.5
+        Me.Height = Screen.PrimaryScreen.Bounds.Height / 1.5
     End Sub
 
     Private Sub CheckFolders()
@@ -123,7 +123,6 @@ Public Class SplashForm
             objDreams.Color = Color.FromArgb(200, 65, 140, 240)
             objDreams.BorderWidth = 1
             objDreams.Points.AddY(0)
-            objDreams.Points.AddY(0)
 
             CheckFolders()
 
@@ -157,32 +156,34 @@ Public Class SplashForm
 
             ' Calculate Dreams
             For Each strYearFolder As String In Directory.GetDirectories(m_strPath + "Dreams")
+                Dim dreamCount As Integer = 0
                 For Each strMonthFolder As String In Directory.GetDirectories(strYearFolder)
                     For Each strDreamFile As String In Directory.GetFiles(strMonthFolder, "*.ld3")
-                        objDreams.Points(1).YValues(0) += 1
+                        dreamCount += 1
                     Next
                 Next
-            Next
-            Application.DoEvents()
+                objDreams.Points.AddY(dreamCount)
 
-            Dim objDreamAnnotation As New Charting.CalloutAnnotation
-            objDreamAnnotation.AllowMoving = True
-            objDreamAnnotation.AllowResizing = True
-            objDreamAnnotation.AllowSelecting = True
-            objDreamAnnotation.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-            objDreamAnnotation.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-            objDreamAnnotation.ForeColor = System.Drawing.Color.SteelBlue
-            objDreamAnnotation.LineColor = System.Drawing.Color.LightSteelBlue
-            objDreamAnnotation.Name = Guid.NewGuid.ToString
-            objDreamAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
-            objDreamAnnotation.ShadowOffset = 1
-            objDreamAnnotation.Text = "Dreams (" & objDreams.Points(1).YValues(0) & ")"
-            objDreamAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
-            objDreamAnnotation.AnchorDataPoint = objDreams.Points(1)
-            Me.graph.Annotations.Add(objDreamAnnotation)
-            Application.DoEvents()
-            System.Threading.Thread.Sleep(128)
-            intPos += 1
+                Dim objDreamAnnotation As New Charting.CalloutAnnotation
+                objDreamAnnotation.AllowMoving = True
+                objDreamAnnotation.AllowResizing = True
+                objDreamAnnotation.AllowSelecting = True
+                objDreamAnnotation.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+                objDreamAnnotation.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                objDreamAnnotation.ForeColor = System.Drawing.Color.SteelBlue
+                objDreamAnnotation.LineColor = System.Drawing.Color.LightSteelBlue
+                objDreamAnnotation.Name = Guid.NewGuid.ToString
+                objDreamAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
+                objDreamAnnotation.ShadowOffset = 1
+                objDreamAnnotation.Text = New DirectoryInfo(strYearFolder).Name & " (" & dreamCount & ")"
+                objDreamAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
+                objDreamAnnotation.AnchorDataPoint = objDreams.Points(objDreams.Points.Count - 1)
+                Me.graph.Annotations.Add(objDreamAnnotation)
+                Application.DoEvents()
+                System.Threading.Thread.Sleep(128)
+                intPos += 1
+                Application.DoEvents()
+            Next
 
             ' Categories
             For Each strCategory As String In m_strCategories.Split(",")

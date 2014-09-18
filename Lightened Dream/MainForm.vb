@@ -2440,7 +2440,7 @@ Public Class MainForm
         If m_boolDoneProcessing Then Exit Sub
 
         Dim dtSpeed As TimeSpan = DateTime.Now.Subtract(m_dtStartTime)
-        If dtSpeed.TotalSeconds > 6 Then
+        If dtSpeed.TotalSeconds > 60 Then
             tmrSaving.Interval = 512
         End If
 

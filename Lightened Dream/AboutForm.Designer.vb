@@ -22,28 +22,28 @@ Partial Class AboutForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AboutForm))
-        Dim MySettings2 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
-        Me.panel3D3 = New lucidcode.Controls.Panel3D
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox
-        Me.panel3D2 = New lucidcode.Controls.Panel3D
-        Me.lblUpdate = New System.Windows.Forms.LinkLabel
-        Me.Panel3D4 = New lucidcode.Controls.Panel3D
-        Me.lblTitle = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.label6 = New System.Windows.Forms.Label
-        Me.lblAuthor = New System.Windows.Forms.Label
-        Me.label1 = New System.Windows.Forms.Label
-        Me.lblDescription = New System.Windows.Forms.Label
-        Me.lblWeb = New System.Windows.Forms.LinkLabel
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.label3 = New System.Windows.Forms.Label
-        Me.lblCopyright = New System.Windows.Forms.Label
-        Me.label2 = New System.Windows.Forms.Label
-        Me.lblVersion = New System.Windows.Forms.Label
-        Me.lblProductName = New System.Windows.Forms.Label
+        Dim MySettings1 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings()
+        Me.panel3D3 = New lucidcode.Controls.Panel3D()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.panel3D2 = New lucidcode.Controls.Panel3D()
+        Me.lblUpdate = New System.Windows.Forms.LinkLabel()
+        Me.Panel3D4 = New lucidcode.Controls.Panel3D()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.label6 = New System.Windows.Forms.Label()
+        Me.lblAuthor = New System.Windows.Forms.Label()
+        Me.label1 = New System.Windows.Forms.Label()
+        Me.lblDescription = New System.Windows.Forms.Label()
+        Me.lblWeb = New System.Windows.Forms.LinkLabel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.label3 = New System.Windows.Forms.Label()
+        Me.lblCopyright = New System.Windows.Forms.Label()
+        Me.label2 = New System.Windows.Forms.Label()
+        Me.lblVersion = New System.Windows.Forms.Label()
+        Me.lblProductName = New System.Windows.Forms.Label()
         Me.tmrLoad = New System.Windows.Forms.Timer(Me.components)
         Me.panel3D3.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,7 +72,7 @@ Partial Class AboutForm
         'panel3D2
         '
         Me.panel3D2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.panel3D2.Controls.Add(Me.lblUpdate)
         Me.panel3D2.Controls.Add(Me.Panel3D4)
         Me.panel3D2.Controls.Add(Me.label6)
@@ -108,20 +108,20 @@ Partial Class AboutForm
         'Panel3D4
         '
         Me.Panel3D4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        MySettings2.Font = New System.Drawing.Font("Verdana", 8.25!)
-        MySettings2.FormBackColor = System.Drawing.Color.LightSteelBlue
-        MySettings2.FormForeColor = System.Drawing.Color.MidnightBlue
-        MySettings2.LastAsleep = New Date(CType(0, Long))
-        MySettings2.LastAwake = New Date(CType(0, Long))
-        MySettings2.SettingsKey = ""
-        MySettings2.TextBackColor = System.Drawing.Color.White
-        MySettings2.TitleBackColor = System.Drawing.Color.SteelBlue
-        MySettings2.TitleForeColor = System.Drawing.Color.White
-        Me.Panel3D4.BackColor = MySettings2.TitleBackColor
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        MySettings1.Font = New System.Drawing.Font("Verdana", 8.25!)
+        MySettings1.FormBackColor = System.Drawing.Color.LightSteelBlue
+        MySettings1.FormForeColor = System.Drawing.Color.MidnightBlue
+        MySettings1.LastAsleep = New Date(CType(0, Long))
+        MySettings1.LastAwake = New Date(CType(0, Long))
+        MySettings1.SettingsKey = ""
+        MySettings1.TextBackColor = System.Drawing.Color.White
+        MySettings1.TitleBackColor = System.Drawing.Color.SteelBlue
+        MySettings1.TitleForeColor = System.Drawing.Color.White
+        Me.Panel3D4.BackColor = MySettings1.TitleBackColor
         Me.Panel3D4.Controls.Add(Me.lblTitle)
         Me.Panel3D4.Controls.Add(Me.Label4)
-        Me.Panel3D4.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings2, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.Panel3D4.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings1, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.Panel3D4.Location = New System.Drawing.Point(0, 0)
         Me.Panel3D4.Name = "Panel3D4"
         Me.Panel3D4.Size = New System.Drawing.Size(662, 24)
@@ -130,7 +130,7 @@ Partial Class AboutForm
         'lblTitle
         '
         Me.lblTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblTitle.BackColor = Global.LightenedDream.My.MySettings.Default.TitleBackColor
         Me.lblTitle.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.LightenedDream.My.MySettings.Default, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
         Me.lblTitle.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.LightenedDream.My.MySettings.Default, "TitleForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
@@ -166,7 +166,7 @@ Partial Class AboutForm
         'lblAuthor
         '
         Me.lblAuthor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblAuthor.ForeColor = System.Drawing.Color.Black
         Me.lblAuthor.Location = New System.Drawing.Point(104, 69)
         Me.lblAuthor.Name = "lblAuthor"
@@ -189,7 +189,7 @@ Partial Class AboutForm
         'lblDescription
         '
         Me.lblDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblDescription.ForeColor = System.Drawing.Color.Black
         Me.lblDescription.Location = New System.Drawing.Point(104, 48)
         Me.lblDescription.Name = "lblDescription"
@@ -244,14 +244,14 @@ Partial Class AboutForm
         'lblCopyright
         '
         Me.lblCopyright.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblCopyright.ForeColor = System.Drawing.Color.Black
         Me.lblCopyright.Location = New System.Drawing.Point(104, 111)
         Me.lblCopyright.Name = "lblCopyright"
         Me.lblCopyright.Size = New System.Drawing.Size(554, 21)
         Me.lblCopyright.TabIndex = 271
         Me.lblCopyright.Tag = ""
-        Me.lblCopyright.Text = "© 2000 - 2012 lucidcode"
+        Me.lblCopyright.Text = "© 2000 - 2014 lucidcode"
         Me.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'label2
@@ -267,7 +267,7 @@ Partial Class AboutForm
         'lblVersion
         '
         Me.lblVersion.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblVersion.ForeColor = System.Drawing.Color.Black
         Me.lblVersion.Location = New System.Drawing.Point(104, 90)
         Me.lblVersion.Name = "lblVersion"
@@ -280,7 +280,7 @@ Partial Class AboutForm
         'lblProductName
         '
         Me.lblProductName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblProductName.ForeColor = System.Drawing.Color.Black
         Me.lblProductName.Location = New System.Drawing.Point(104, 27)
         Me.lblProductName.Name = "lblProductName"

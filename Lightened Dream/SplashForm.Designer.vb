@@ -22,16 +22,16 @@ Partial Class SplashForm
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea
-        Dim CustomLabel1 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel
-        Dim CustomLabel2 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series
-        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title
+        Me.components = New System.ComponentModel.Container()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim CustomLabel1 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim CustomLabel2 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Title1 As System.Windows.Forms.DataVisualization.Charting.Title = New System.Windows.Forms.DataVisualization.Charting.Title()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SplashForm))
         Me.tmrLoad = New System.Windows.Forms.Timer(Me.components)
-        Me.graph = New System.Windows.Forms.DataVisualization.Charting.Chart
-        Me.panel3D2 = New lucidcode.Controls.Panel3D
+        Me.graph = New System.Windows.Forms.DataVisualization.Charting.Chart()
+        Me.panel3D2 = New lucidcode.Controls.Panel3D()
         CType(Me.graph, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.panel3D2.SuspendLayout()
         Me.SuspendLayout()
@@ -44,8 +44,8 @@ Partial Class SplashForm
         'graph
         '
         Me.graph.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.graph.BackColor = System.Drawing.Color.Transparent
         ChartArea1.Area3DStyle.Enable3D = True
         ChartArea1.Area3DStyle.Inclination = 10
@@ -59,7 +59,7 @@ Partial Class SplashForm
         ChartArea1.AxisX.IsLabelAutoFit = False
         ChartArea1.AxisX.LabelStyle.Angle = 90
         ChartArea1.AxisX.LabelStyle.Enabled = False
-        ChartArea1.AxisX.LabelStyle.Interval = 0
+        ChartArea1.AxisX.LabelStyle.Interval = 0.0R
         ChartArea1.AxisX.LineColor = System.Drawing.Color.Transparent
         ChartArea1.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
         ChartArea1.AxisX.LineWidth = 0
@@ -89,8 +89,8 @@ Partial Class SplashForm
         ChartArea1.AxisY2.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
         ChartArea1.AxisY2.LineWidth = 0
         ChartArea1.AxisY2.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash
-        ChartArea1.AxisY2.Maximum = 11
-        ChartArea1.AxisY2.Minimum = -11
+        ChartArea1.AxisY2.Maximum = 11.0R
+        ChartArea1.AxisY2.Minimum = -11.0R
         ChartArea1.AxisY2.ScaleBreakStyle.BreakLineStyle = System.Windows.Forms.DataVisualization.Charting.BreakLineStyle.Wave
         ChartArea1.AxisY2.ScaleBreakStyle.Enabled = True
         ChartArea1.BackColor = System.Drawing.Color.LightSteelBlue
