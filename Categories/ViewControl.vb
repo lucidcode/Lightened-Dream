@@ -38,7 +38,7 @@ Public Class ViewControl
       xmlDoc.Load(FileName)
       m_strCategory = Category
       lblType.Text = m_strCategory
-      lblTitle.Text = "Categories - " + Category + "s - " + xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText
+            lblTitle.Text = "Categories - " + Category + " - " + xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText
       txtName.Text = xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText
       txtDescription.Text = xmlDoc.DocumentElement.SelectSingleNode("Description").InnerText
       lblTitle.Tag = xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText
@@ -124,15 +124,15 @@ Public Class ViewControl
   Public Sub Save()
     Changed = False
     If txtName.Text <> lblTitle.Tag Then
-      Dim newFileName = m_strPath + "Categories\" + m_strCategory + "s\" + txtName.Text + ".ld3"
+      Dim newFileName = New FileInfo(FileName).Directory.FullName + "\" + txtName.Text + ".ld3"
       File.Move(FileName, newFileName)
-      FileName = m_strPath + "Categories\" + m_strCategory + "s\" + txtName.Text + ".ld3"
+      FileName = newFileName
     End If
 
     Dim objWorkerClass As New WorkerClass()
-    objWorkerClass.Name = txtName.Text.ToLower
+    objWorkerClass.Name = txtName.Text
     objWorkerClass.Description = txtDescription.Text
-    objWorkerClass.Keywords = txtKeywords.Text.ToLower
+    objWorkerClass.Keywords = txtKeywords.Text
     objWorkerClass.FileName = FileName
     AddHandler objWorkerClass.RandomWord, AddressOf RandomWordLocal
 
@@ -183,10 +183,10 @@ Public Class ViewControl
 
         Dim strNamesXml = ""
         Dim arrKeywords As New List(Of String)
-        arrKeywords.Add(Name)
+        arrKeywords.Add(Name.ToLower)
         For Each strKeyWord As String In Keywords.Split(", ")
           If strKeyWord <> "" Then
-            arrKeywords.Add(strKeyWord)
+            arrKeywords.Add(strKeyWord.ToLower)
             strXml += "<Name>" + strKeyWord.TrimStart(" ") + "</Name>"
           End If
         Next
@@ -332,7 +332,7 @@ Public Class ViewControl
   End Sub
 
   Private Sub txtName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtName.TextChanged
-    lblTitle.Text = "Categories - " + m_strCategory + "s - " + txtName.Text
+        lblTitle.Text = "Categories - " + m_strCategory + " - " + txtName.Text
     Changed = True
   End Sub
 

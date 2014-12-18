@@ -145,7 +145,6 @@ Partial Class SplashForm
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Lightened Dream"
-        Me.TopMost = True
         CType(Me.graph, System.ComponentModel.ISupportInitialize).EndInit()
         Me.panel3D2.ResumeLayout(False)
         Me.ResumeLayout(False)

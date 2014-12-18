@@ -13,7 +13,6 @@ Public Class CompareDreamsControl
     Public OnlyCategories As Boolean = False
 
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
-    Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
     Private m_boolSearching As Boolean = False
 
     Private m_arrDreams As New List(Of Dream)
@@ -106,12 +105,10 @@ Public Class CompareDreamsControl
             m_arrIgnore.Add(xmlNode.InnerText.ToLower)
         Next
 
-        For Each strCategory As String In m_strCategories.Split(",")
-            For Each strCatgeoryFile As String In Directory.GetFiles(m_strPath + "Categories\" + strCategory, "*.ld3")
-                Dim strName As String = New FileInfo(strCatgeoryFile).Name.Replace(".ld3", "")
-                m_arrCategories.Add(strName.ToLower)
-            Next
-        Next
+    ' Load each Category
+    For Each strCategory As String In Directory.GetDirectories(m_strPath + "Categories")
+      LoadCategoryFolder(strCategory)
+    Next
 
         Dim arrDreamFiles As String() = Directory.GetFiles(m_strPath & "Dreams\", "*.ld3", SearchOption.AllDirectories)
         For Each strDreamFile As String In arrDreamFiles
@@ -138,6 +135,24 @@ Public Class CompareDreamsControl
         objSeries("BarLabelStyle") = "Center"
 
     End Sub
+
+  Private Sub LoadCategoryFolder(ByVal categoryPath As String)
+    For Each strCatgeoryFile As String In Directory.GetFiles(categoryPath, "*.ld3")
+      Dim strName As String = New FileInfo(strCatgeoryFile).Name.Replace(".ld3", "")
+
+      m_arrCategories.Add(strName.ToLower)
+
+      Dim xmlDocCategory As New XmlDocument
+      xmlDocCategory.Load(strCatgeoryFile)
+      For Each xmlWord As XmlNode In xmlDocCategory.DocumentElement.SelectNodes("Names/Name")
+          m_arrCategories.Add(xmlWord.InnerText.ToLower)
+      Next
+    Next
+
+    For Each subCategory As String In Directory.GetDirectories(categoryPath)
+      LoadCategoryFolder(subCategory)
+    Next
+  End Sub
 
     Private Sub tmrDreamSigns_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrDreamSigns.Tick
         tmrDreamSigns.Enabled = False

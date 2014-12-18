@@ -75,12 +75,8 @@ Partial Class MainForm
     Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.DreamToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
-    Me.CharacterToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.LocationToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ObjectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ActionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ThemeToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.EmotionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+    Me.CategoryToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuNewCategoryItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripMenuItem9 = New System.Windows.Forms.ToolStripSeparator()
     Me.REMCycleToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
     Me.CheckToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -95,12 +91,6 @@ Partial Class MainForm
     Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripSeparator()
     Me.mnuFileExit = New System.Windows.Forms.ToolStripMenuItem()
-    Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuCategoriesCharacters = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuCategoriesLocations = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuCategoriesObjects = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuCategoriesThemes = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuCategoriesEmotions = New System.Windows.Forms.ToolStripMenuItem()
     Me.LucidityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuLucidityREMCycles = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuLucidityChecks = New System.Windows.Forms.ToolStripMenuItem()
@@ -112,6 +102,7 @@ Partial Class MainForm
     Me.ToolStripMenuItem22 = New System.Windows.Forms.ToolStripSeparator()
     Me.mnuToolsDreamSigns = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsCompareDreams = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuToolsDreamTypeCount = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsFIELD = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsWILD = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsWhyLD = New System.Windows.Forms.ToolStripMenuItem()
@@ -136,12 +127,8 @@ Partial Class MainForm
     Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-    Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolStripMenuItem8 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolStripMenuItem10 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolStripMenuItem12 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolStripMenuItem13 = New System.Windows.Forms.ToolStripMenuItem()
-    Me.ToolStripMenuItem14 = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuToolNewCategoryFolder = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuToolNewCategoryItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
     Me.ToolStripMenuItem15 = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripMenuItem16 = New System.Windows.Forms.ToolStripMenuItem()
@@ -161,18 +148,6 @@ Partial Class MainForm
     Me.lstImgTrv = New System.Windows.Forms.ImageList(Me.components)
     Me.pnlContainer = New System.Windows.Forms.Panel()
     Me.tmrLoad = New System.Windows.Forms.Timer(Me.components)
-    Me.Panel3D2 = New lucidcode.Controls.Panel3D()
-    Me.Panel3D4 = New lucidcode.Controls.Panel3D()
-    Me.Label5 = New System.Windows.Forms.Label()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
-    Me.toolCharacters = New System.Windows.Forms.ToolStripButton()
-    Me.toolLocations = New System.Windows.Forms.ToolStripButton()
-    Me.toolObjects = New System.Windows.Forms.ToolStripButton()
-    Me.toolActions = New System.Windows.Forms.ToolStripButton()
-    Me.toolThemes = New System.Windows.Forms.ToolStripButton()
-    Me.toolEmotions = New System.Windows.Forms.ToolStripButton()
-    Me.ToolStripButton10 = New System.Windows.Forms.ToolStripButton()
     Me.Panel3D5 = New lucidcode.Controls.Panel3D()
     Me.Panel3D7 = New lucidcode.Controls.Panel3D()
     Me.Label6 = New System.Windows.Forms.Label()
@@ -189,10 +164,9 @@ Partial Class MainForm
     Me.lstImgIco = New System.Windows.Forms.ImageList(Me.components)
     Me.tmrProcessing = New System.Windows.Forms.Timer(Me.components)
     Me.pnlProcessing = New lucidcode.Controls.Panel3D()
+    Me.tmrSaving = New System.Windows.Forms.Timer(Me.components)
     Me.pnlSearching = New lucidcode.Controls.Panel3D()
     Me.graph = New System.Windows.Forms.DataVisualization.Charting.Chart()
-    Me.tmrSaving = New System.Windows.Forms.Timer(Me.components)
-    Me.mnuToolsDreamTypeCount = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStrip1.SuspendLayout()
     Me.Panel3D3.SuspendLayout()
     Me.Panel3D6.SuspendLayout()
@@ -203,9 +177,6 @@ Partial Class MainForm
     Me.Panel3D1.SuspendLayout()
     Me.Panel3D8.SuspendLayout()
     Me.mnuTrv.SuspendLayout()
-    Me.Panel3D2.SuspendLayout()
-    Me.Panel3D4.SuspendLayout()
-    Me.ToolStrip2.SuspendLayout()
     Me.Panel3D5.SuspendLayout()
     Me.Panel3D7.SuspendLayout()
     Me.ToolStrip3.SuspendLayout()
@@ -497,7 +468,7 @@ Partial Class MainForm
     '
     Me.MenuStrip1.BackColor = Global.LightenedDream.My.MySettings.Default.FormBackColor
     Me.MenuStrip1.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.LightenedDream.My.MySettings.Default, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.EditToolStripMenuItem, Me.LucidityToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
+    Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.LucidityToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.HelpToolStripMenuItem})
     Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
     Me.MenuStrip1.Name = "MenuStrip1"
     Me.MenuStrip1.Padding = New System.Windows.Forms.Padding(7, 2, 0, 2)
@@ -518,7 +489,7 @@ Partial Class MainForm
     'NewToolStripMenuItem
     '
     Me.NewToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control
-    Me.NewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DreamToolStripMenuItem, Me.ToolStripSeparator4, Me.CharacterToolStripMenuItem1, Me.LocationToolStripMenuItem1, Me.ObjectToolStripMenuItem, Me.ActionToolStripMenuItem1, Me.ThemeToolStripMenuItem2, Me.EmotionToolStripMenuItem1, Me.ToolStripMenuItem9, Me.REMCycleToolStripMenuItem1, Me.CheckToolStripMenuItem, Me.SubliminalToolStripMenuItem, Me.RecordingToolStripMenuItem1, Me.ReadingToolStripMenuItem, Me.mnuFileNewExercise, Me.RandomExerciseToolStripMenuItem})
+    Me.NewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DreamToolStripMenuItem, Me.ToolStripSeparator4, Me.CategoryToolStripMenuItem1, Me.mnuNewCategoryItem, Me.ToolStripMenuItem9, Me.REMCycleToolStripMenuItem1, Me.CheckToolStripMenuItem, Me.SubliminalToolStripMenuItem, Me.RecordingToolStripMenuItem1, Me.ReadingToolStripMenuItem, Me.mnuFileNewExercise, Me.RandomExerciseToolStripMenuItem})
     Me.NewToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText
     Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"), System.Drawing.Image)
     Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
@@ -537,53 +508,21 @@ Partial Class MainForm
     Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
     Me.ToolStripSeparator4.Size = New System.Drawing.Size(160, 6)
     '
-    'CharacterToolStripMenuItem1
+    'CategoryToolStripMenuItem1
     '
-    Me.CharacterToolStripMenuItem1.Image = Global.LightenedDream.My.Resources.Resources.Character2
-    Me.CharacterToolStripMenuItem1.Name = "CharacterToolStripMenuItem1"
-    Me.CharacterToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
-    Me.CharacterToolStripMenuItem1.Tag = "Character"
-    Me.CharacterToolStripMenuItem1.Text = "Character"
+    Me.CategoryToolStripMenuItem1.Image = Global.LightenedDream.My.Resources.Resources.Folder_16
+    Me.CategoryToolStripMenuItem1.Name = "CategoryToolStripMenuItem1"
+    Me.CategoryToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
+    Me.CategoryToolStripMenuItem1.Tag = "Category"
+    Me.CategoryToolStripMenuItem1.Text = "Category"
     '
-    'LocationToolStripMenuItem1
+    'mnuNewCategoryItem
     '
-    Me.LocationToolStripMenuItem1.Image = Global.LightenedDream.My.Resources.Resources.Locations
-    Me.LocationToolStripMenuItem1.Name = "LocationToolStripMenuItem1"
-    Me.LocationToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
-    Me.LocationToolStripMenuItem1.Tag = "Location"
-    Me.LocationToolStripMenuItem1.Text = "Location"
-    '
-    'ObjectToolStripMenuItem
-    '
-    Me.ObjectToolStripMenuItem.Image = CType(resources.GetObject("ObjectToolStripMenuItem.Image"), System.Drawing.Image)
-    Me.ObjectToolStripMenuItem.Name = "ObjectToolStripMenuItem"
-    Me.ObjectToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-    Me.ObjectToolStripMenuItem.Tag = "Object"
-    Me.ObjectToolStripMenuItem.Text = "Object"
-    '
-    'ActionToolStripMenuItem1
-    '
-    Me.ActionToolStripMenuItem1.Image = CType(resources.GetObject("ActionToolStripMenuItem1.Image"), System.Drawing.Image)
-    Me.ActionToolStripMenuItem1.Name = "ActionToolStripMenuItem1"
-    Me.ActionToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
-    Me.ActionToolStripMenuItem1.Tag = "Action"
-    Me.ActionToolStripMenuItem1.Text = "Action"
-    '
-    'ThemeToolStripMenuItem2
-    '
-    Me.ThemeToolStripMenuItem2.Image = CType(resources.GetObject("ThemeToolStripMenuItem2.Image"), System.Drawing.Image)
-    Me.ThemeToolStripMenuItem2.Name = "ThemeToolStripMenuItem2"
-    Me.ThemeToolStripMenuItem2.Size = New System.Drawing.Size(163, 22)
-    Me.ThemeToolStripMenuItem2.Tag = "Theme"
-    Me.ThemeToolStripMenuItem2.Text = "Theme"
-    '
-    'EmotionToolStripMenuItem1
-    '
-    Me.EmotionToolStripMenuItem1.Image = CType(resources.GetObject("EmotionToolStripMenuItem1.Image"), System.Drawing.Image)
-    Me.EmotionToolStripMenuItem1.Name = "EmotionToolStripMenuItem1"
-    Me.EmotionToolStripMenuItem1.Size = New System.Drawing.Size(163, 22)
-    Me.EmotionToolStripMenuItem1.Tag = "Emotion"
-    Me.EmotionToolStripMenuItem1.Text = "Emotion"
+    Me.mnuNewCategoryItem.Image = Global.LightenedDream.My.Resources.Resources.Categories
+    Me.mnuNewCategoryItem.Name = "mnuNewCategoryItem"
+    Me.mnuNewCategoryItem.Size = New System.Drawing.Size(163, 22)
+    Me.mnuNewCategoryItem.Tag = "Catgeory Item"
+    Me.mnuNewCategoryItem.Text = "Catgeory Item"
     '
     'ToolStripMenuItem9
     '
@@ -688,54 +627,6 @@ Partial Class MainForm
     Me.mnuFileExit.Size = New System.Drawing.Size(158, 22)
     Me.mnuFileExit.Text = "E&xit"
     '
-    'EditToolStripMenuItem
-    '
-    Me.EditToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCategoriesCharacters, Me.mnuCategoriesLocations, Me.mnuCategoriesObjects, Me.mnuCategoriesThemes, Me.mnuCategoriesEmotions})
-    Me.EditToolStripMenuItem.ForeColor = Global.LightenedDream.My.MySettings.Default.FormForeColor
-    Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-    Me.EditToolStripMenuItem.Size = New System.Drawing.Size(75, 20)
-    Me.EditToolStripMenuItem.Text = "&Categories"
-    '
-    'mnuCategoriesCharacters
-    '
-    Me.mnuCategoriesCharacters.Image = Global.LightenedDream.My.Resources.Resources.Character2
-    Me.mnuCategoriesCharacters.Name = "mnuCategoriesCharacters"
-    Me.mnuCategoriesCharacters.Size = New System.Drawing.Size(130, 22)
-    Me.mnuCategoriesCharacters.Tag = "Characters"
-    Me.mnuCategoriesCharacters.Text = "&Characters"
-    '
-    'mnuCategoriesLocations
-    '
-    Me.mnuCategoriesLocations.Image = Global.LightenedDream.My.Resources.Resources.Locations
-    Me.mnuCategoriesLocations.Name = "mnuCategoriesLocations"
-    Me.mnuCategoriesLocations.Size = New System.Drawing.Size(130, 22)
-    Me.mnuCategoriesLocations.Tag = "Locations"
-    Me.mnuCategoriesLocations.Text = "&Locations"
-    '
-    'mnuCategoriesObjects
-    '
-    Me.mnuCategoriesObjects.Image = Global.LightenedDream.My.Resources.Resources.objectsdl
-    Me.mnuCategoriesObjects.Name = "mnuCategoriesObjects"
-    Me.mnuCategoriesObjects.Size = New System.Drawing.Size(130, 22)
-    Me.mnuCategoriesObjects.Tag = "Objects"
-    Me.mnuCategoriesObjects.Text = "&Objects"
-    '
-    'mnuCategoriesThemes
-    '
-    Me.mnuCategoriesThemes.Image = Global.LightenedDream.My.Resources.Resources.Themes
-    Me.mnuCategoriesThemes.Name = "mnuCategoriesThemes"
-    Me.mnuCategoriesThemes.Size = New System.Drawing.Size(130, 22)
-    Me.mnuCategoriesThemes.Tag = "Themes"
-    Me.mnuCategoriesThemes.Text = "&Themes"
-    '
-    'mnuCategoriesEmotions
-    '
-    Me.mnuCategoriesEmotions.Image = Global.LightenedDream.My.Resources.Resources.Emotions
-    Me.mnuCategoriesEmotions.Name = "mnuCategoriesEmotions"
-    Me.mnuCategoriesEmotions.Size = New System.Drawing.Size(130, 22)
-    Me.mnuCategoriesEmotions.Tag = "Emotions"
-    Me.mnuCategoriesEmotions.Text = "&Emotions"
-    '
     'LucidityToolStripMenuItem
     '
     Me.LucidityToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuLucidityREMCycles, Me.mnuLucidityChecks, Me.mnuLuciditySubliminals, Me.mnuLucidityRecordings, Me.mnuLucidityReadings})
@@ -748,7 +639,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityREMCycles.Image = CType(resources.GetObject("mnuLucidityREMCycles.Image"), System.Drawing.Image)
     Me.mnuLucidityREMCycles.Name = "mnuLucidityREMCycles"
-    Me.mnuLucidityREMCycles.Size = New System.Drawing.Size(152, 22)
+    Me.mnuLucidityREMCycles.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityREMCycles.Tag = "REM Cycles"
     Me.mnuLucidityREMCycles.Text = "&REM Cycles"
     '
@@ -756,7 +647,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityChecks.Image = CType(resources.GetObject("mnuLucidityChecks.Image"), System.Drawing.Image)
     Me.mnuLucidityChecks.Name = "mnuLucidityChecks"
-    Me.mnuLucidityChecks.Size = New System.Drawing.Size(152, 22)
+    Me.mnuLucidityChecks.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityChecks.Tag = "Checks"
     Me.mnuLucidityChecks.Text = "&Checks"
     '
@@ -764,7 +655,7 @@ Partial Class MainForm
     '
     Me.mnuLuciditySubliminals.Image = CType(resources.GetObject("mnuLuciditySubliminals.Image"), System.Drawing.Image)
     Me.mnuLuciditySubliminals.Name = "mnuLuciditySubliminals"
-    Me.mnuLuciditySubliminals.Size = New System.Drawing.Size(152, 22)
+    Me.mnuLuciditySubliminals.Size = New System.Drawing.Size(135, 22)
     Me.mnuLuciditySubliminals.Tag = "Subliminals"
     Me.mnuLuciditySubliminals.Text = "&Subliminals"
     '
@@ -772,7 +663,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityRecordings.Image = CType(resources.GetObject("mnuLucidityRecordings.Image"), System.Drawing.Image)
     Me.mnuLucidityRecordings.Name = "mnuLucidityRecordings"
-    Me.mnuLucidityRecordings.Size = New System.Drawing.Size(152, 22)
+    Me.mnuLucidityRecordings.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityRecordings.Tag = "Recordings"
     Me.mnuLucidityRecordings.Text = "&Recordings"
     '
@@ -780,7 +671,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityReadings.Image = CType(resources.GetObject("mnuLucidityReadings.Image"), System.Drawing.Image)
     Me.mnuLucidityReadings.Name = "mnuLucidityReadings"
-    Me.mnuLucidityReadings.Size = New System.Drawing.Size(152, 22)
+    Me.mnuLucidityReadings.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityReadings.Tag = "Readings"
     Me.mnuLucidityReadings.Text = "&Readings"
     '
@@ -819,6 +710,13 @@ Partial Class MainForm
     Me.mnuToolsCompareDreams.Name = "mnuToolsCompareDreams"
     Me.mnuToolsCompareDreams.Size = New System.Drawing.Size(175, 22)
     Me.mnuToolsCompareDreams.Text = "&Compare Dreams"
+    '
+    'mnuToolsDreamTypeCount
+    '
+    Me.mnuToolsDreamTypeCount.Image = Global.LightenedDream.My.Resources.Resources.Dream4
+    Me.mnuToolsDreamTypeCount.Name = "mnuToolsDreamTypeCount"
+    Me.mnuToolsDreamTypeCount.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsDreamTypeCount.Text = "&Dream Type Count"
     '
     'mnuToolsFIELD
     '
@@ -1045,7 +943,7 @@ Partial Class MainForm
     'ToolStripMenuItem1
     '
     Me.ToolStripMenuItem1.BackColor = System.Drawing.SystemColors.Control
-    Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripSeparator1, Me.ToolStripMenuItem4, Me.ToolStripMenuItem8, Me.ToolStripMenuItem10, Me.ToolStripMenuItem12, Me.ToolStripMenuItem13, Me.ToolStripMenuItem14, Me.ToolStripSeparator2, Me.ToolStripMenuItem15, Me.ToolStripMenuItem16, Me.ToolStripMenuItem17, Me.ToolStripMenuItem18, Me.ToolStripMenuItem19, Me.mnuTrvNewExercise, Me.RandomExerciseToolStripMenuItem1})
+    Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem2, Me.ToolStripSeparator1, Me.mnuToolNewCategoryFolder, Me.mnuToolNewCategoryItem, Me.ToolStripSeparator2, Me.ToolStripMenuItem15, Me.ToolStripMenuItem16, Me.ToolStripMenuItem17, Me.ToolStripMenuItem18, Me.ToolStripMenuItem19, Me.mnuTrvNewExercise, Me.RandomExerciseToolStripMenuItem1})
     Me.ToolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ControlText
     Me.ToolStripMenuItem1.Image = CType(resources.GetObject("ToolStripMenuItem1.Image"), System.Drawing.Image)
     Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
@@ -1064,53 +962,21 @@ Partial Class MainForm
     Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
     Me.ToolStripSeparator1.Size = New System.Drawing.Size(160, 6)
     '
-    'ToolStripMenuItem4
+    'mnuToolNewCategoryFolder
     '
-    Me.ToolStripMenuItem4.Image = Global.LightenedDream.My.Resources.Resources.Character2
-    Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-    Me.ToolStripMenuItem4.Size = New System.Drawing.Size(163, 22)
-    Me.ToolStripMenuItem4.Tag = "Character"
-    Me.ToolStripMenuItem4.Text = "Character"
+    Me.mnuToolNewCategoryFolder.Image = Global.LightenedDream.My.Resources.Resources.Folder_16
+    Me.mnuToolNewCategoryFolder.Name = "mnuToolNewCategoryFolder"
+    Me.mnuToolNewCategoryFolder.Size = New System.Drawing.Size(163, 22)
+    Me.mnuToolNewCategoryFolder.Tag = "Category"
+    Me.mnuToolNewCategoryFolder.Text = "Category"
     '
-    'ToolStripMenuItem8
+    'mnuToolNewCategoryItem
     '
-    Me.ToolStripMenuItem8.Image = Global.LightenedDream.My.Resources.Resources.Locations
-    Me.ToolStripMenuItem8.Name = "ToolStripMenuItem8"
-    Me.ToolStripMenuItem8.Size = New System.Drawing.Size(163, 22)
-    Me.ToolStripMenuItem8.Tag = "Location"
-    Me.ToolStripMenuItem8.Text = "Location"
-    '
-    'ToolStripMenuItem10
-    '
-    Me.ToolStripMenuItem10.Image = CType(resources.GetObject("ToolStripMenuItem10.Image"), System.Drawing.Image)
-    Me.ToolStripMenuItem10.Name = "ToolStripMenuItem10"
-    Me.ToolStripMenuItem10.Size = New System.Drawing.Size(163, 22)
-    Me.ToolStripMenuItem10.Tag = "Object"
-    Me.ToolStripMenuItem10.Text = "Object"
-    '
-    'ToolStripMenuItem12
-    '
-    Me.ToolStripMenuItem12.Image = CType(resources.GetObject("ToolStripMenuItem12.Image"), System.Drawing.Image)
-    Me.ToolStripMenuItem12.Name = "ToolStripMenuItem12"
-    Me.ToolStripMenuItem12.Size = New System.Drawing.Size(163, 22)
-    Me.ToolStripMenuItem12.Tag = "Action"
-    Me.ToolStripMenuItem12.Text = "Action"
-    '
-    'ToolStripMenuItem13
-    '
-    Me.ToolStripMenuItem13.Image = CType(resources.GetObject("ToolStripMenuItem13.Image"), System.Drawing.Image)
-    Me.ToolStripMenuItem13.Name = "ToolStripMenuItem13"
-    Me.ToolStripMenuItem13.Size = New System.Drawing.Size(163, 22)
-    Me.ToolStripMenuItem13.Tag = "Theme"
-    Me.ToolStripMenuItem13.Text = "Theme"
-    '
-    'ToolStripMenuItem14
-    '
-    Me.ToolStripMenuItem14.Image = CType(resources.GetObject("ToolStripMenuItem14.Image"), System.Drawing.Image)
-    Me.ToolStripMenuItem14.Name = "ToolStripMenuItem14"
-    Me.ToolStripMenuItem14.Size = New System.Drawing.Size(163, 22)
-    Me.ToolStripMenuItem14.Tag = "Emotion"
-    Me.ToolStripMenuItem14.Text = "Emotion"
+    Me.mnuToolNewCategoryItem.Image = Global.LightenedDream.My.Resources.Resources.Categories
+    Me.mnuToolNewCategoryItem.Name = "mnuToolNewCategoryItem"
+    Me.mnuToolNewCategoryItem.Size = New System.Drawing.Size(163, 22)
+    Me.mnuToolNewCategoryItem.Tag = "CategoryItem"
+    Me.mnuToolNewCategoryItem.Text = "Category Item"
     '
     'ToolStripSeparator2
     '
@@ -1243,6 +1109,7 @@ Partial Class MainForm
     Me.lstImgTrv.Images.SetKeyName(13, "File.REM Cycles")
     Me.lstImgTrv.Images.SetKeyName(14, "Dream")
     Me.lstImgTrv.Images.SetKeyName(15, "Exercise")
+    Me.lstImgTrv.Images.SetKeyName(16, "Categories.ico")
     '
     'pnlContainer
     '
@@ -1255,163 +1122,6 @@ Partial Class MainForm
     'tmrLoad
     '
     Me.tmrLoad.Enabled = True
-    '
-    'Panel3D2
-    '
-    Me.Panel3D2.Controls.Add(Me.Panel3D4)
-    Me.Panel3D2.Controls.Add(Me.ToolStrip2)
-    Me.Panel3D2.Location = New System.Drawing.Point(265, 27)
-    Me.Panel3D2.Name = "Panel3D2"
-    Me.Panel3D2.Size = New System.Drawing.Size(348, 80)
-    Me.Panel3D2.TabIndex = 27
-    Me.Panel3D2.Visible = False
-    '
-    'Panel3D4
-    '
-    Me.Panel3D4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    Me.Panel3D4.BackColor = Global.LightenedDream.My.MySettings.Default.TitleBackColor
-    Me.Panel3D4.Controls.Add(Me.Label5)
-    Me.Panel3D4.Controls.Add(Me.Label1)
-    Me.Panel3D4.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.LightenedDream.My.MySettings.Default, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.Panel3D4.Location = New System.Drawing.Point(0, 0)
-    Me.Panel3D4.Name = "Panel3D4"
-    Me.Panel3D4.Size = New System.Drawing.Size(348, 24)
-    Me.Panel3D4.TabIndex = 5
-    '
-    'Label5
-    '
-    Me.Label5.BackColor = System.Drawing.Color.Transparent
-    Me.Label5.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.LightenedDream.My.MySettings.Default, "TitleForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.Label5.Font = New System.Drawing.Font("Verdana", 8.0!, System.Drawing.FontStyle.Bold)
-    Me.Label5.ForeColor = Global.LightenedDream.My.MySettings.Default.TitleForeColor
-    Me.Label5.Image = Global.LightenedDream.My.Resources.Resources.Categories
-    Me.Label5.Location = New System.Drawing.Point(4, 4)
-    Me.Label5.Name = "Label5"
-    Me.Label5.Size = New System.Drawing.Size(16, 16)
-    Me.Label5.TabIndex = 5
-    Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'Label1
-    '
-    Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    Me.Label1.BackColor = System.Drawing.Color.Transparent
-    Me.Label1.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.LightenedDream.My.MySettings.Default, "TitleForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.Label1.Font = New System.Drawing.Font("Verdana", 8.0!, System.Drawing.FontStyle.Bold)
-    Me.Label1.ForeColor = Global.LightenedDream.My.MySettings.Default.TitleForeColor
-    Me.Label1.Location = New System.Drawing.Point(24, 3)
-    Me.Label1.Name = "Label1"
-    Me.Label1.Size = New System.Drawing.Size(321, 19)
-    Me.Label1.TabIndex = 3
-    Me.Label1.Text = "Categories"
-    Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-    '
-    'ToolStrip2
-    '
-    Me.ToolStrip2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    Me.ToolStrip2.AutoSize = False
-    Me.ToolStrip2.BackColor = System.Drawing.Color.Transparent
-    Me.ToolStrip2.Dock = System.Windows.Forms.DockStyle.None
-    Me.ToolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-    Me.ToolStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.toolCharacters, Me.toolLocations, Me.toolObjects, Me.toolActions, Me.toolThemes, Me.toolEmotions, Me.ToolStripButton10})
-    Me.ToolStrip2.Location = New System.Drawing.Point(10, 27)
-    Me.ToolStrip2.Name = "ToolStrip2"
-    Me.ToolStrip2.ShowItemToolTips = False
-    Me.ToolStrip2.Size = New System.Drawing.Size(363, 54)
-    Me.ToolStrip2.TabIndex = 6
-    Me.ToolStrip2.Text = "ToolStrip2"
-    '
-    'toolCharacters
-    '
-    Me.toolCharacters.AutoSize = False
-    Me.toolCharacters.Image = CType(resources.GetObject("toolCharacters.Image"), System.Drawing.Image)
-    Me.toolCharacters.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.toolCharacters.ImageTransparentColor = System.Drawing.Color.White
-    Me.toolCharacters.Name = "toolCharacters"
-    Me.toolCharacters.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.toolCharacters.Size = New System.Drawing.Size(64, 48)
-    Me.toolCharacters.Tag = "Characters"
-    Me.toolCharacters.Text = "&Characters"
-    Me.toolCharacters.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-    '
-    'toolLocations
-    '
-    Me.toolLocations.AutoSize = False
-    Me.toolLocations.Image = CType(resources.GetObject("toolLocations.Image"), System.Drawing.Image)
-    Me.toolLocations.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.toolLocations.ImageTransparentColor = System.Drawing.Color.White
-    Me.toolLocations.Name = "toolLocations"
-    Me.toolLocations.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.toolLocations.Size = New System.Drawing.Size(58, 48)
-    Me.toolLocations.Tag = "Locations"
-    Me.toolLocations.Text = "&Locations"
-    Me.toolLocations.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-    '
-    'toolObjects
-    '
-    Me.toolObjects.AutoSize = False
-    Me.toolObjects.Image = CType(resources.GetObject("toolObjects.Image"), System.Drawing.Image)
-    Me.toolObjects.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.toolObjects.ImageTransparentColor = System.Drawing.Color.White
-    Me.toolObjects.Name = "toolObjects"
-    Me.toolObjects.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.toolObjects.Size = New System.Drawing.Size(50, 48)
-    Me.toolObjects.Tag = "Objects"
-    Me.toolObjects.Text = "&Objects"
-    Me.toolObjects.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-    '
-    'toolActions
-    '
-    Me.toolActions.AutoSize = False
-    Me.toolActions.Image = CType(resources.GetObject("toolActions.Image"), System.Drawing.Image)
-    Me.toolActions.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.toolActions.ImageTransparentColor = System.Drawing.Color.White
-    Me.toolActions.Name = "toolActions"
-    Me.toolActions.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.toolActions.Size = New System.Drawing.Size(50, 48)
-    Me.toolActions.Tag = "Actions"
-    Me.toolActions.Text = "&Actions"
-    Me.toolActions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-    '
-    'toolThemes
-    '
-    Me.toolThemes.AutoSize = False
-    Me.toolThemes.Image = CType(resources.GetObject("toolThemes.Image"), System.Drawing.Image)
-    Me.toolThemes.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.toolThemes.ImageTransparentColor = System.Drawing.Color.White
-    Me.toolThemes.Name = "toolThemes"
-    Me.toolThemes.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.toolThemes.Size = New System.Drawing.Size(50, 48)
-    Me.toolThemes.Tag = "Themes"
-    Me.toolThemes.Text = "&Themes"
-    Me.toolThemes.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-    '
-    'toolEmotions
-    '
-    Me.toolEmotions.AutoSize = False
-    Me.toolEmotions.Image = CType(resources.GetObject("toolEmotions.Image"), System.Drawing.Image)
-    Me.toolEmotions.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.toolEmotions.ImageTransparentColor = System.Drawing.Color.White
-    Me.toolEmotions.Name = "toolEmotions"
-    Me.toolEmotions.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.toolEmotions.Size = New System.Drawing.Size(60, 48)
-    Me.toolEmotions.Tag = "Emotions"
-    Me.toolEmotions.Text = "&Emotions"
-    Me.toolEmotions.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
-    '
-    'ToolStripButton10
-    '
-    Me.ToolStripButton10.AutoSize = False
-    Me.ToolStripButton10.Image = CType(resources.GetObject("ToolStripButton10.Image"), System.Drawing.Image)
-    Me.ToolStripButton10.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-    Me.ToolStripButton10.ImageTransparentColor = System.Drawing.Color.White
-    Me.ToolStripButton10.Name = "ToolStripButton10"
-    Me.ToolStripButton10.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never
-    Me.ToolStripButton10.Size = New System.Drawing.Size(54, 48)
-    Me.ToolStripButton10.Text = "&Lessons"
-    Me.ToolStripButton10.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText
     '
     'Panel3D5
     '
@@ -1633,6 +1343,10 @@ Partial Class MainForm
     Me.pnlProcessing.TabIndex = 30
     Me.pnlProcessing.Visible = False
     '
+    'tmrSaving
+    '
+    Me.tmrSaving.Interval = 128
+    '
     'pnlSearching
     '
     Me.pnlSearching.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1723,17 +1437,6 @@ Partial Class MainForm
     Me.graph.Size = New System.Drawing.Size(978, 685)
     Me.graph.TabIndex = 283
     '
-    'tmrSaving
-    '
-    Me.tmrSaving.Interval = 128
-    '
-    'mnuToolsDreamTypeCount
-    '
-    Me.mnuToolsDreamTypeCount.Image = Global.LightenedDream.My.Resources.Resources.Dream4
-    Me.mnuToolsDreamTypeCount.Name = "mnuToolsDreamTypeCount"
-    Me.mnuToolsDreamTypeCount.Size = New System.Drawing.Size(175, 22)
-    Me.mnuToolsDreamTypeCount.Text = "&Dream Type Count"
-    '
     'MainForm
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 13.0!)
@@ -1745,7 +1448,6 @@ Partial Class MainForm
     Me.Controls.Add(Me.lblStatus)
     Me.Controls.Add(Me.Panel3D3)
     Me.Controls.Add(Me.Panel3D5)
-    Me.Controls.Add(Me.Panel3D2)
     Me.Controls.Add(Me.MenuStrip1)
     Me.DataBindings.Add(New System.Windows.Forms.Binding("Font", Global.LightenedDream.My.MySettings.Default, "Font", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.LightenedDream.My.MySettings.Default, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
@@ -1770,10 +1472,6 @@ Partial Class MainForm
     Me.Panel3D1.ResumeLayout(False)
     Me.Panel3D8.ResumeLayout(False)
     Me.mnuTrv.ResumeLayout(False)
-    Me.Panel3D2.ResumeLayout(False)
-    Me.Panel3D4.ResumeLayout(False)
-    Me.ToolStrip2.ResumeLayout(False)
-    Me.ToolStrip2.PerformLayout()
     Me.Panel3D5.ResumeLayout(False)
     Me.Panel3D7.ResumeLayout(False)
     Me.ToolStrip3.ResumeLayout(False)
@@ -1798,30 +1496,18 @@ Partial Class MainForm
   Friend WithEvents Panel3D1 As lucidcode.Controls.Panel3D
   Friend WithEvents trvMain As System.Windows.Forms.TreeView
   Friend WithEvents pnlContainer As System.Windows.Forms.Panel
-  Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents tmrLoad As System.Windows.Forms.Timer
   Friend WithEvents toolNew As System.Windows.Forms.ToolStripDropDownButton
   Friend WithEvents mnuToolNewDream As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents lstImgTrv As System.Windows.Forms.ImageList
   Friend WithEvents Panel3D8 As lucidcode.Controls.Panel3D
   Friend WithEvents Label3 As System.Windows.Forms.Label
-  Friend WithEvents Panel3D2 As lucidcode.Controls.Panel3D
-  Friend WithEvents Panel3D4 As lucidcode.Controls.Panel3D
-  Friend WithEvents Label1 As System.Windows.Forms.Label
-  Friend WithEvents ToolStrip2 As System.Windows.Forms.ToolStrip
-  Friend WithEvents toolCharacters As System.Windows.Forms.ToolStripButton
   Friend WithEvents Panel3D5 As lucidcode.Controls.Panel3D
   Friend WithEvents Panel3D7 As lucidcode.Controls.Panel3D
   Friend WithEvents Label2 As System.Windows.Forms.Label
   Friend WithEvents ToolStrip3 As System.Windows.Forms.ToolStrip
   Friend WithEvents toolREMCycles As System.Windows.Forms.ToolStripButton
   Friend WithEvents toolChecks As System.Windows.Forms.ToolStripButton
-  Friend WithEvents toolLocations As System.Windows.Forms.ToolStripButton
-  Friend WithEvents toolObjects As System.Windows.Forms.ToolStripButton
-  Friend WithEvents toolActions As System.Windows.Forms.ToolStripButton
-  Friend WithEvents toolThemes As System.Windows.Forms.ToolStripButton
-  Friend WithEvents toolEmotions As System.Windows.Forms.ToolStripButton
-  Friend WithEvents ToolStripButton10 As System.Windows.Forms.ToolStripButton
   Friend WithEvents toolForward As System.Windows.Forms.ToolStripButton
   Friend WithEvents toolUpdate As System.Windows.Forms.ToolStripButton
   Friend WithEvents NewToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -1851,17 +1537,12 @@ Partial Class MainForm
   Friend WithEvents mnuToolNewREMCycle As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolNewCheck As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolNewSubliminal As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents CharacterToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ObjectToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ActionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ThemeToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents EmotionToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents CategoryToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuNewCategoryItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripMenuItem9 As System.Windows.Forms.ToolStripSeparator
   Friend WithEvents RecordingToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents REMCycleToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents LocationToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuHelpSupport As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents Label5 As System.Windows.Forms.Label
   Friend WithEvents Label6 As System.Windows.Forms.Label
   Friend WithEvents toolSubliminals As System.Windows.Forms.ToolStripButton
   Friend WithEvents toolReadings As System.Windows.Forms.ToolStripButton
@@ -1874,11 +1555,6 @@ Partial Class MainForm
   Friend WithEvents CheckToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents SubliminalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ReadingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuCategoriesCharacters As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuCategoriesLocations As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuCategoriesObjects As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuCategoriesThemes As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuCategoriesEmotions As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents LucidityToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuLucidityREMCycles As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuLucidityChecks As System.Windows.Forms.ToolStripMenuItem
@@ -1895,12 +1571,7 @@ Partial Class MainForm
   Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-  Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ToolStripMenuItem8 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ToolStripMenuItem10 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ToolStripMenuItem12 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ToolStripMenuItem13 As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents ToolStripMenuItem14 As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuToolNewCategoryFolder As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
   Friend WithEvents ToolStripMenuItem15 As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripMenuItem16 As System.Windows.Forms.ToolStripMenuItem
@@ -1930,12 +1601,13 @@ Partial Class MainForm
   Friend WithEvents mnuTrvSendToLD4All As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents pnlProcessing As lucidcode.Controls.Panel3D
   Friend WithEvents pnlSearching As lucidcode.Controls.Panel3D
-    Friend WithEvents tmrSaving As System.Windows.Forms.Timer
-    Friend WithEvents mnuToolsWhyLD As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuToolsCompareDreams As System.Windows.Forms.ToolStripMenuItem
-    Private WithEvents graph As System.Windows.Forms.DataVisualization.Charting.Chart
-    Friend WithEvents mnuToolsFIELD As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents tmrSaving As System.Windows.Forms.Timer
+  Friend WithEvents mnuToolsWhyLD As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuToolsCompareDreams As System.Windows.Forms.ToolStripMenuItem
+  Private WithEvents graph As System.Windows.Forms.DataVisualization.Charting.Chart
+  Friend WithEvents mnuToolsFIELD As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolsDataDirectory As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolsDreamTypeCount As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuToolNewCategoryItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

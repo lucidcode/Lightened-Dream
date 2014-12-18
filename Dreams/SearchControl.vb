@@ -5,13 +5,37 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Public Class SearchControl
 
   Public Event MonthSelected(ByVal Month As String)
-  Public Event CategoryFileSelected(ByVal Category As String, ByVal Item As String)
+  Public Event CategoryFileSelected(ByVal CategoryItem As String)
   Public Event CategoryFileCreated(ByVal Category As String, ByVal Item As String)
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
   Private m_boolSearching As Boolean = False
   Private objDreamSeries As Series
 
   Private m_strSelectedNewCategory As String
+
+  Public Sub New()
+
+    ' This call is required by the designer.
+    InitializeComponent()
+
+    ' Load each Category
+    For Each strCategory As String In Directory.GetDirectories(m_strPath + "Categories")
+      LoadCategoryFolder(strCategory, mnuAddTo)
+    Next
+  End Sub
+
+  Private Sub LoadCategoryFolder(ByVal strCategory As String, parentNode As ToolStripMenuItem)
+    Dim objToolMenuItem As New ToolStripMenuItem
+    objToolMenuItem.Image = CategoryMenuItem.Image
+    objToolMenuItem.Text = New DirectoryInfo(strCategory).Name
+    objToolMenuItem.Tag = strCategory
+    AddHandler objToolMenuItem.Click, AddressOf mnuToolNewCategoryItem_Click
+    parentNode.DropDownItems.Add(objToolMenuItem)
+
+    For Each subCategory As String In Directory.GetDirectories(strCategory)
+      LoadCategoryFolder(subCategory, objToolMenuItem)
+    Next
+  End Sub
 
   Public Sub Activate()
     txtSearch.Focus()
@@ -114,31 +138,16 @@ Public Class SearchControl
       ' Link to categories
       For Each objSeries As Series In graph.Series
         If objSeries.Name <> "Dreams" Then
-          For Each strCategory As String In "Characters,Locations,Objects,Actions,Themes,Emotions".Split(",")
-            For Each strCatgeoryFile As String In Directory.GetFiles(m_strPath + "Categories\" + strCategory, "*.ld3")
-              Dim strName As String = New FileInfo(strCatgeoryFile).Name.Replace(".ld3", "")
-              If strName.ToLower = objSeries.Name.ToLower Then
-                Dim strTag As String = objSeries.Tag
-                objSeries.Tag = strCategory & "\" & objSeries.Name
-                objSeries.Name += " (" & strTag & ")"
-                Exit For
-              End If
 
-              Dim xmlDocCategory As New XmlDocument
-              xmlDocCategory.Load(strCatgeoryFile)
-              For Each xmlWord As XmlNode In xmlDocCategory.DocumentElement.SelectNodes("Names/Name")
-                If xmlWord.InnerText.ToLower = objSeries.Name.ToLower Then
-                  Dim strTag As String = objSeries.Tag
-                  objSeries.Tag = strCategory & "\" & objSeries.Name
-                  objSeries.Name += " (" & strTag & ")"
-                  Exit For
-                End If
-              Next
-            Next
-          Next
+          Dim strCatgeoryFile As String = FindCategoryFolder(m_strPath + "Categories", objSeries.Name.ToLower)
+
+          If Not strCatgeoryFile = "" Then
+            Dim strTag As String = objSeries.Tag
+            objSeries.Tag = strCatgeoryFile
+            objSeries.Name += " (" & strTag & ")"
+          End If
         End If
       Next
-
 
       ' Totals
       For Each objSeries As Series In graph.Series
@@ -163,6 +172,32 @@ Public Class SearchControl
 
     m_boolSearching = False
   End Sub
+
+  Private Function FindCategoryFolder(ByVal categoryPath As String, categoryName As String) As String
+    For Each strCatgeoryFile As String In Directory.GetFiles(categoryPath, "*.ld3")
+      Dim strName As String = New FileInfo(strCatgeoryFile).Name.Replace(".ld3", "")
+      If strName.ToLower = categoryName Then
+        Return strCatgeoryFile
+      End If
+
+      Dim xmlDocCategory As New XmlDocument
+      xmlDocCategory.Load(strCatgeoryFile)
+      For Each xmlWord As XmlNode In xmlDocCategory.DocumentElement.SelectNodes("Names/Name")
+        If xmlWord.InnerText.ToLower = categoryName Then
+          Return strCatgeoryFile
+        End If
+      Next
+    Next
+
+    For Each subCategory As String In Directory.GetDirectories(categoryPath)
+      Dim subCategoryItem As String = FindCategoryFolder(subCategory, categoryName)
+      If Not subCategoryItem = "" Then
+        Return subCategoryItem
+      End If
+    Next
+
+    Return ""
+  End Function
 
   Private Sub graph_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles graph.MouseMove
     Try
@@ -212,8 +247,7 @@ Public Class SearchControl
           End If
         Else
           If result.Series.Tag.ToString.Contains("\") Then
-            Dim arrCategoryFile() As String = result.Series.Tag.ToString.Split("\")
-            RaiseEvent CategoryFileSelected(arrCategoryFile(0), arrCategoryFile(1))
+            RaiseEvent CategoryFileSelected(result.Series.Tag.ToString)
           Else
             m_strSelectedNewCategory = result.Series.Tag.ToString
             If Not m_strSelectedNewCategory = "0" Then
@@ -255,7 +289,7 @@ Public Class SearchControl
 
   End Sub
 
-  Private Sub mnuCategories_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuCharacters.Click, mnuActions.Click, mnuEmotions.Click, mnuLocations.Click, mnuObjects.Click, mnuThemes.Click
+  Private Sub mnuToolNewCategoryItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
     RaiseEvent CategoryFileCreated(CType(sender, ToolStripMenuItem).Tag, m_strSelectedNewCategory)
   End Sub
 End Class

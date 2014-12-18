@@ -6,7 +6,6 @@ Public Class ExerciseViewControl
   Public Words As Integer
   Public FileName As String
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
-    Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
     Private m_boolLoading As Boolean = False
     Private m_objSpeechSynthesizer As New System.Speech.Synthesis.SpeechSynthesizer()
 

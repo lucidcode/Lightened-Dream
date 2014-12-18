@@ -6,7 +6,6 @@ Public Class CategoriesListControl
 
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strFileName As String
-    Public Categories As String
 
     Public Event CategorySelected(ByVal Category As String)
 
@@ -18,18 +17,19 @@ Public Class CategoriesListControl
             objSeries.Points.Clear()
             objSeries("PieDrawingStyle") = "SoftEdge"
             lstCategories.Items.Clear()
-            For Each strCategory As String In Categories.Split(",")
-                Dim intCount As Integer = Directory.GetFiles(m_strPath + "Categories\" + strCategory, "*.ld3").Length
 
-                Dim lstItem As New ListViewItem(strCategory)
-                lstItem.SubItems.Add(intCount)
-                lstCategories.Items.Add(lstItem)
+      For Each categoryPath As String In Directory.GetDirectories(m_strPath + "Categories")
+        Dim intCount As Integer = Directory.GetFiles(categoryPath, "*.ld3", SearchOption.AllDirectories).Length
 
-                If intCount > 0 Then
-                    Dim intPoint As Integer = objSeries.Points.AddY(intCount)
-                    objSeries.Points(intPoint).Label = strCategory
-                End If
-            Next
+        Dim lstItem As New ListViewItem(New FileInfo(categoryPath).Name)
+        lstItem.SubItems.Add(intCount)
+        lstCategories.Items.Add(lstItem)
+
+        If intCount > 0 Then
+          Dim intPoint As Integer = objSeries.Points.AddY(intCount)
+          objSeries.Points(intPoint).Label = New FileInfo(categoryPath).Name
+        End If
+      Next
 
         Catch ex As Exception
             MessageBox.Show(ex.Message, "LightenedDream.Categories.LoadCategory()", MessageBoxButtons.OK, MessageBoxIcon.Error)

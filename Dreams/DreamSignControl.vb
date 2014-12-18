@@ -6,11 +6,8 @@ Imports System.Windows.Forms.DataVisualization
 
 Public Class DreamSignControl
 
-  Public Event MonthSelected(ByVal Month As String)
-  Public Event CategoryFileSelected(ByVal Category As String, ByVal Item As String)
   Public Event CategoryFileCreated(ByVal Category As String, ByVal Item As String)
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
-    Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
     Private m_boolSearching As Boolean = False
 
     Private m_arrDreamFiles As String()
@@ -33,13 +30,47 @@ Public Class DreamSignControl
         objDreams = Chart1.Series.Add("Dreams")
         objDreams.ChartType = SeriesChartType.Column
         objDreams.Color = Color.FromArgb(200, 65, 140, 240)
-        objDreams.BorderWidth = 1
+    objDreams.BorderWidth = 1
+
+    ' Load each Category
+    For Each strCategory As String In Directory.GetDirectories(m_strPath + "Categories")
+      LoadCategoryFolder(strCategory, mnuAddTo)
+    Next
+
     End Sub
 
     Private Class Word
         Public Name As String = ""
         Public Count As Integer = 1
-    End Class
+  End Class
+
+  Private Sub LoadCategoryFolder(ByVal strCategory As String, parentNode As ToolStripMenuItem)
+    Dim objToolMenuItem As New ToolStripMenuItem
+    objToolMenuItem.Image = CategoryMenuItem.Image
+    objToolMenuItem.Text = New DirectoryInfo(strCategory).Name
+    objToolMenuItem.Tag = strCategory
+    AddHandler objToolMenuItem.Click, AddressOf mnuToolNewCategoryItem_Click
+    parentNode.DropDownItems.Add(objToolMenuItem)
+
+    For Each subCategory As String In Directory.GetDirectories(strCategory)
+      LoadCategoryFolder(subCategory, objToolMenuItem)
+    Next
+  End Sub
+
+  Private Sub mnuToolNewCategoryItem_Click(sender As System.Object, e As System.EventArgs)
+    RaiseEvent CategoryFileCreated(CType(sender, ToolStripMenuItem).Tag, m_strSelectedNewCategory)
+
+    For Each objWord As Word In m_arrTop100
+      If objWord.Name = m_strSelectedNewCategory Then
+        objWord.Name = ""
+      End If
+    Next
+
+    mnuCategories.Hide()
+
+    m_arrTop10.Clear()
+    LoadGraph()
+  End Sub
 
     Public Sub StartSearch()
         objDreams.Points.Clear()
@@ -97,12 +128,7 @@ Public Class DreamSignControl
             m_arrIgnore.Add(xmlNode.InnerText.ToLower)
         Next
 
-        For Each strCategory As String In m_strCategories.Split(",")
-            For Each strCatgeoryFile As String In Directory.GetFiles(m_strPath + "Categories\" + strCategory, "*.ld3")
-                Dim strName As String = New FileInfo(strCatgeoryFile).Name.Replace(".ld3", "")
-                m_arrIgnore.Add(strName.ToLower)
-            Next
-        Next
+    IgnoreCategoryFolder(m_strPath + "Categories")
 
         m_arrDreamFiles = Directory.GetFiles(m_strPath & "Dreams\", "*.ld3", SearchOption.AllDirectories)
         m_arrWords.Clear()
@@ -123,6 +149,17 @@ Public Class DreamSignControl
         objSeries("BarLabelStyle") = "Center"
 
     End Sub
+
+  Private Sub IgnoreCategoryFolder(ByVal strCategory As String)
+    For Each strCatgeoryFile As String In Directory.GetFiles(strCategory, "*.ld3")
+      Dim strName As String = New FileInfo(strCatgeoryFile).Name.Replace(".ld3", "")
+      m_arrIgnore.Add(strName.ToLower)
+    Next
+
+    For Each subCategory As String In Directory.GetDirectories(strCategory)
+      IgnoreCategoryFolder(subCategory)
+    Next
+  End Sub
 
     Public Sub CountDreamTypes()
         objDreams.Points.Clear()
@@ -245,6 +282,8 @@ Public Class DreamSignControl
             Return
         End If
 
+    Dim FoundList As New List(Of String)
+
         For Each strWord As String In arrWords
 
             If strWord <> "" Then
@@ -252,11 +291,14 @@ Public Class DreamSignControl
                 ' Check if the word is in the list
                 Dim boolFound As Boolean = False
                 For Each objWord As Word In m_arrWords
-                    If objWord.Name.ToLower = strWord.ToLower Then
-                        objWord.Count += 1
-                        boolFound = True
-                        Exit For
-                    End If
+          If objWord.Name.ToLower = strWord.ToLower Then
+            boolFound = True
+            If Not FoundList.Contains(strWord.ToLower) Then
+              objWord.Count += 1
+              FoundList.Add(strWord.ToLower)
+            End If
+            Exit For
+          End If
                 Next
 
                 If Not boolFound Then
@@ -273,7 +315,8 @@ Public Class DreamSignControl
                         ' Add it to the list
                         Dim objWord As New Word
                         objWord.Name = strWord
-                        m_arrWords.Add(objWord)
+            m_arrWords.Add(objWord)
+            FoundList.Add(strWord.ToLower)
                     End If
 
                 End If
@@ -374,17 +417,17 @@ Public Class DreamSignControl
         End If
     End Sub
 
-    Private Sub mnuCategories_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuCharacters.Click, mnuActions.Click, mnuEmotions.Click, mnuLocations.Click, mnuObjects.Click, mnuThemes.Click
-        RaiseEvent CategoryFileCreated(CType(sender, ToolStripMenuItem).Tag, m_strSelectedNewCategory)
+  Private Sub mnuCategories_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    RaiseEvent CategoryFileCreated(CType(sender, ToolStripMenuItem).Tag, m_strSelectedNewCategory)
 
-        For Each objWord As Word In m_arrTop100
-            If objWord.Name = m_strSelectedNewCategory Then
-                objWord.Name = ""
-            End If
-        Next
-        m_arrTop10.Clear()
-        LoadGraph()
-    End Sub
+    For Each objWord As Word In m_arrTop100
+      If objWord.Name = m_strSelectedNewCategory Then
+        objWord.Name = ""
+      End If
+    Next
+    m_arrTop10.Clear()
+    LoadGraph()
+  End Sub
 
     Private Sub tmrSearching_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrSearching.Tick
         objDreams.Points.AddY(Int(Rnd() * 1000))

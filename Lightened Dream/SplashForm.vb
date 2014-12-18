@@ -8,7 +8,6 @@ Public Class SplashForm
     Private m_formMain As MainForm
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strOldPath As String = DataDirectory.GetFolderPath() + "\Liquid Dream III\"
-    Private m_strCategories As String = "Characters,Locations,Objects,Actions,Themes,Emotions"
 
     Private Sub SplashForm3_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Me.Left = Screen.PrimaryScreen.Bounds.Left + (Screen.PrimaryScreen.Bounds.Width - (Screen.PrimaryScreen.Bounds.Width / 1.5)) / 2
@@ -45,18 +44,6 @@ Public Class SplashForm
             If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
 
             strDirectory = m_strPath & "Categories"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Categories\Actions"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Categories\Characters"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Categories\Emotions"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Categories\Locations"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Categories\Objects"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Categories\Themes"
             If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
 
             strDirectory = m_strPath & "Lucidity"
@@ -186,28 +173,28 @@ Public Class SplashForm
             Next
 
             ' Categories
-            For Each strCategory As String In m_strCategories.Split(",")
-                intPos = objDreams.Points.AddY(Directory.GetFiles(m_strPath & "Categories\" & strCategory, "*.ld3").Length)
+      For Each categoryPath As String In Directory.GetDirectories(m_strPath + "Categories")
+        intPos = objDreams.Points.AddY(Directory.GetFiles(categoryPath, "*.ld3", SearchOption.AllDirectories).Length)
 
-                Dim objCategoryAnnotation As New Charting.CalloutAnnotation
-                objCategoryAnnotation.AllowMoving = True
-                objCategoryAnnotation.AllowResizing = True
-                objCategoryAnnotation.AllowSelecting = True
-                objCategoryAnnotation.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-                objCategoryAnnotation.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                objCategoryAnnotation.ForeColor = System.Drawing.Color.SteelBlue
-                objCategoryAnnotation.LineColor = System.Drawing.Color.LightSteelBlue
-                objCategoryAnnotation.Name = Guid.NewGuid.ToString
-                objCategoryAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
-                objCategoryAnnotation.ShadowOffset = 1
-                objCategoryAnnotation.Text = strCategory & " (" & objDreams.Points(intPos).YValues(0) & ")"
-                objCategoryAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
-                objCategoryAnnotation.AnchorDataPoint = objDreams.Points(intPos)
-                Me.graph.Annotations.Add(objCategoryAnnotation)
+        Dim objCategoryAnnotation As New Charting.CalloutAnnotation
+        objCategoryAnnotation.AllowMoving = True
+        objCategoryAnnotation.AllowResizing = True
+        objCategoryAnnotation.AllowSelecting = True
+        objCategoryAnnotation.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+        objCategoryAnnotation.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        objCategoryAnnotation.ForeColor = System.Drawing.Color.SteelBlue
+        objCategoryAnnotation.LineColor = System.Drawing.Color.LightSteelBlue
+        objCategoryAnnotation.Name = Guid.NewGuid.ToString
+        objCategoryAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
+        objCategoryAnnotation.ShadowOffset = 1
+        objCategoryAnnotation.Text = New FileInfo(categoryPath).Name & " (" & objDreams.Points(intPos).YValues(0) & ")"
+        objCategoryAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
+        objCategoryAnnotation.AnchorDataPoint = objDreams.Points(intPos)
+        Me.graph.Annotations.Add(objCategoryAnnotation)
 
-                Application.DoEvents()
-                System.Threading.Thread.Sleep(128)
-            Next
+        Application.DoEvents()
+        System.Threading.Thread.Sleep(128)
+      Next
 
             ' Lucidity
             For Each strCategory As String In "REM Cycles,Checks,Subliminals,Recordings,Readings".Split(",")

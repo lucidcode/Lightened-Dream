@@ -7,6 +7,7 @@ Public Class CategoryListControl
     Private m_strPath As String = DataDirectory.GetFolderPath() + "\Lightened Dream\"
     Private m_strFileName As String
     Public Category As String
+    Public CategoryFile As String
 
     Public Event CategorySelected(ByVal Entry As String)
 
@@ -18,21 +19,15 @@ Public Class CategoryListControl
             txtName.Visible = True
             txtName.Text = Category
 
-            For Each strCategory As String In "Characters,Locations,Objects,Actions,Themes,Emotions".Split(",")
-                If Category.ToLower = strCategory.ToLower Then
-                    lblT.Visible = False
-                    txtName.Visible = False
-                    Exit For
-                End If
-            Next
-
             Dim objSeries As Series = graph.Series("DreamSeries")
             objSeries.Points.Clear()
             objSeries("PieDrawingStyle") = "SoftEdge"
             lstCategories.Items.Clear()
             lblTitle.Text = "Categories - " + Category
 
-            For Each strCatgeoryFile As String In Directory.GetFiles(m_strPath + "Categories\" + Category, "*.ld3")
+      Dim hasData As Boolean = False
+
+            For Each strCatgeoryFile As String In Directory.GetFiles(CategoryFile, "*.ld3")
                 Dim xmlDoc As New Xml.XmlDocument
                 xmlDoc.Load(strCatgeoryFile)
 
@@ -44,9 +39,13 @@ Public Class CategoryListControl
 
                 If intCount > 0 Then
                     Dim intPoint As Integer = objSeries.Points.AddY(intCount)
-                    objSeries.Points(intPoint).Label = lstItem.Text
+          objSeries.Points(intPoint).Label = lstItem.Text
+          hasData = True
                 End If
-            Next
+      Next
+
+        graph.Visible = hasData
+
         Catch ex As Exception
             MessageBox.Show(ex.Message, "LightenedDream.Categories.LoadCategory()", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -54,7 +53,9 @@ Public Class CategoryListControl
 
   Public Sub Save()
     If txtName.Text <> Category Then
-      Directory.Move(m_strPath & "Categories\" & Category, m_strPath & "Categories\" & txtName.Text)
+      Directory.Move(CategoryFile, New DirectoryInfo(CategoryFile).Parent.FullName + "\" & txtName.Text)
+      CategoryFile = New DirectoryInfo(CategoryFile).Parent.FullName + "\" & txtName.Text
+      Category = txtName.Text
     End If
   End Sub
 
