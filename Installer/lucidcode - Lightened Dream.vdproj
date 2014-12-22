@@ -416,7 +416,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:3.5.30729         "
+                "FrameworkVersion" = "8:3.5.30729          "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -1443,15 +1443,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Lightened Dream"
-        "ProductCode" = "8:{7BD713BE-F3AB-478D-968B-7C1A9905922E}"
-        "PackageCode" = "8:{664FFB12-7E66-4728-B53A-E1E9400EC980}"
+        "ProductCode" = "8:{FC799118-2F0C-4FDC-8B8C-486AE5D96100}"
+        "PackageCode" = "8:{5FCC2A64-B314-4436-8278-874A8D25580A}"
         "UpgradeCode" = "8:{323AF716-90AF-44C2-A6BD-4F7D4345EED6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:3.3.3"
+        "ProductVersion" = "8:3.3.4"
         "Manufacturer" = "8:lucidcode"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://www.lucidcode.com/LightenedDream"
@@ -2356,7 +2356,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D3FED1BB9B16412CB5D07596E74ED32A"
             {
-            "SourcePath" = "8:..\\Lightened Dream\\obj\\Debug\\Lightened Dream.exe"
+            "SourcePath" = "8:..\\Lightened Dream\\obj\\x86\\Release\\Lightened Dream.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_59F5C9F577BE4DEF9BA1216434C509E1"
