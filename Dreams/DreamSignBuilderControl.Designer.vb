@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class DreamSignControl
+Partial Class DreamSignBuilderControl
   Inherits System.Windows.Forms.UserControl
 
   'UserControl1 overrides dispose to clean up the component list.
@@ -32,7 +32,7 @@ Partial Class DreamSignControl
     Dim CustomLabel4 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
     Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
     Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DreamSignControl))
+    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DreamSignBuilderControl))
     Me.lstDreams = New System.Windows.Forms.ListView()
     Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
     Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
@@ -364,7 +364,7 @@ Partial Class DreamSignControl
   Friend WithEvents pnlSearching As lucidcode.Controls.Panel3D
   Friend WithEvents Chart1 As System.Windows.Forms.DataVisualization.Charting.Chart
   Friend WithEvents tmrSearching As System.Windows.Forms.Timer
-    Friend WithEvents mnuIgnore As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuIgnore As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents tmrDreamTypes As System.Windows.Forms.Timer
   Friend WithEvents CategoryMenuItem As System.Windows.Forms.ToolStripMenuItem
 

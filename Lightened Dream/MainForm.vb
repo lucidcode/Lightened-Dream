@@ -21,7 +21,8 @@ Public Class MainForm
   Private m_objYearListControl As New Dreams.YearListControl
   Private m_objYearsListControl As New Dreams.YearsListControl
   Private m_objSearchControl As New Dreams.SearchControl
-  Private m_objDreamSignListControl As New Dreams.DreamSignControl
+  Private m_objDreamSignListControl As New Dreams.DreamSignBuilderControl
+  Private m_objRecentDreamSignControl As New Dreams.RecentDreamSignControl
   Private m_objCompareDreamsControl As New Dreams.CompareDreamsControl
 
   Private m_objCategoryViewControl As New Categories.ViewControl
@@ -2407,7 +2408,7 @@ Public Class MainForm
     formFIELD.ShowDialog()
   End Sub
 
-  Private Sub mnuToolsDreamSigns_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuToolsDreamSigns.Click
+  Private Sub mnuToolsDreamSignBuilder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuToolsDreamSignBuilder.Click
     trvMain.SelectedNode = trvMain.Nodes(0)
     trvMain.SelectedNode = Nothing
     pnlContainer.Controls.Clear()
@@ -2671,5 +2672,14 @@ Public Class MainForm
     If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
       mnuNewCategoryItem.Enabled = True
     End If
+  End Sub
+
+  Private Sub mnuToolsRecentDreamSigns_Click(sender As System.Object, e As System.EventArgs) Handles mnuToolsRecentDreamSigns.Click
+    trvMain.SelectedNode = trvMain.Nodes(0)
+    trvMain.SelectedNode = Nothing
+    pnlContainer.Controls.Clear()
+    m_objRecentDreamSignControl.Dock = DockStyle.Fill
+    pnlContainer.Controls.Add(m_objRecentDreamSignControl)
+    m_objRecentDreamSignControl.StartSearch()
   End Sub
 End Class

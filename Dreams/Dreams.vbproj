@@ -124,11 +124,17 @@
     <Compile Include="CompareDreamsControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="DataDirectory.vb" />
-    <Compile Include="DreamSignControl.Designer.vb">
-      <DependentUpon>DreamSignControl.vb</DependentUpon>
+    <Compile Include="RecentDreamSignControl.Designer.vb">
+      <DependentUpon>RecentDreamSignControl.vb</DependentUpon>
     </Compile>
-    <Compile Include="DreamSignControl.vb">
+    <Compile Include="RecentDreamSignControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataDirectory.vb" />
+    <Compile Include="DreamSignBuilderControl.Designer.vb">
+      <DependentUpon>DreamSignBuilderControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="DreamSignBuilderControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DreamViewControl.Designer.vb">
@@ -194,8 +200,11 @@
     <EmbeddedResource Include="CompareDreamsControl.resx">
       <DependentUpon>CompareDreamsControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DreamSignControl.resx">
-      <DependentUpon>DreamSignControl.vb</DependentUpon>
+    <EmbeddedResource Include="RecentDreamSignControl.resx">
+      <DependentUpon>RecentDreamSignControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DreamSignBuilderControl.resx">
+      <DependentUpon>DreamSignBuilderControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DreamViewControl.resx">
       <DependentUpon>DreamViewControl.vb</DependentUpon>

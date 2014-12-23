@@ -100,7 +100,8 @@ Partial Class MainForm
     Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsPlay = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripMenuItem22 = New System.Windows.Forms.ToolStripSeparator()
-    Me.mnuToolsDreamSigns = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuToolsDreamSignBuilder = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuToolsRecentDreamSigns = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsCompareDreams = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsDreamTypeCount = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsFIELD = New System.Windows.Forms.ToolStripMenuItem()
@@ -164,9 +165,9 @@ Partial Class MainForm
     Me.lstImgIco = New System.Windows.Forms.ImageList(Me.components)
     Me.tmrProcessing = New System.Windows.Forms.Timer(Me.components)
     Me.pnlProcessing = New lucidcode.Controls.Panel3D()
-    Me.tmrSaving = New System.Windows.Forms.Timer(Me.components)
     Me.pnlSearching = New lucidcode.Controls.Panel3D()
     Me.graph = New System.Windows.Forms.DataVisualization.Charting.Chart()
+    Me.tmrSaving = New System.Windows.Forms.Timer(Me.components)
     Me.ToolStrip1.SuspendLayout()
     Me.Panel3D3.SuspendLayout()
     Me.Panel3D6.SuspendLayout()
@@ -678,7 +679,7 @@ Partial Class MainForm
     'ToolsToolStripMenuItem
     '
     Me.ToolsToolStripMenuItem.BackColor = Global.LightenedDream.My.MySettings.Default.FormBackColor
-    Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsPlay, Me.ToolStripMenuItem22, Me.mnuToolsDreamSigns, Me.mnuToolsCompareDreams, Me.mnuToolsDreamTypeCount, Me.mnuToolsFIELD, Me.mnuToolsWILD, Me.mnuToolsWhyLD, Me.ToolStripMenuItem5, Me.SpellingToolStripMenuItem, Me.mnuToolsDataDirectory})
+    Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsPlay, Me.ToolStripMenuItem22, Me.mnuToolsDreamSignBuilder, Me.mnuToolsRecentDreamSigns, Me.mnuToolsCompareDreams, Me.mnuToolsDreamTypeCount, Me.mnuToolsFIELD, Me.mnuToolsWILD, Me.mnuToolsWhyLD, Me.ToolStripMenuItem5, Me.SpellingToolStripMenuItem, Me.mnuToolsDataDirectory})
     Me.ToolsToolStripMenuItem.ForeColor = Global.LightenedDream.My.MySettings.Default.FormForeColor
     Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
     Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
@@ -689,67 +690,74 @@ Partial Class MainForm
     Me.mnuToolsPlay.Image = CType(resources.GetObject("mnuToolsPlay.Image"), System.Drawing.Image)
     Me.mnuToolsPlay.Name = "mnuToolsPlay"
     Me.mnuToolsPlay.ShortcutKeys = System.Windows.Forms.Keys.F5
-    Me.mnuToolsPlay.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsPlay.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsPlay.Text = "&Play"
     '
     'ToolStripMenuItem22
     '
     Me.ToolStripMenuItem22.Name = "ToolStripMenuItem22"
-    Me.ToolStripMenuItem22.Size = New System.Drawing.Size(172, 6)
+    Me.ToolStripMenuItem22.Size = New System.Drawing.Size(176, 6)
     '
-    'mnuToolsDreamSigns
+    'mnuToolsDreamSignBuilder
     '
-    Me.mnuToolsDreamSigns.Image = CType(resources.GetObject("mnuToolsDreamSigns.Image"), System.Drawing.Image)
-    Me.mnuToolsDreamSigns.Name = "mnuToolsDreamSigns"
-    Me.mnuToolsDreamSigns.Size = New System.Drawing.Size(175, 22)
-    Me.mnuToolsDreamSigns.Text = "&Dream Sign Builder"
+    Me.mnuToolsDreamSignBuilder.Image = CType(resources.GetObject("mnuToolsDreamSignBuilder.Image"), System.Drawing.Image)
+    Me.mnuToolsDreamSignBuilder.Name = "mnuToolsDreamSignBuilder"
+    Me.mnuToolsDreamSignBuilder.Size = New System.Drawing.Size(179, 22)
+    Me.mnuToolsDreamSignBuilder.Text = "&Dream Sign Builder"
+    '
+    'mnuToolsRecentDreamSigns
+    '
+    Me.mnuToolsRecentDreamSigns.Image = CType(resources.GetObject("mnuToolsRecentDreamSigns.Image"), System.Drawing.Image)
+    Me.mnuToolsRecentDreamSigns.Name = "mnuToolsRecentDreamSigns"
+    Me.mnuToolsRecentDreamSigns.Size = New System.Drawing.Size(179, 22)
+    Me.mnuToolsRecentDreamSigns.Text = "&Recent Dream Signs"
     '
     'mnuToolsCompareDreams
     '
     Me.mnuToolsCompareDreams.Image = Global.LightenedDream.My.Resources.Resources.Dream4
     Me.mnuToolsCompareDreams.Name = "mnuToolsCompareDreams"
-    Me.mnuToolsCompareDreams.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsCompareDreams.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsCompareDreams.Text = "&Compare Dreams"
     '
     'mnuToolsDreamTypeCount
     '
     Me.mnuToolsDreamTypeCount.Image = Global.LightenedDream.My.Resources.Resources.Dream4
     Me.mnuToolsDreamTypeCount.Name = "mnuToolsDreamTypeCount"
-    Me.mnuToolsDreamTypeCount.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsDreamTypeCount.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsDreamTypeCount.Text = "&Dream Type Count"
     '
     'mnuToolsFIELD
     '
     Me.mnuToolsFIELD.Image = Global.LightenedDream.My.Resources.Resources.Lucidity2
     Me.mnuToolsFIELD.Name = "mnuToolsFIELD"
-    Me.mnuToolsFIELD.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsFIELD.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsFIELD.Text = "FIELD Inducer"
     '
     'mnuToolsWILD
     '
     Me.mnuToolsWILD.Image = CType(resources.GetObject("mnuToolsWILD.Image"), System.Drawing.Image)
     Me.mnuToolsWILD.Name = "mnuToolsWILD"
-    Me.mnuToolsWILD.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsWILD.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsWILD.Text = "&WILD Inducer"
     '
     'mnuToolsWhyLD
     '
     Me.mnuToolsWhyLD.Image = CType(resources.GetObject("mnuToolsWhyLD.Image"), System.Drawing.Image)
     Me.mnuToolsWhyLD.Name = "mnuToolsWhyLD"
-    Me.mnuToolsWhyLD.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsWhyLD.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsWhyLD.Text = "Wh&y LD"
     '
     'ToolStripMenuItem5
     '
     Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-    Me.ToolStripMenuItem5.Size = New System.Drawing.Size(172, 6)
+    Me.ToolStripMenuItem5.Size = New System.Drawing.Size(176, 6)
     '
     'SpellingToolStripMenuItem
     '
     Me.SpellingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCheckSpelling, Me.mnuSpellingLanguage})
     Me.SpellingToolStripMenuItem.Image = CType(resources.GetObject("SpellingToolStripMenuItem.Image"), System.Drawing.Image)
     Me.SpellingToolStripMenuItem.Name = "SpellingToolStripMenuItem"
-    Me.SpellingToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+    Me.SpellingToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
     Me.SpellingToolStripMenuItem.Text = "&Spelling"
     '
     'mnuCheckSpelling
@@ -781,7 +789,7 @@ Partial Class MainForm
     '
     Me.mnuToolsDataDirectory.Image = CType(resources.GetObject("mnuToolsDataDirectory.Image"), System.Drawing.Image)
     Me.mnuToolsDataDirectory.Name = "mnuToolsDataDirectory"
-    Me.mnuToolsDataDirectory.Size = New System.Drawing.Size(175, 22)
+    Me.mnuToolsDataDirectory.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsDataDirectory.Text = "D&ata Directory"
     '
     'HelpToolStripMenuItem
@@ -1343,10 +1351,6 @@ Partial Class MainForm
     Me.pnlProcessing.TabIndex = 30
     Me.pnlProcessing.Visible = False
     '
-    'tmrSaving
-    '
-    Me.tmrSaving.Interval = 128
-    '
     'pnlSearching
     '
     Me.pnlSearching.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1436,6 +1440,10 @@ Partial Class MainForm
     Me.graph.Series.Add(Series2)
     Me.graph.Size = New System.Drawing.Size(978, 685)
     Me.graph.TabIndex = 283
+    '
+    'tmrSaving
+    '
+    Me.tmrSaving.Interval = 128
     '
     'MainForm
     '
@@ -1594,7 +1602,7 @@ Partial Class MainForm
   Friend WithEvents ToolStripMenuItem22 As System.Windows.Forms.ToolStripSeparator
   Friend WithEvents mnuToolsWILD As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripSeparator
-  Friend WithEvents mnuToolsDreamSigns As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuToolsDreamSignBuilder As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuHelpUpdate As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripMenuItem11 As System.Windows.Forms.ToolStripSeparator
   Friend WithEvents mnuQuickStart As System.Windows.Forms.ToolStripMenuItem
@@ -1609,5 +1617,6 @@ Partial Class MainForm
   Friend WithEvents mnuToolsDataDirectory As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolsDreamTypeCount As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolNewCategoryItem As System.Windows.Forms.ToolStripMenuItem
+  Friend WithEvents mnuToolsRecentDreamSigns As System.Windows.Forms.ToolStripMenuItem
 
 End Class
