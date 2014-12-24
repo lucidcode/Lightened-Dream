@@ -1145,11 +1145,11 @@ Public Class MainForm
     Return FindNode(FindNode(trvMain.Nodes(2).Nodes(5), Format(FolderDate, "yyyy")), Format(FolderDate, "MM"))
   End Function
 
-  Private Sub mnuToolNewCategoryFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuToolNewCharacter.Click, mnuToolNewTheme.Click, mnuToolNewObject.Click, mnuToolNewLocation.Click, mnuToolNewEmotion.Click, mnuToolNewAction.Click, CategoryToolStripMenuItem1.Click, mnuToolNewCategoryFolder.Click
+  Private Sub mnuToolNewCategoryFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CategoryToolStripMenuItem1.Click, mnuTreeNewCategoryFolder.Click
     CreateNewCategoryFolder()
   End Sub
 
-  Private Sub mnuToolNewCategoryItem_Click(sender As System.Object, e As System.EventArgs) Handles mnuToolNewCategoryItem.Click, mnuNewCategoryItem.Click
+  Private Sub mnuToolNewCategoryItem_Click(sender As System.Object, e As System.EventArgs) Handles mnuTreeNewCategoryItem.Click, mnuNewCategoryItem.Click, mnuToolNewCategoryItem.Click
     CreateNewCategoryItem()
   End Sub
 
@@ -1199,66 +1199,66 @@ Public Class MainForm
       strCategory = CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path + "\New Category Item.ld3"
     End If
 
-      Dim intPos As Integer = 2
-      Do
-        If (File.Exists(strCategory)) Then
-          If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
-            strCategory = CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path + "\New Category Item " + intPos.ToString + ".ld3"
-          End If
-          intPos += 1
-        Else
-          Exit Do
+    Dim intPos As Integer = 2
+    Do
+      If (File.Exists(strCategory)) Then
+        If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
+          strCategory = CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path + "\New Category Item " + intPos.ToString + ".ld3"
         End If
-      Loop
-
-      Dim strXml As String
-      strXml = "<Category>"
-      strXml += "<Name></Name>"
-      strXml += "<Description></Description>"
-      strXml += "<Names></Names>"
-      strXml += "<Dreams>"
-      strXml += "</Dreams>"
-      strXml += "</Category>"
-
-      Dim xmlDoc As New XmlDocument
-      xmlDoc.LoadXml(strXml)
-
-      xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = "New Category Item"
-      xmlDoc.Save(strCategory)
-
-      ' Update Tree   
-      Dim trvCategoryItem As New TreeNode(New FileInfo(strCategory).Name.Replace(".ld3", ""))
-      Dim objCategoryTag As New Categories.Tags.CategoryFile(strCategory, "")
-      trvCategoryItem.Tag = objCategoryTag
-      trvCategoryItem.ImageIndex = 16
-      trvCategoryItem.SelectedImageIndex = 16
-
-      ' Add Item
-      If FindNode(trvMain.Nodes(1), New FileInfo(CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path).Name) IsNot Nothing Then
-        FindNode(trvMain.Nodes(1), New FileInfo(CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path).Name).Nodes.Add(trvCategoryItem)
+        intPos += 1
       Else
-        trvMain.SelectedNode.Nodes.Add(trvCategoryItem)
+        Exit Do
       End If
+    Loop
 
-      ' Select Item
-      trvMain.SelectedNode = trvCategoryItem
+    Dim strXml As String
+    strXml = "<Category>"
+    strXml += "<Name></Name>"
+    strXml += "<Description></Description>"
+    strXml += "<Names></Names>"
+    strXml += "<Dreams>"
+    strXml += "</Dreams>"
+    strXml += "</Category>"
 
-      ' Load each dream
-      Dim xmlCategory As New Xml.XmlDocument
-      xmlCategory.Load(strCategory)
-      For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
-        Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
-        Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
-        trvDream.Tag = objDreamTag
-        trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
-        trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
-        trvCategoryItem.Nodes.Add(trvDream)
-        ' Add the loading node
-        Dim trvLoading As New TreeNode("Loading Categories...")
-        trvDream.Nodes.Add(trvLoading)
-      Next
+    Dim xmlDoc As New XmlDocument
+    xmlDoc.LoadXml(strXml)
 
-      m_objCategoryViewControl.Focus()
+    xmlDoc.DocumentElement.SelectSingleNode("Name").InnerText = "New Category Item"
+    xmlDoc.Save(strCategory)
+
+    ' Update Tree   
+    Dim trvCategoryItem As New TreeNode(New FileInfo(strCategory).Name.Replace(".ld3", ""))
+    Dim objCategoryTag As New Categories.Tags.CategoryFile(strCategory, "")
+    trvCategoryItem.Tag = objCategoryTag
+    trvCategoryItem.ImageIndex = 16
+    trvCategoryItem.SelectedImageIndex = 16
+
+    ' Add Item
+    If FindNode(trvMain.Nodes(1), New FileInfo(CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path).Name) IsNot Nothing Then
+      FindNode(trvMain.Nodes(1), New FileInfo(CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path).Name).Nodes.Add(trvCategoryItem)
+    Else
+      trvMain.SelectedNode.Nodes.Add(trvCategoryItem)
+    End If
+
+    ' Select Item
+    trvMain.SelectedNode = trvCategoryItem
+
+    ' Load each dream
+    Dim xmlCategory As New Xml.XmlDocument
+    xmlCategory.Load(strCategory)
+    For Each xmlDreamNode As XmlNode In xmlCategory.DocumentElement.SelectNodes("//Dream")
+      Dim trvDream As New TreeNode(xmlDreamNode.Attributes("Date").InnerText + " " + xmlDreamNode.Attributes("Title").InnerText)
+      Dim objDreamTag As New Dreams.Tags.DreamFile(m_strPath + "Dreams\" + xmlDreamNode.Attributes("Date").InnerText.Replace("-", "/") + " " + m_objDreamViewControl.SafeFilename(xmlDreamNode.Attributes("Title").InnerText) + ".ld3")
+      trvDream.Tag = objDreamTag
+      trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
+      trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Dream")
+      trvCategoryItem.Nodes.Add(trvDream)
+      ' Add the loading node
+      Dim trvLoading As New TreeNode("Loading Categories...")
+      trvDream.Nodes.Add(trvLoading)
+    Next
+
+    m_objCategoryViewControl.Focus()
 
   End Sub
 
@@ -2289,9 +2289,9 @@ Public Class MainForm
       mnuTrvExplorer.Enabled = True
     End If
 
-    mnuToolNewCategoryItem.Enabled = False
+    mnuTreeNewCategoryItem.Enabled = False
     If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
-      mnuToolNewCategoryItem.Enabled = True
+      mnuTreeNewCategoryItem.Enabled = True
     End If
   End Sub
 
@@ -2681,5 +2681,12 @@ Public Class MainForm
     m_objRecentDreamSignControl.Dock = DockStyle.Fill
     pnlContainer.Controls.Add(m_objRecentDreamSignControl)
     m_objRecentDreamSignControl.StartSearch()
+  End Sub
+
+  Private Sub toolNew_DropDownOpening(sender As System.Object, e As System.EventArgs) Handles toolNew.DropDownOpening
+    mnuToolNewCategoryItem.Enabled = False
+    If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
+      mnuToolNewCategoryItem.Enabled = True
+    End If
   End Sub
 End Class
