@@ -1165,7 +1165,8 @@ Public Class MainForm
     If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
       strCategory = CType(trvMain.SelectedNode.Tag, Categories.Tags.CategoryFolder).Path + "\New Category"
     Else
-      strCategory = m_strPath + "\Categories\" + "New Category"
+      CreateCustomCategory()
+      Return
     End If
 
     If Directory.Exists(strCategory) Then
@@ -2352,7 +2353,7 @@ Public Class MainForm
   End Sub
 
   Private Sub mnuNewCustomCatgeory_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuNewCustomCatgeory.Click
-    CreateCustomCategory()
+    CreateNewCategoryFolder()
   End Sub
 
   Public Sub New()

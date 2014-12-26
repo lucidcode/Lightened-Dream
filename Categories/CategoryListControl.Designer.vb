@@ -28,7 +28,14 @@ Partial Class CategoryListControl
     Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
     Dim DataPoint1 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(1.0R, 1.0R)
     Dim DataPoint2 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(2.0R, 2.0R)
+    Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+    Dim CustomLabel3 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+    Dim CustomLabel4 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+    Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+    Dim DataPoint3 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(1.0R, 1.0R)
+    Dim DataPoint4 As System.Windows.Forms.DataVisualization.Charting.DataPoint = New System.Windows.Forms.DataVisualization.Charting.DataPoint(2.0R, 2.0R)
     Me.Panel3D2 = New lucidcode.Controls.Panel3D()
+    Me.graphDozen = New System.Windows.Forms.DataVisualization.Charting.Chart()
     Me.txtName = New System.Windows.Forms.TextBox()
     Me.lblT = New System.Windows.Forms.Label()
     Me.lstCategories = New System.Windows.Forms.ListView()
@@ -38,12 +45,14 @@ Partial Class CategoryListControl
     Me.Panel3D4 = New lucidcode.Controls.Panel3D()
     Me.lblTitle = New System.Windows.Forms.Label()
     Me.Panel3D2.SuspendLayout()
+    CType(Me.graphDozen, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.graph, System.ComponentModel.ISupportInitialize).BeginInit()
     Me.Panel3D4.SuspendLayout()
     Me.SuspendLayout()
     '
     'Panel3D2
     '
+    Me.Panel3D2.Controls.Add(Me.graphDozen)
     Me.Panel3D2.Controls.Add(Me.txtName)
     Me.Panel3D2.Controls.Add(Me.lblT)
     Me.Panel3D2.Controls.Add(Me.lstCategories)
@@ -54,6 +63,54 @@ Partial Class CategoryListControl
     Me.Panel3D2.Name = "Panel3D2"
     Me.Panel3D2.Size = New System.Drawing.Size(640, 480)
     Me.Panel3D2.TabIndex = 7
+    '
+    'graphDozen
+    '
+    Me.graphDozen.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+    Me.graphDozen.BackColor = Global.lucidcode.LightenedDream.Categories.My.MySettings.Default.FormBackColor
+    ChartArea1.Area3DStyle.Enable3D = True
+    ChartArea1.Area3DStyle.Inclination = 10
+    ChartArea1.Area3DStyle.PointDepth = 50
+    ChartArea1.Area3DStyle.PointGapDepth = 50
+    ChartArea1.Area3DStyle.Rotation = 10
+    ChartArea1.Area3DStyle.WallWidth = 0
+    ChartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+    ChartArea1.AxisX.LabelStyle.Interval = 0.0R
+    ChartArea1.AxisX.MajorGrid.Enabled = False
+    ChartArea1.AxisX.MajorTickMark.Enabled = False
+    ChartArea1.AxisX2.CustomLabels.Add(CustomLabel1)
+    ChartArea1.AxisX2.CustomLabels.Add(CustomLabel2)
+    ChartArea1.AxisX2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+    ChartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+    ChartArea1.BackColor = System.Drawing.Color.LightSteelBlue
+    ChartArea1.Name = "ChartArea1"
+    Me.graphDozen.ChartAreas.Add(ChartArea1)
+    Me.graphDozen.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.lucidcode.LightenedDream.Categories.My.MySettings.Default, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+    Me.graphDozen.Location = New System.Drawing.Point(3, 51)
+    Me.graphDozen.Name = "graphDozen"
+    Me.graphDozen.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
+    Series1.ChartArea = "ChartArea1"
+    Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar
+    Series1.CustomProperties = "BarLabelStyle=Outside"
+    Series1.Font = New System.Drawing.Font("Verdana", 8.25!)
+    Series1.LabelForeColor = System.Drawing.Color.MidnightBlue
+    Series1.Name = "DreamSeries"
+    DataPoint1.AxisLabel = "yyy"
+    DataPoint2.AxisLabel = "xxx"
+    DataPoint2.Label = "x"
+    DataPoint2.LegendText = "xx"
+    DataPoint2.ToolTip = "xx"
+    Series1.Points.Add(DataPoint1)
+    Series1.Points.Add(DataPoint2)
+    Series1.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes
+    Series1.SmartLabelStyle.MaxMovingDistance = 50.0R
+    Series1.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+    Me.graphDozen.Series.Add(Series1)
+    Me.graphDozen.Size = New System.Drawing.Size(634, 426)
+    Me.graphDozen.TabIndex = 34
+    Me.graphDozen.Visible = False
     '
     'txtName
     '
@@ -106,32 +163,32 @@ Partial Class CategoryListControl
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.graph.BackColor = Global.lucidcode.LightenedDream.Categories.My.MySettings.Default.FormBackColor
-    ChartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
-    ChartArea1.AxisX.LabelStyle.Interval = 0.0R
-    CustomLabel1.Text = "x"
-    CustomLabel2.Text = "x"
-    ChartArea1.AxisX2.CustomLabels.Add(CustomLabel1)
-    ChartArea1.AxisX2.CustomLabels.Add(CustomLabel2)
-    ChartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
-    ChartArea1.Name = "ChartArea1"
-    Me.graph.ChartAreas.Add(ChartArea1)
+    ChartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+    ChartArea2.AxisX.LabelStyle.Interval = 0.0R
+    CustomLabel3.Text = "x"
+    CustomLabel4.Text = "x"
+    ChartArea2.AxisX2.CustomLabels.Add(CustomLabel3)
+    ChartArea2.AxisX2.CustomLabels.Add(CustomLabel4)
+    ChartArea2.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+    ChartArea2.Name = "ChartArea1"
+    Me.graph.ChartAreas.Add(ChartArea2)
     Me.graph.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.lucidcode.LightenedDream.Categories.My.MySettings.Default, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.graph.Location = New System.Drawing.Point(3, 30)
     Me.graph.Name = "graph"
     Me.graph.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen
-    Series1.ChartArea = "ChartArea1"
-    Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-    Series1.Font = New System.Drawing.Font("Verdana", 8.25!)
-    Series1.Name = "DreamSeries"
-    DataPoint1.AxisLabel = "yyy"
-    DataPoint2.AxisLabel = "xxx"
-    DataPoint2.Label = "x"
-    DataPoint2.LegendText = "xx"
-    DataPoint2.ToolTip = "xx"
-    Series1.Points.Add(DataPoint1)
-    Series1.Points.Add(DataPoint2)
-    Series1.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
-    Me.graph.Series.Add(Series1)
+    Series2.ChartArea = "ChartArea1"
+    Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+    Series2.Font = New System.Drawing.Font("Verdana", 8.25!)
+    Series2.Name = "DreamSeries"
+    DataPoint3.AxisLabel = "yyy"
+    DataPoint4.AxisLabel = "xxx"
+    DataPoint4.Label = "x"
+    DataPoint4.LegendText = "xx"
+    DataPoint4.ToolTip = "xx"
+    Series2.Points.Add(DataPoint3)
+    Series2.Points.Add(DataPoint4)
+    Series2.XAxisType = System.Windows.Forms.DataVisualization.Charting.AxisType.Secondary
+    Me.graph.Series.Add(Series2)
     Me.graph.Size = New System.Drawing.Size(634, 447)
     Me.graph.TabIndex = 1
     '
@@ -176,6 +233,7 @@ Partial Class CategoryListControl
     Me.Size = New System.Drawing.Size(640, 480)
     Me.Panel3D2.ResumeLayout(False)
     Me.Panel3D2.PerformLayout()
+    CType(Me.graphDozen, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.graph, System.ComponentModel.ISupportInitialize).EndInit()
     Me.Panel3D4.ResumeLayout(False)
     Me.ResumeLayout(False)
@@ -190,5 +248,6 @@ Partial Class CategoryListControl
   Friend WithEvents graph As System.Windows.Forms.DataVisualization.Charting.Chart
   Friend WithEvents lblT As System.Windows.Forms.Label
   Public WithEvents txtName As System.Windows.Forms.TextBox
+  Friend WithEvents graphDozen As System.Windows.Forms.DataVisualization.Charting.Chart
 
 End Class
