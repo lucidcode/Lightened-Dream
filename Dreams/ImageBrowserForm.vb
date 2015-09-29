@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms.DataVisualization.Charting
 Imports System.Windows.Forms.DataVisualization
 Imports System.Threading
+Imports Newtonsoft.Json
 
 Public Class ImageBrowserForm
 
@@ -10,7 +11,7 @@ Public Class ImageBrowserForm
 
   Private Images As New List(Of Image)
   Private objSearchClass As New SearchClass()
-  Private strLastSearch As String = "http://refer.istockphoto.com/ta.php?lc=062184042431004651&atid=128087%7CBannerID%3D128087%7CReferralMethod%3DLink&url=http%3A%2F%2Fwww.istockphoto.com"
+  Private strLastSearch As String = "https://api.gettyimages.com/v3/search/images/creative?phrase=light"
 
   Private Sub ImageBrowserForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
     DoubleBuffered = True
@@ -60,7 +61,7 @@ Public Class ImageBrowserForm
     Try
 
     Catch ex As Exception
-            MessageBox.Show(ex.Message, "LightenedDream.Dreams.SelectImage()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+      MessageBox.Show(ex.Message, "LightenedDream.Dreams.SelectImage()", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Try
   End Sub
 
@@ -90,7 +91,7 @@ Public Class ImageBrowserForm
     pnlSearching.Visible = True
 
     objSearchClass = New SearchClass
-    strLastSearch = "http://refer.istockphoto.com/ta.php?lc=062184042431004651&atid=128087%7CBannerID%3D128087%7CReferralMethod%3DLink&url=http://www.istockphoto.com/search/text/" + txtKeywords.Text.Replace(" ", "_").Replace(vbNewLine, "_") + ""
+    strLastSearch = "https://api.gettyimages.com/v3/search/images/creative?phrase=" + txtKeywords.Text.Replace(" ", "_").Replace(vbNewLine, "_") + ""
     objSearchClass.Keywords = strLastSearch
     objSearchClass.Completed = False
     'AddHandler objSearchClass.ThumbnailAdded, AddressOf ThumbnailAdded
@@ -147,59 +148,30 @@ Public Class ImageBrowserForm
       Try
 
         Dim objWebClient As New System.Net.WebClient
+        objWebClient.Headers.Add("Api-Key", "5z67acwgvytgqsnw9ae4vwwg")
         strSource = objWebClient.DownloadString(Keywords)
-        intStart = strSource.IndexOf("istock.search.event.fire", intStart)
 
-        Do
-          Dim intLastIndex = intStart
-          intStart = strSource.IndexOf("title", intStart) + 8
+        Dim objImages = JsonConvert.DeserializeObject(strSource)
 
-          If intStart <= intLastIndex Then Exit Do
+        For Each objImage As Object In objImages("images")
 
-          intEnd = strSource.IndexOf(""",""", intStart)
-          Dim strTitle As String = strSource.Substring(intStart, intEnd - intStart)
+          Dim objDownloadClass As New DownloadClass
+          objDownloadClass.Title = objImage("title")
+          objDownloadClass.FileID = objImage("display_sizes")(0)("uri")
+          objDownloadClass.ImageIndex = intImageIndex
+          objDownloadClass.Completed = False
+          AddHandler objDownloadClass.ListItemAdded, AddressOf ListItemAddedX
 
-          If strTitle.Contains("Ghost-like") Then
-            strTitle = strTitle
-          End If
+          Dim objThread As New Thread(AddressOf objDownloadClass.DoDownloadWork)
+          objThread.Start()
 
-          intStart = strSource.IndexOf("file_thumbview_approve", intStart)
+          Thread.Sleep(2)
+          Application.DoEvents()
 
-          If intStart = -1 Then
-            Exit Do
-          End If
-
-          intStart = strSource.IndexOf("\/", intStart) + 2
-
-          If intStart = -1 Then
-            Exit Do
-          End If
-
-          intEnd = strSource.IndexOf("\/", intStart)
-
-          Dim strFileID As String = strSource.Substring(intStart, intEnd - intStart)
-
-          If Not strFileID = "search" Then
-
-            Dim objDownloadClass As New DownloadClass
-            objDownloadClass.Title = strTitle
-            objDownloadClass.FileID = strFileID
-            objDownloadClass.ImageIndex = intImageIndex
-            objDownloadClass.Completed = False
-            AddHandler objDownloadClass.ListItemAdded, AddressOf ListItemAddedX
-
-            Dim objThread As New Thread(AddressOf objDownloadClass.DoDownloadWork)
-            objThread.Start()
-
-            Thread.Sleep(2)
-            Application.DoEvents()
-
-          End If
-
-          If Completed Then Exit Do
+          If Completed Then Exit For
           intImageIndex += 1
 
-        Loop
+        Next
 
         ' Wait for all the threads to complete
         Dim intCompleted As Integer = intImageIndex * -1
@@ -213,7 +185,6 @@ Public Class ImageBrowserForm
           End If
 
         Loop
-
 
       Catch ex As Exception
 
@@ -242,7 +213,7 @@ Public Class ImageBrowserForm
     Public Sub DoDownloadWork()
       Try
         Dim objWebClient As New System.Net.WebClient
-        Dim arrImage As Byte() = objWebClient.DownloadData("http://www.istockphoto.com/file_thumbview_approve/" & FileID & "/1")
+        Dim arrImage As Byte() = objWebClient.DownloadData(FileID)
 
         Thread.Sleep(2)
         Application.DoEvents()
@@ -265,7 +236,7 @@ Public Class ImageBrowserForm
       Catch ex As Exception
 
       End Try
-     
+
     End Sub
   End Class
 
@@ -299,7 +270,7 @@ Public Class ImageBrowserForm
   End Sub
 
   Private Sub lblRAC_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lblRAC.LinkClicked
-    System.Diagnostics.Process.Start(strLastSearch)
+    System.Diagnostics.Process.Start("http://www.gettyimages.com")
   End Sub
 
   Private Sub ImageBrowserForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
