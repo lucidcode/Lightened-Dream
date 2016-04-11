@@ -46,7 +46,6 @@ Public Class MainForm
   Private m_formAbout As AboutForm
   Private m_objUpdateControl As New UpdateControl
 
-  Friend objMerlin As New AxAgentObjects.AxAgent
   Private resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
   Private m_objDreams As Series
 
@@ -84,8 +83,6 @@ Public Class MainForm
 
           If strImportType = "REM" Then
             strNewPath = m_strPath & "Lucidity\REM Cycles\" & strImportFileName
-          ElseIf strImportType = "Check" Then
-            strNewPath = m_strPath & "Lucidity\Checks\" & strImportFileName
           ElseIf strImportType = "Subliminal" Then
             strNewPath = m_strPath & "Lucidity\Subliminals\" & strImportFileName
           ElseIf strImportType = "Exercises" Then
@@ -181,29 +178,6 @@ Public Class MainForm
     End Try
     m_objDreamViewControl.Focus()
     m_objDreamViewControl.txtDream.Focus()
-  End Sub
-
-  Public Sub LoadMerlin()
-    Try
-      Me.Controls.Add(objMerlin)
-      objMerlin.Enabled = True
-      objMerlin.Location = New System.Drawing.Point(0, 0)
-      objMerlin.Name = "objMerlin"
-      objMerlin.Size = New System.Drawing.Size(0, 0)
-      objMerlin.TabIndex = 29
-      objMerlin.Characters.Load("Merlin", "C:\Windows\msagent\chars\merlin.acs")
-      objMerlin.Characters("Merlin").Activate()
-      objMerlin.Characters("Merlin").MoveTo(trvMain.Width + trvMain.Left - objMerlin.Characters("Merlin").Width, trvMain.Height + trvMain.Top)
-
-      If (My.MySettings.Default("ShowMerlin") = True) Then
-        objMerlin.Characters("Merlin").Show()
-      End If
-
-      m_objLucidItemControl.SetMerlin(objMerlin)
-      m_boolAgentWorks = True
-    Catch ex As Exception
-      'MessageBox.Show(ex.Message, "LightenedDream.LoadMerlin()", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    End Try
   End Sub
 
   Public Sub LoadImport()
@@ -505,7 +479,7 @@ Public Class MainForm
       Dim objLucidityFolderTag As New Lucidity.Tags.LucidityFolder(m_strPath + "Lucidity")
       trvLucidity.Tag = objLucidityFolderTag
 
-      Dim strLucidity As String = "REM Cycles,Checks,Subliminals,Recordings,Readings"
+      Dim strLucidity As String = "REM Cycles,Subliminals,Recordings,Readings"
 
       ' Load each Category
       For Each strCategory As String In strLucidity.Split(",")
@@ -896,17 +870,6 @@ Public Class MainForm
         m_objLucidFolderViewControl.Dock = DockStyle.Fill
         m_objLucidFolderViewControl.LoadFolder(CType(trvMain.SelectedNode.Tag, Lucidity.Tags.LucidItemFolder).Type)
         pnlContainer.Controls.Add(m_objLucidFolderViewControl)
-
-        If trvMain.SelectedNode.Text = "Checks" Then
-          toolPlay.Enabled = True
-          If m_objLucidFolderViewControl.Playing Then
-            toolPlay.Image = My.Resources.Function_Stop
-            toolPlay.Text = "&Stop"
-          Else
-            toolPlay.Image = My.Resources.Function_Play
-            toolPlay.Text = "&Play"
-          End If
-        End If
       ElseIf TypeOf (trvMain.SelectedNode.Tag) Is Lucidity.Tags.REMCycleFile Then
         pnlContainer.Controls.Clear()
         m_objREMCyclesControl.Dock = DockStyle.Fill
@@ -1893,11 +1856,9 @@ Public Class MainForm
     ElseIf TypeOf (trvMain.SelectedNode.Tag) Is Lucidity.Tags.LucidItemFolder Then
 
       If m_objLucidFolderViewControl.Playing Then
-        m_objLucidFolderViewControl.StopRunning()
         toolPlay.Image = My.Resources.Function_Play
         toolPlay.Text = "&Play"
       Else
-        m_objLucidFolderViewControl.Play(objMerlin)
         toolPlay.Image = My.Resources.Function_Stop
         toolPlay.Text = "&Stop"
       End If
@@ -1999,7 +1960,7 @@ Public Class MainForm
     Application.Exit()
   End Sub
 
-  Private Sub toolLucidity_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles toolREMCycles.Click, toolReadings.Click, toolSubliminals.Click, toolChecks.Click, toolRecordings.Click, toolLucidityExercises.Click
+  Private Sub toolLucidity_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles toolREMCycles.Click, toolReadings.Click, toolSubliminals.Click, toolRecordings.Click, toolLucidityExercises.Click
     SelectLucidItem(CType(sender, ToolStripButton).Tag)
   End Sub
 
@@ -2069,7 +2030,7 @@ Public Class MainForm
         If UpdateAvailable(Version) Then
           If MessageBox.Show("A new version (" & Version & ") is available. Would you like to download it now?", "Lightened Dream", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
             Try
-              System.Diagnostics.Process.Start(URL)
+              System.Diagnostics.Process.Start("explorer.exe", URL)
             Catch ex As Exception
               MessageBox.Show(ex.Message, "LightenedDream.Update.Launch()", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -2244,7 +2205,7 @@ Public Class MainForm
     CreateNewREMCycle()
   End Sub
 
-  Private Sub CheckToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CheckToolStripMenuItem.Click, SubliminalToolStripMenuItem.Click, RecordingToolStripMenuItem1.Click, ReadingToolStripMenuItem.Click, ToolStripMenuItem19.Click, ToolStripMenuItem18.Click, ToolStripMenuItem17.Click, ToolStripMenuItem16.Click
+  Private Sub CheckToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubliminalToolStripMenuItem.Click, RecordingToolStripMenuItem1.Click, ReadingToolStripMenuItem.Click, ToolStripMenuItem19.Click, ToolStripMenuItem18.Click, ToolStripMenuItem17.Click
     CreateNewLucidityItem(CType(sender, ToolStripMenuItem).Tag)
   End Sub
 
@@ -2256,7 +2217,7 @@ Public Class MainForm
     MessageBox.Show("This feature is still dreaming itself into existence.", "Lightened Dream", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
   End Sub
 
-  Private Sub mnuLucidity_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuLucidityREMCycles.Click, mnuLuciditySubliminals.Click, mnuLucidityRecordings.Click, mnuLucidityReadings.Click, mnuLucidityChecks.Click
+  Private Sub mnuLucidity_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuLucidityREMCycles.Click, mnuLuciditySubliminals.Click, mnuLucidityRecordings.Click, mnuLucidityReadings.Click
     If FindNode(trvMain.Nodes(2), CType(sender, ToolStripMenuItem).Tag) IsNot Nothing Then
       trvMain.SelectedNode = FindNode(trvMain.Nodes(2), CType(sender, ToolStripMenuItem).Tag)
     End If

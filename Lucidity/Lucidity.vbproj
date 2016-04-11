@@ -83,19 +83,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.AgentObjects, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\AxInterop.AgentObjects.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="AxInterop.WMPLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\AxInterop.WMPLib.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Interop.AgentObjects, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Interop.AgentObjects.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="lucidcode.Controls, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
@@ -195,22 +185,10 @@
     <Compile Include="SpeedReadingViewControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MerlinItemControl.Designer.vb">
-      <DependentUpon>MerlinItemControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="MerlinItemControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="SubliminalViewControl.Designer.vb">
       <DependentUpon>SubliminalViewControl.vb</DependentUpon>
     </Compile>
     <Compile Include="SubliminalViewControl.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MerlinViewControl.Designer.vb">
-      <DependentUpon>MerlinViewControl.vb</DependentUpon>
-    </Compile>
-    <Compile Include="MerlinViewControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ItemViewControl.Designer.vb">
@@ -315,14 +293,8 @@
     <EmbeddedResource Include="SpeedReadingViewControl.resx">
       <DependentUpon>SpeedReadingViewControl.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MerlinItemControl.resx">
-      <DependentUpon>MerlinItemControl.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SubliminalViewControl.resx">
       <DependentUpon>SubliminalViewControl.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MerlinViewControl.resx">
-      <DependentUpon>MerlinViewControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItemViewControl.resx">
       <DependentUpon>ItemViewControl.vb</DependentUpon>

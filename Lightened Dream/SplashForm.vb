@@ -48,8 +48,6 @@ Public Class SplashForm
 
             strDirectory = m_strPath & "Lucidity"
             If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
-            strDirectory = m_strPath & "Lucidity\Checks"
-            If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
             strDirectory = m_strPath & "Lucidity\Readings"
             If Not Directory.Exists(strDirectory) Then Directory.CreateDirectory(strDirectory)
             strDirectory = m_strPath & "Lucidity\Recordings"
@@ -196,64 +194,63 @@ Public Class SplashForm
         System.Threading.Thread.Sleep(128)
       Next
 
-            ' Lucidity
-            For Each strCategory As String In "REM Cycles,Checks,Subliminals,Recordings,Readings".Split(",")
-                intPos = objDreams.Points.AddY(Directory.GetFiles(m_strPath & "Lucidity\" & strCategory, "*.ld3").Length)
+      ' Lucidity
+      For Each strCategory As String In "REM Cycles,Subliminals,Recordings,Readings".Split(",")
+        intPos = objDreams.Points.AddY(Directory.GetFiles(m_strPath & "Lucidity\" & strCategory, "*.ld3").Length)
 
-                Dim objCategoryAnnotation As New Charting.CalloutAnnotation
-                objCategoryAnnotation.AllowMoving = True
-                objCategoryAnnotation.AllowResizing = True
-                objCategoryAnnotation.AllowSelecting = True
-                objCategoryAnnotation.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
-                objCategoryAnnotation.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                objCategoryAnnotation.ForeColor = System.Drawing.Color.SteelBlue
-                objCategoryAnnotation.LineColor = System.Drawing.Color.LightSteelBlue
-                objCategoryAnnotation.Name = Guid.NewGuid.ToString
-                objCategoryAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
-                objCategoryAnnotation.ShadowOffset = 1
-                objCategoryAnnotation.Text = strCategory & " (" & objDreams.Points(intPos).YValues(0) & ")"
-                objCategoryAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
-                objCategoryAnnotation.AnchorDataPoint = objDreams.Points(intPos)
-                Me.graph.Annotations.Add(objCategoryAnnotation)
+        Dim objCategoryAnnotation As New Charting.CalloutAnnotation
+        objCategoryAnnotation.AllowMoving = True
+        objCategoryAnnotation.AllowResizing = True
+        objCategoryAnnotation.AllowSelecting = True
+        objCategoryAnnotation.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.CalloutStyle.Cloud
+        objCategoryAnnotation.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        objCategoryAnnotation.ForeColor = System.Drawing.Color.SteelBlue
+        objCategoryAnnotation.LineColor = System.Drawing.Color.LightSteelBlue
+        objCategoryAnnotation.Name = Guid.NewGuid.ToString
+        objCategoryAnnotation.ShadowColor = System.Drawing.Color.SteelBlue
+        objCategoryAnnotation.ShadowOffset = 1
+        objCategoryAnnotation.Text = strCategory & " (" & objDreams.Points(intPos).YValues(0) & ")"
+        objCategoryAnnotation.AnchorAlignment = ContentAlignment.BottomCenter
+        objCategoryAnnotation.AnchorDataPoint = objDreams.Points(intPos)
+        Me.graph.Annotations.Add(objCategoryAnnotation)
 
-                Application.DoEvents()
-                System.Threading.Thread.Sleep(128)
-            Next
+        Application.DoEvents()
+        System.Threading.Thread.Sleep(128)
+      Next
 
-            Application.DoEvents()
-            m_formMain = New MainForm
+      Application.DoEvents()
+      m_formMain = New MainForm
 
-            Do While Not m_formMain.Loaded
-                Application.DoEvents()
-                System.Threading.Thread.Sleep(10)
-            Loop
+      Do While Not m_formMain.Loaded
+        Application.DoEvents()
+        System.Threading.Thread.Sleep(10)
+      Loop
 
-            Me.Opacity = 0.6
-            Application.DoEvents()
-            m_formMain.Show()
-            Application.DoEvents()
-            m_formMain.LoadMerlin()
+      Me.Opacity = 0.6
+      Application.DoEvents()
+      m_formMain.Show()
+      Application.DoEvents()
 
-            Application.DoEvents()
-            System.Threading.Thread.Sleep(128)
-            Application.DoEvents()
-            Hide()
+      Application.DoEvents()
+      System.Threading.Thread.Sleep(128)
+      Application.DoEvents()
+      Hide()
 
-            m_formMain.LoadImport()
+      m_formMain.LoadImport()
 
-        Catch ex As Exception
-            If ex.Message.Contains("80040154") Then
-                If MessageBox.Show("Lightened Dream requires Windows Media Player, which can be downloaded for free from Microsoft. Would you like to download it now?", "Lightened Dream", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
-                    Try
-                        System.Diagnostics.Process.Start("http://windows.microsoft.com/en-us/windows/download-windows-media-player")
-                    Catch mediaException As Exception
-                        MessageBox.Show(mediaException.Message, "LightenedDream.MediaPlayer.Download()", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End Try
-                End If
-            Else
-                MessageBox.Show(ex.Message, "LightenedDream.Splash.LoadGraph()", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
-            Application.Exit()
-        End Try
-    End Sub
+    Catch ex As Exception
+      If ex.Message.Contains("80040154") Then
+        If MessageBox.Show("Lightened Dream requires Windows Media Player, which can be downloaded for free from Microsoft. Would you like to download it now?", "Lightened Dream", MessageBoxButtons.YesNo, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1) = Windows.Forms.DialogResult.Yes Then
+          Try
+            System.Diagnostics.Process.Start("http://windows.microsoft.com/en-us/windows/download-windows-media-player")
+          Catch mediaException As Exception
+            MessageBox.Show(mediaException.Message, "LightenedDream.MediaPlayer.Download()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+          End Try
+        End If
+      Else
+        MessageBox.Show(ex.Message, "LightenedDream.Splash.LoadGraph()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+      End If
+      Application.Exit()
+    End Try
+  End Sub
 End Class

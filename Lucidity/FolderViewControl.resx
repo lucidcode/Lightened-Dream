@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <metadata name="lstImg.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+    <value>141, 17</value>
   </metadata>
   <data name="lstImg.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj0yLjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAAC
-        QgAAAk1TRnQBSQFMAgEBBQEAASgBAAEoAQABHwEAARwBAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAF8
+        QgAAAk1TRnQBSQFMAgEBBQEAATgBAAE4AQABHwEAARwBAAT/ARkBAAj/AUIBTQE2BwABNgMAASgDAAF8
         AwABOAMAAQEBAAEYBQABYAFREgBd//8AGAAG/wHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHp
         AdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHp
         AdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHpAdYBxwHo
@@ -409,7 +409,4 @@
         BwABPgMAASgDAAF8AwABOAMAAQEBAAEBBQABgAEDFgAD//8A/wD/AIQACw==
 </value>
   </data>
-  <metadata name="tmrChecks.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>102, 17</value>
-  </metadata>
 </root>

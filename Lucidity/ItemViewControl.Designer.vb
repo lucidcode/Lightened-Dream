@@ -34,7 +34,6 @@ Partial Class ItemViewControl
         Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender
         Me.objRecordingViewControl = New lucidcode.LightenedDream.Lucidity.RecordingViewControl
         Me.objSpeedReadingControl = New lucidcode.LightenedDream.Lucidity.SpeedReadingViewControl
-        Me.objMerlinViewControl = New lucidcode.LightenedDream.Lucidity.MerlinViewControl
         Me.objSublinalControl = New lucidcode.LightenedDream.Lucidity.SubliminalViewControl
         Me.pnlContainer.SuspendLayout()
         Me.Panel3D2.SuspendLayout()
@@ -49,7 +48,6 @@ Partial Class ItemViewControl
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlContainer.Controls.Add(Me.objRecordingViewControl)
         Me.pnlContainer.Controls.Add(Me.objSpeedReadingControl)
-        Me.pnlContainer.Controls.Add(Me.objMerlinViewControl)
         Me.pnlContainer.Controls.Add(Me.objSublinalControl)
         Me.pnlContainer.Location = New System.Drawing.Point(0, 98)
         Me.pnlContainer.Name = "pnlContainer"
@@ -162,26 +160,6 @@ Partial Class ItemViewControl
         Me.objSpeedReadingControl.Size = New System.Drawing.Size(166, 116)
         Me.objSpeedReadingControl.TabIndex = 2
         '
-        'objMerlinViewControl
-        '
-        Me.objMerlinViewControl.BackColor = System.Drawing.Color.LightSteelBlue
-        MySettings1.Font = New System.Drawing.Font("Verdana", 8.25!)
-        MySettings1.FormBackColor = System.Drawing.Color.LightSteelBlue
-        MySettings1.FormForeColor = System.Drawing.Color.MidnightBlue
-        MySettings1.SettingsKey = ""
-        MySettings1.TextBackColor = System.Drawing.Color.White
-        MySettings1.TitleBackColor = System.Drawing.Color.SteelBlue
-        MySettings1.TitleForeColor = System.Drawing.Color.White
-        Me.objMerlinViewControl.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings1, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.objMerlinViewControl.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", MySettings1, "FormForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.objMerlinViewControl.DataBindings.Add(New System.Windows.Forms.Binding("Font", MySettings1, "Font", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.objMerlinViewControl.Font = New System.Drawing.Font("Verdana", 8.25!)
-        Me.objMerlinViewControl.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.objMerlinViewControl.Location = New System.Drawing.Point(289, 245)
-        Me.objMerlinViewControl.Name = "objMerlinViewControl"
-        Me.objMerlinViewControl.Size = New System.Drawing.Size(485, 191)
-        Me.objMerlinViewControl.TabIndex = 1
-        '
         'objSublinalControl
         '
         Me.objSublinalControl.BackColor = System.Drawing.Color.LightSteelBlue
@@ -223,7 +201,6 @@ Partial Class ItemViewControl
     Friend WithEvents txtDescription As System.Windows.Forms.TextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents objSublinalControl As lucidcode.LightenedDream.Lucidity.SubliminalViewControl
-    Friend WithEvents objMerlinViewControl As lucidcode.LightenedDream.Lucidity.MerlinViewControl
     Friend WithEvents objSpeedReadingControl As lucidcode.LightenedDream.Lucidity.SpeedReadingViewControl
     Friend WithEvents objRecordingViewControl As lucidcode.LightenedDream.Lucidity.RecordingViewControl
     Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender

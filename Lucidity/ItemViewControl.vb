@@ -8,13 +8,9 @@ Public Class ItemViewControl
     Private m_strType As String
     Private m_boolSpelling As Boolean = False
 
-    Public Sub SetMerlin(ByVal Merlin As AxAgentObjects.AxAgent)
-        objMerlinViewControl.objMerlin = Merlin
-    End Sub
-
-    Public Sub EnableSpellCheck()
-        m_boolSpelling = True
-    End Sub
+  Public Sub EnableSpellCheck()
+    m_boolSpelling = True
+  End Sub
 
     Public Sub DisableSpellCheck()
         m_boolSpelling = False
@@ -24,8 +20,6 @@ Public Class ItemViewControl
 
         If m_strType = "Subliminal" Then
             Return objSublinalControl.Changed
-        ElseIf m_strType = "Check" Then
-            Return objMerlinViewControl.Changed
         ElseIf m_strType = "Reading" Then
             Return objSpeedReadingControl.Changed
         ElseIf m_strType = "Recording" Then
@@ -54,12 +48,6 @@ Public Class ItemViewControl
                 lblTitle.Text = "Lucidity - Subliminals - " + txtTitle.Text
                 objSublinalControl.LoadFile(strFileName)
                 NHunspellTextBoxExtender1.SetSpellCheckEnabled(objSublinalControl.txtMessages, True)
-            ElseIf m_strType = "Check" Then
-                pnlContainer.Controls.Add(objMerlinViewControl)
-                objMerlinViewControl.Location = New Point(0, 0)
-                objMerlinViewControl.Dock = DockStyle.Fill
-                lblTitle.Text = "Lucidity - Checks - " + txtTitle.Text
-                objMerlinViewControl.LoadFile(strFileName)
             ElseIf m_strType = "Reading" Then
                 pnlContainer.Controls.Add(objSpeedReadingControl)
                 objSpeedReadingControl.Location = New Point(0, 0)
@@ -102,8 +90,6 @@ Public Class ItemViewControl
 
             If m_strType = "Subliminal" Then
                 objSublinalControl.Save(txtTitle.Text, txtDescription.Text, strFileName)
-            ElseIf m_strType = "Check" Then
-                objMerlinViewControl.Save(txtTitle.Text, txtDescription.Text, strFileName)
             ElseIf m_strType = "Reading" Then
                 objSpeedReadingControl.Save(txtTitle.Text, txtDescription.Text, strFileName)
             ElseIf m_strType = "Recording" Then
@@ -155,8 +141,6 @@ Public Class ItemViewControl
     If m_strType = "Subliminal" Then
       objSublinalControl.Play()
       Return True
-    ElseIf m_strType = "Check" Then
-      objMerlinViewControl.Play()
     ElseIf m_strType = "Reading" Then
       objSpeedReadingControl.Play()
     ElseIf m_strType = "Recording" Then
@@ -175,8 +159,6 @@ Public Class ItemViewControl
   Public Sub StopRunning()
     If m_strType = "Subliminal" Then
       objSublinalControl.StopRunning()
-    ElseIf m_strType = "Check" Then
-      objMerlinViewControl.StopRunning()
     ElseIf m_strType = "Reading" Then
       objSpeedReadingControl.StopRunning()
     ElseIf m_strType = "Recording" Then

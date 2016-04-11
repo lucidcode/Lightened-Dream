@@ -81,14 +81,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AxInterop.AgentObjects, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\AxInterop.AgentObjects.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.AgentObjects, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Interop.AgentObjects.dll</HintPath>
-    </Reference>
     <Reference Include="lucidcode.Controls, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\lucidcode.Controls.dll</HintPath>
