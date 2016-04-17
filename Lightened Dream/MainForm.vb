@@ -1093,19 +1093,19 @@ Public Class MainForm
   End Function
 
   Private Function GetExerciseFolder(ByVal FolderDate As DateTime) As TreeNode
-    If FindNode(trvMain.Nodes(2).Nodes(5), (Format(FolderDate, "yyyy"))) Is Nothing Then
+    If FindNode(trvMain.Nodes(2).Nodes(4), (Format(FolderDate, "yyyy"))) Is Nothing Then
       ' Create a new year node
-      Dim trvYearNode As TreeNode = trvMain.Nodes(2).Nodes(5).Nodes.Add(Format(FolderDate, "yyyy"))
+      Dim trvYearNode As TreeNode = trvMain.Nodes(2).Nodes(4).Nodes.Add(Format(FolderDate, "yyyy"))
       Dim objYearTag As New Lucidity.Tags.YearFolder(m_strPath & "Lucidity\Exercises\" & Format(FolderDate, "yyyy"), Format(FolderDate, "yyyy"))
       trvYearNode.Tag = objYearTag
     End If
-    If FindNode(FindNode(trvMain.Nodes(2).Nodes(5), Format(FolderDate, "yyyy")), Format(FolderDate, "MM")) Is Nothing Then
+    If FindNode(FindNode(trvMain.Nodes(2).Nodes(4), Format(FolderDate, "yyyy")), Format(FolderDate, "MM")) Is Nothing Then
       ' Create a new month node
-      Dim trvMonthNode As TreeNode = FindNode(trvMain.Nodes(2).Nodes(5), (Format(FolderDate, "yyyy"))).Nodes.Add(Format(FolderDate, "MM"))
+      Dim trvMonthNode As TreeNode = FindNode(trvMain.Nodes(2).Nodes(4), (Format(FolderDate, "yyyy"))).Nodes.Add(Format(FolderDate, "MM"))
       Dim objMonthTag As New Lucidity.Tags.MonthFolder(m_strPath & "Lucidity\Exercises\" & Format(FolderDate, "yyyy") & "\" & Format(FolderDate, "MM"), Format(FolderDate, "yyyy"), Format(FolderDate, "MM"))
       trvMonthNode.Tag = objMonthTag
     End If
-    Return FindNode(FindNode(trvMain.Nodes(2).Nodes(5), Format(FolderDate, "yyyy")), Format(FolderDate, "MM"))
+    Return FindNode(FindNode(trvMain.Nodes(2).Nodes(4), Format(FolderDate, "yyyy")), Format(FolderDate, "MM"))
   End Function
 
   Private Sub mnuToolNewCategoryFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CategoryToolStripMenuItem1.Click, mnuTreeNewCategoryFolder.Click
@@ -1717,9 +1717,9 @@ Public Class MainForm
 
   Private Sub ExercisesearchMonthSelected(ByVal Month As String)
     Dim arrMonth() As String = Month.Split("-")
-    If FindNode(trvMain.Nodes(2).Nodes(5), arrMonth(0)) IsNot Nothing Then
-      If FindNode(FindNode(trvMain.Nodes(2).Nodes(5), arrMonth(0)), arrMonth(1)) IsNot Nothing Then
-        trvMain.SelectedNode = FindNode(FindNode(trvMain.Nodes(2).Nodes(5), arrMonth(0)), arrMonth(1))
+    If FindNode(trvMain.Nodes(2).Nodes(4), arrMonth(0)) IsNot Nothing Then
+      If FindNode(FindNode(trvMain.Nodes(2).Nodes(4), arrMonth(0)), arrMonth(1)) IsNot Nothing Then
+        trvMain.SelectedNode = FindNode(FindNode(trvMain.Nodes(2).Nodes(4), arrMonth(0)), arrMonth(1))
       End If
     End If
   End Sub
