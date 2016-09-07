@@ -33,7 +33,7 @@ Public Class DataDirectoryForm
                 End If
 
                 ' Move the data
-                Directory.Move(m_strOldPath + "\Lightened Dream", txtDataDirectory.Text + "\Lightened Dream")
+                FileIO.FileSystem.MoveDirectory(m_strOldPath + "\Lightened Dream", txtDataDirectory.Text + "\Lightened Dream")
 
                 ' Save the new path
                 Dim xmlDocDataDirectory As New XmlDocument
