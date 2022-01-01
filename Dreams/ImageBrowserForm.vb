@@ -1,17 +1,15 @@
 ﻿Imports System.Windows.Forms.DataVisualization.Charting
-Imports System.Windows.Forms.DataVisualization
 Imports System.Threading
-Imports Newtonsoft.Json
+Imports System.Drawing.Drawing2D
 
 Public Class ImageBrowserForm
 
-  Private objDreams As Series
+  Private searchGraph As Series
 
   Public DreamImage As Image
 
   Private Images As New List(Of Image)
-  Private objSearchClass As New SearchClass()
-  Private strLastSearch As String = "https://api.gettyimages.com/v3/search/images/creative?phrase=light"
+  Private searchInstance As New SearchClass()
 
   Private Sub ImageBrowserForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
     DoubleBuffered = True
@@ -21,35 +19,16 @@ Public Class ImageBrowserForm
     graph.ResetAutoValues()
     graph.Annotations.Clear()
 
-    objDreams = graph.Series.Add("Dreams")
-    objDreams.ChartType = SeriesChartType.Column
-    objDreams.Color = Color.FromArgb(200, 65, 140, 240)
-    objDreams.BorderWidth = 1
+    searchGraph = graph.Series.Add("Dreams")
+    searchGraph.ChartType = SeriesChartType.Column
+    searchGraph.Color = Color.FromArgb(200, 65, 140, 240)
+    searchGraph.BorderWidth = 1
 
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(0)
-    objDreams.Points.AddY(1000)
+    For i As Int32 = 1 To 25
+      searchGraph.Points.AddY(0)
+    Next
+
+    searchGraph.Points.AddY(1000)
 
   End Sub
 
@@ -76,55 +55,47 @@ Public Class ImageBrowserForm
   End Sub
 
   Public Sub Search()
-    If tmrSearching.Enabled Then
-      objSearchClass.Completed = True
-      System.Threading.Thread.Sleep(100)
-      Application.DoEvents()
-      System.Threading.Thread.Sleep(100)
-    End If
-
-    tmrSearching.Enabled = True
-
     Images.Clear()
     lstImages.Items.Clear()
     lstImg.Images.Clear()
     pnlSearching.Visible = True
 
-    objSearchClass = New SearchClass
-    strLastSearch = "https://api.gettyimages.com/v3/search/images/creative?phrase=" + txtKeywords.Text.Replace(" ", "_").Replace(vbNewLine, "_") + ""
-    objSearchClass.Keywords = strLastSearch
-    objSearchClass.Completed = False
-    'AddHandler objSearchClass.ThumbnailAdded, AddressOf ThumbnailAdded
-    'AddHandler objSearchClass.ImageAdded, AddressOf ImageAdded
-    'AddHandler objSearchClass.ItemAdded, AddressOf ItemAdded
-    AddHandler objSearchClass.ListItemAdded, AddressOf ListItemAdded
+    searchInstance = New SearchClass
+    searchInstance.URL = "https://www.everypixel.com/search?q=" + txtKeywords.Text.Replace(" ", "+").Replace(vbNewLine, "+") + "&stocks_type=free&page=1"
+    searchInstance.Completed = False
 
-    Dim objThread As New Thread(AddressOf objSearchClass.DoSearchWork)
+    AddHandler searchInstance.ListItemAdded, AddressOf ListItemAdded
+
+    Dim objThread As New Thread(AddressOf searchInstance.DoSearchWork)
     objThread.Start()
 
     Do
-      If objSearchClass.Completed Then Exit Do
+      If searchInstance.Completed Then Exit Do
       Application.DoEvents()
-      System.Threading.Thread.Sleep(128)
+      Thread.Sleep(128)
     Loop
 
     pnlSearching.Visible = False
-    tmrSearching.Enabled = False
   End Sub
 
-  Private Delegate Sub ListItemAddedDelegate(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem)
-  Private Sub ListItemAdded(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem)
+  Private Delegate Sub ListItemAddedDelegate(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem, ByVal Size As Integer)
+  Private Sub ListItemAdded(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem, ByVal Size As Integer)
     Try
+      If Thumbnail Is Nothing Then Return
+      If searchInstance.Completed Then Return
       If InvokeRequired Then
-        If objSearchClass.Completed Then Exit Sub
+        If searchInstance.Completed Then Exit Sub
         Dim d As New ListItemAddedDelegate(AddressOf ListItemAdded)
-        Invoke(d, Thumbnail, Bitmap, Item)
+        Invoke(d, Thumbnail, Bitmap, Item, Size)
       Else
-        Images.Add(Thumbnail)
-        lstImg.Images.Add(Bitmap)
+        Images.Add(Bitmap)
+        lstImg.Images.Add(Thumbnail)
         Item.ImageIndex = lstImg.Images.Count - 1
         lstImages.Items.Add(Item)
         Item.EnsureVisible()
+        searchGraph.Points.AddY(Size)
+        searchGraph.Points.Remove(searchGraph.Points(0))
+        graph.ChartAreas(0).RecalculateAxesScale()
       End If
     Catch ex As Exception
     End Try
@@ -132,10 +103,10 @@ Public Class ImageBrowserForm
 
   Private Class SearchClass
 
-    Public Keywords As String = "Dream"
+    Public URL As String = "Dream"
     Public Completed As Boolean = False
 
-    Public Event ListItemAdded(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem)
+    Public Event ListItemAdded(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem, ByVal Size As Integer)
 
     Private m_intDownloaded As Integer = 0
 
@@ -148,16 +119,36 @@ Public Class ImageBrowserForm
       Try
 
         Dim objWebClient As New System.Net.WebClient
-        objWebClient.Headers.Add("Api-Key", "5z67acwgvytgqsnw9ae4vwwg")
-        strSource = objWebClient.DownloadString(Keywords)
+        strSource = objWebClient.DownloadString(URL)
 
-        Dim objImages = JsonConvert.DeserializeObject(strSource)
+        Dim position As Integer = strSource.IndexOf("response.images")
+        Dim titleSearchString As String = "title: '"
+        Dim urlSearchString As String = "url: '"
 
-        For Each objImage As Object In objImages("images")
+        While True
+          position = strSource.IndexOf(titleSearchString, position)
 
+          If position < 0 Then
+            If URL.Contains("&stocks_type=free") Then
+              URL = URL.Replace("&stocks_type=free", "")
+              strSource = objWebClient.DownloadString(URL)
+              position = strSource.IndexOf("response.images")
+              position = strSource.IndexOf(titleSearchString, position)
+              If position < 0 Then Exit While
+            Else
+              Exit While
+            End If
+          End If
+
+          If Completed Then Exit While
+
+          Dim endPosition = strSource.IndexOf("',", position)
           Dim objDownloadClass As New DownloadClass
-          objDownloadClass.Title = objImage("title")
-          objDownloadClass.FileID = objImage("display_sizes")(0)("uri")
+          objDownloadClass.Title = strSource.Substring(position + titleSearchString.Length, endPosition - position - titleSearchString.Length)
+
+          position = strSource.IndexOf(urlSearchString, position)
+          endPosition = strSource.IndexOf("',", position)
+          objDownloadClass.FileID = strSource.Substring(position + urlSearchString.Length, endPosition - position - urlSearchString.Length)
           objDownloadClass.ImageIndex = intImageIndex
           objDownloadClass.Completed = False
           AddHandler objDownloadClass.ListItemAdded, AddressOf ListItemAddedX
@@ -168,19 +159,20 @@ Public Class ImageBrowserForm
           Thread.Sleep(2)
           Application.DoEvents()
 
-          If Completed Then Exit For
           intImageIndex += 1
 
-        Next
+          position = endPosition
+
+        End While
 
         ' Wait for all the threads to complete
-        Dim intCompleted As Integer = intImageIndex * -1
-
         Do
 
           If Completed Then Exit Do
 
-          If m_intDownloaded = intImageIndex - 1 Then
+          If intImageIndex = 0 Then Exit Do
+
+          If m_intDownloaded >= intImageIndex - 1 Then
             Exit Do
           End If
 
@@ -188,14 +180,16 @@ Public Class ImageBrowserForm
 
       Catch ex As Exception
 
+        MessageBox.Show(ex.Message, "LightenedDream.ImageSearch()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
       End Try
 
       Completed = True
 
     End Sub
 
-    Private Sub ListItemAddedX(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem)
-      RaiseEvent ListItemAdded(Thumbnail, Bitmap, Item)
+    Private Sub ListItemAddedX(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem, ByVal Size As Integer)
+      RaiseEvent ListItemAdded(Thumbnail, Bitmap, Item, Size)
 
       m_intDownloaded += 1
     End Sub
@@ -204,7 +198,7 @@ Public Class ImageBrowserForm
 
   Private Class DownloadClass
 
-    Public Event ListItemAdded(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem)
+    Public Event ListItemAdded(ByVal Thumbnail As Image, ByVal Bitmap As Image, ByVal Item As ListViewItem, ByVal Size As Integer)
     Public Title As String
     Public ImageIndex As Integer
     Public FileID As String
@@ -212,32 +206,65 @@ Public Class ImageBrowserForm
 
     Public Sub DoDownloadWork()
       Try
+
+        Thread.Sleep(2)
+
         Dim objWebClient As New System.Net.WebClient
         Dim arrImage As Byte() = objWebClient.DownloadData(FileID)
 
-        Thread.Sleep(2)
-        Application.DoEvents()
-
         Dim objMem As New System.IO.MemoryStream(arrImage)
-        Dim imgThumbnail As Image = Image.FromStream(objMem)
-        Dim bmpThumbnail As New Bitmap(110, 110, Imaging.PixelFormat.Format32bppArgb)
-        Dim imgBitmap As Image = Image.FromHbitmap(bmpThumbnail.GetHbitmap)
+        Dim imgOriginal As Image = Image.FromStream(objMem)
+        Dim imgBitmap As Image = ResizeImage(imgOriginal, New Drawing.Size(110, 110), True) 'Image.FromHbitmap(bmpThumbnail.GetHbitmap)
 
-        Dim objGraphics As System.Drawing.Graphics = Graphics.FromImage(imgBitmap)
+        Dim bmpThumbnail As New Bitmap(110, 110, Imaging.PixelFormat.Format32bppArgb)
+        Dim imgThumbnail As Image = Image.FromHbitmap(bmpThumbnail.GetHbitmap)
+        Dim objGraphics As System.Drawing.Graphics = Graphics.FromImage(imgThumbnail)
         objGraphics.Clear(Color.White)
-        objGraphics.DrawImage(imgThumbnail, 0, 0, imgThumbnail.Width, imgThumbnail.Height)
+        objGraphics.DrawImage(imgBitmap, 0, 0, imgBitmap.Width, imgBitmap.Height)
 
         Dim lstThumbnail As New ListViewItem(Title)
         lstThumbnail.ToolTipText = Title
         lstThumbnail.ImageIndex = ImageIndex
         lstThumbnail.Tag = FileID
 
-        RaiseEvent ListItemAdded(imgThumbnail, imgBitmap, lstThumbnail)
+        RaiseEvent ListItemAdded(imgThumbnail, imgBitmap, lstThumbnail, arrImage.Length)
       Catch ex As Exception
+
+        RaiseEvent ListItemAdded(Nothing, Nothing, Nothing, 0)
 
       End Try
 
     End Sub
+
+    Private Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
+      Try
+        Dim newWidth As Integer
+        Dim newHeight As Integer
+        If preserveAspectRatio Then
+          Dim originalWidth As Integer = image.Width
+          Dim originalHeight As Integer = image.Height
+          Dim percentWidth As Single = CSng(size.Width) / CSng(originalWidth)
+          Dim percentHeight As Single = CSng(size.Height) / CSng(originalHeight)
+          Dim percent As Single = IIf(percentHeight < percentWidth, percentHeight, percentWidth)
+          newWidth = CInt(originalWidth * percent)
+          newHeight = CInt(originalHeight * percent)
+        Else
+          newWidth = size.Width
+          newHeight = size.Height
+        End If
+
+        Dim newImage As Image = New Bitmap(newWidth, newHeight)
+        Using graphicsHandle As Graphics = Graphics.FromImage(newImage)
+          graphicsHandle.InterpolationMode = InterpolationMode.HighQualityBicubic
+          graphicsHandle.DrawImage(image, 0, 0, newWidth, newHeight)
+        End Using
+
+        Return newImage
+
+      Catch ex As Exception
+        Return image
+      End Try
+    End Function
   End Class
 
   Private Sub lstImages_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lstImages.MouseMove
@@ -252,11 +279,6 @@ Public Class ImageBrowserForm
 
   End Sub
 
-  Private Sub tmrSearching_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrSearching.Tick
-    objDreams.Points.AddY(Int(Rnd() * 1000))
-    objDreams.Points.Remove(objDreams.Points(0))
-  End Sub
-
   Private Sub txtKeywords_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtKeywords.Enter
     txtKeywords.SelectAll()
   End Sub
@@ -265,17 +287,17 @@ Public Class ImageBrowserForm
     If lstImages.SelectedItems.Count = 0 Then Return
     DreamImage = Images(lstImages.SelectedItems(0).ImageIndex)
     DialogResult = Windows.Forms.DialogResult.OK
-    objSearchClass.Completed = True
+    searchInstance.Completed = True
     Close()
   End Sub
 
   Private Sub lblRAC_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lblRAC.LinkClicked
-    System.Diagnostics.Process.Start("http://www.gettyimages.com")
+    System.Diagnostics.Process.Start("http://www.everypixel.com")
   End Sub
 
   Private Sub ImageBrowserForm_FormClosing(ByVal sender As System.Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
 
-    objSearchClass.Completed = True
+    searchInstance.Completed = True
   End Sub
 
   Private Sub tmrDoSearch_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrDoSearch.Tick

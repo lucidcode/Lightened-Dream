@@ -36,7 +36,6 @@ Partial Class ImageBrowserForm
     Me.Label7 = New System.Windows.Forms.Label()
     Me.txtKeywords = New System.Windows.Forms.TextBox()
     Me.btnCancel = New System.Windows.Forms.Button()
-    Me.tmrSearching = New System.Windows.Forms.Timer(Me.components)
     Me.Panel3D2 = New lucidcode.Controls.Panel3D()
     Me.lstImages = New lucidcode.LightenedDream.Dreams.ListViewNF()
     Me.lstImg = New System.Windows.Forms.ImageList(Me.components)
@@ -156,10 +155,6 @@ Partial Class ImageBrowserForm
     Me.btnCancel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
     Me.btnCancel.UseVisualStyleBackColor = True
     '
-    'tmrSearching
-    '
-    Me.tmrSearching.Interval = 128
-    '
     'Panel3D2
     '
     Me.Panel3D2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -180,6 +175,7 @@ Partial Class ImageBrowserForm
     Me.lstImages.BorderStyle = System.Windows.Forms.BorderStyle.None
     Me.lstImages.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.lucidcode.LightenedDream.Dreams.My.MySettings.Default, "FormForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.lstImages.ForeColor = Global.lucidcode.LightenedDream.Dreams.My.MySettings.Default.FormForeColor
+    Me.lstImages.HideSelection = False
     Me.lstImages.LargeImageList = Me.lstImg
     Me.lstImages.Location = New System.Drawing.Point(2, 2)
     Me.lstImages.Name = "lstImages"
@@ -224,7 +220,7 @@ Partial Class ImageBrowserForm
     ChartArea1.AxisX.IsLabelAutoFit = False
     ChartArea1.AxisX.LabelStyle.Angle = 90
     ChartArea1.AxisX.LabelStyle.Enabled = False
-    ChartArea1.AxisX.LabelStyle.Interval = 0.0R
+    ChartArea1.AxisX.LabelStyle.Interval = 0R
     ChartArea1.AxisX.LineColor = System.Drawing.Color.Transparent
     ChartArea1.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
     ChartArea1.AxisX.LineWidth = 0
@@ -232,10 +228,10 @@ Partial Class ImageBrowserForm
     ChartArea1.AxisX.MajorGrid.LineWidth = 0
     ChartArea1.AxisX.MajorTickMark.Enabled = False
     ChartArea1.AxisX.MajorTickMark.LineWidth = 0
-    ChartArea1.AxisX.MajorTickMark.Size = 0.0!
+    ChartArea1.AxisX.MajorTickMark.Size = 0!
     ChartArea1.AxisX.MinorGrid.LineWidth = 0
     ChartArea1.AxisX.MinorTickMark.LineWidth = 0
-    ChartArea1.AxisX.MinorTickMark.Size = 0.0!
+    ChartArea1.AxisX.MinorTickMark.Size = 0!
     ChartArea1.AxisX.TitleForeColor = System.Drawing.Color.LightSteelBlue
     CustomLabel1.Text = "x"
     CustomLabel2.Text = "x"
@@ -283,7 +279,7 @@ Partial Class ImageBrowserForm
     Me.lblRAC.Size = New System.Drawing.Size(86, 21)
     Me.lblRAC.TabIndex = 286
     Me.lblRAC.TabStop = True
-    Me.lblRAC.Text = "gettyimages"
+    Me.lblRAC.Text = "everypixel"
     Me.lblRAC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
     Me.lblRAC.UseCompatibleTextRendering = True
     '
@@ -336,7 +332,6 @@ Partial Class ImageBrowserForm
   Friend WithEvents Panel3D1 As lucidcode.Controls.Panel3D
   Friend WithEvents Panel3D3 As lucidcode.Controls.Panel3D
   Public WithEvents Label7 As System.Windows.Forms.Label
-  Friend WithEvents tmrSearching As System.Windows.Forms.Timer
   Private WithEvents lstImgTlb As System.Windows.Forms.ImageList
   Public WithEvents btnCancel As System.Windows.Forms.Button
   Friend WithEvents txtKeywords As System.Windows.Forms.TextBox
