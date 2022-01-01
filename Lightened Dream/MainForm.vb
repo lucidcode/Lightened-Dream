@@ -657,6 +657,10 @@ Public Class MainForm
 
   Private Function CancelForSave(ByVal trvNode As TreeNode, ByVal boolClosing As Boolean) As Boolean
     Try
+      If trvMain.SelectedNode Is Nothing Then
+        Return False
+      End If
+
       Dim boolChanged As Boolean = False
       If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Then
         boolChanged = m_objDreamViewControl.Changed
@@ -674,17 +678,7 @@ Public Class MainForm
         Dim objResult As DialogResult
         objResult = MessageBox.Show("Would you like to save the changes you made to '" & trvMain.SelectedNode.Text & "'?", "Save Changes?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
         If objResult = Windows.Forms.DialogResult.Yes Then
-          'Save
           Save()
-          'If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Then
-          '  m_objDreamViewControl.Save()
-          'ElseIf TypeOf (trvNode.Tag) Is Categories.Tags.CategoryFile Then
-          '  m_objCategoryViewControl.Save()
-          'ElseIf TypeOf (trvNode.Tag) Is Lucidity.Tags.REMCycleFile Then
-          '  m_objREMCyclesControl.Save()
-          'ElseIf TypeOf (trvNode.Tag) Is Lucidity.Tags.LucidItemFile Then
-          '  m_objLucidItemControl.Save()
-          'End If
         ElseIf objResult = Windows.Forms.DialogResult.Cancel Then
           Return True
         End If
