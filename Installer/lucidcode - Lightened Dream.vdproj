@@ -21,12 +21,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_04F569A0F445C94D3E3CDC730EDF2777"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_058E395D80B04C8BBC1A483B0A13B168"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -69,18 +63,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_29FA2CF0F596C00F679650B94BA8FA17"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_2A3C69918997F9F8B547D3BDD80F5FB5"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_2DB9B386494144519A158444EAC69ECE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -99,12 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_3F11CBBB3EBE4F47CA182A16C8E39641"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_413A13AE46C24CF881E9BC84379D286F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -113,12 +89,6 @@
         {
         "MsmKey" = "8:_476F90B73EAA465B8CFE231D54492BDE"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_4F839A66766B56555CE42F2E6225A921"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -141,12 +111,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_820E69621903872B22AC4E6069D8C1BB"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_8472F6622DF34AF594D643E80D9BDEF2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -161,18 +125,6 @@
         {
         "MsmKey" = "8:_850F8C7608544274B5B610ED399A8A4B"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_85770E574E1C34B7C99F7CF09EC13497"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_88D372E727550D488F5A477245589EBA"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -201,12 +153,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_A7CD17DCD35D44AA167AD32442CDA514"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_A86F1BD1155544D6968D4AD1B6BF0AFA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -221,12 +167,6 @@
         {
         "MsmKey" = "8:_B91502C587BA417DA7C0B02C0EDBD0BF"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BA2C584E00C7570B378AA14EA7FE054C"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -255,12 +195,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_CF9ECC4C6DE05920AFFA906567317418"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_D1D5725CC9A44F75AB61BC9B8CC330EB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -269,18 +203,6 @@
         {
         "MsmKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_DA068EB97C127303A211C5B0DD509249"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_E04B8EE1AFBB701D748B6A347D67D82B"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -299,12 +221,6 @@
         {
         "MsmKey" = "8:_F8D598C65566454E962DDB09A7917F7B"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D3FED1BB9B16412CB5D07596E74ED32A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -410,7 +326,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:3.5.30729                 "
+                "FrameworkVersion" = "8:3.5.30729                  "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=76617"
                 }
@@ -1437,18 +1353,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Lightened Dream"
-        "ProductCode" = "8:{99D09F17-7B8B-45C9-A919-56D470364A9D}"
-        "PackageCode" = "8:{BE308572-0CFC-4AC5-A3FA-CFEDB557B1F1}"
+        "ProductCode" = "8:{6E2D0B2F-3FCF-406E-AC71-AA4FAE531863}"
+        "PackageCode" = "8:{60EA4718-3DDD-4333-B532-A2F270AD876C}"
         "UpgradeCode" = "8:{323AF716-90AF-44C2-A6BD-4F7D4345EED6}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:3.4.1"
+        "ProductVersion" = "8:3.4.2"
         "Manufacturer" = "8:lucidcode"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:http://www.lucidcode.com/LightenedDream"
+        "ARPHELPLINK" = "8:https://www.lucidcode.com/LightenedDream"
         "Title" = "8:Lightened Dream"
         "Subject" = "8:Improving the quality of consciousness"
         "ARPCONTACT" = "8:Michael Paul Coder"

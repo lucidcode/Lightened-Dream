@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Lightened Dream")> 
 <Assembly: AssemblyDescription("A journal designed for dreamers in search of lucidity")> 
 <Assembly: AssemblyCompany("lucidcode")> 
-<Assembly: AssemblyProduct("Lightened Dream")> 
-<Assembly: AssemblyCopyright("Copyright © lucidcode 2000 - 2016")> 
+<Assembly: AssemblyProduct("Lightened Dream")>
+<Assembly: AssemblyCopyright("Copyright © lucidcode 2000 - 2022")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

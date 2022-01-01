@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Dreams", "Dreams\Dreams.vbproj", "{3CBCDCC5-6CE6-4D50-AD8C-B60F73EF489D}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Categories", "Categories\Categories.vbproj", "{296DD16C-5039-48F0-BDDF-029D5322DE19}"

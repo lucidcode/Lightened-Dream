@@ -11,8 +11,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("Lucidity")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("lucidcode")> 
-<Assembly: AssemblyProduct("Lucidity")> 
-<Assembly: AssemblyCopyright("Copyright © lucidcode 2013 - 2016")> 
+<Assembly: AssemblyProduct("Lucidity")>
+<Assembly: AssemblyCopyright("Copyright © lucidcode 2013 - 2022")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

@@ -4,7 +4,7 @@ Imports System.Threading
 
 Public Class AboutForm
 
-    Private m_strUpdateURL As String = "http://www.lucid-code.com/LightenedDream"
+    Private m_strUpdateURL As String = "https://www.lucid-code.com/LightenedDream"
     Private m_boolClosing As Boolean = False
 
     Private Sub AboutForm_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -82,7 +82,7 @@ Public Class AboutForm
 
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lblWeb.LinkClicked
         Try
-            System.Diagnostics.Process.Start("http://www.lucidcode.com/LightenedDream/")
+            System.Diagnostics.Process.Start("https://www.lucidcode.com/LightenedDream/")
         Catch ex As Exception
             MessageBox.Show(ex.Message, "LightenedDream.About.Link()", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
