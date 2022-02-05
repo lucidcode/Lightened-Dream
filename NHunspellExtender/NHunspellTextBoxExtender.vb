@@ -571,7 +571,6 @@ GetNextLine:
             If Not Directory.Exists(callingDir & "\SpellCheck") Then
                 Directory.CreateDirectory(callingDir & "\SpellCheck")
                 Dim newDirInfo As New DirectoryInfo(callingDir & "\SpellCheck")
-                newDirInfo.Attributes = FileAttributes.Hidden
             End If
 
             'Check if the spell check files already exist.  If not, add it
@@ -626,7 +625,6 @@ GetNextLine:
                     If Not Directory.Exists(callingDir & "\SpellCheck") Then
                         Directory.CreateDirectory(callingDir & "\SpellCheck")
                         Dim newDirInfo As New DirectoryInfo(callingDir & "\SpellCheck")
-                        newDirInfo.Attributes = FileAttributes.Hidden
                     End If
 
                     'Check if the spell check files already exist.  If not, add it
@@ -752,100 +750,6 @@ CreateNewHunspell:
         ReDim myControls(-1)
     End Sub
 
-
-    'Private Shared Function FromAssembly() As Object
-    'Dim a As Assembly = Assembly.Load(My.Resources.NHunspell)
-    'Dim type_l As Type = a.GetType("NHunspell.Hunspell")
-    'Dim types(1) As Type
-    'types(0) = GetType(String)
-    'types(1) = GetType(String)
-    'Dim ctor As ConstructorInfo = type_l.GetConstructor(types)
-
-    'Dim USdic, USaff As String
-    'Dim callingDir As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location)
-
-    ''Set the paths for the dic and aff files
-    'USdic = callingDir & "\SpellCheck\en_US.dic"
-    'USaff = callingDir & "\SpellCheck\en_US.aff"
-
-    ''Check if the spell check directory already exists.  If not, add it
-    'If Not Directory.Exists(callingDir & "\SpellCheck") Then
-    'Directory.CreateDirectory(callingDir & "\SpellCheck")
-    'Dim newDirInfo As New DirectoryInfo(callingDir & "\SpellCheck")
-    'newDirInfo.Attributes = FileAttributes.Hidden
-    'End If
-
-    ''Check if the spell check files already exist.  If not, add it
-    'If Not File.Exists(USaff) Then
-    'Try
-    'File.WriteAllBytes(USaff, My.Resources.en_US)
-    'Catch ex As Exception
-    'MessageBox.Show("Error writing en_US.aff file!" & vbNewLine & ex.Message)
-    'End Try
-    'End If
-
-    'If Not File.Exists(USdic) Then
-    'Try
-    'File.WriteAllBytes(USdic, My.Resources.en_US_dic)
-    'Catch ex As Exception
-    'MessageBox.Show("Error writing en_US.dic file!" & vbNewLine & ex.Message)
-    'End Try
-    'End If
-
-    'Dim params(1) As Object
-    'params(0) = USaff
-    'params(1) = USdic
-
-    'Dim result As Object = Nothing
-
-    'CreateNewHunspell:
-    'Try
-    'result = ctor.Invoke(params)
-    'Catch ex As Exception
-    'If TypeOf ex.InnerException Is System.DllNotFoundException Then
-    ''Get where the dll is supposed to be
-    'Dim DLLpath As String = Trim(Strings.Mid(ex.InnerException.Message, InStr(ex.InnerException.Message, "DLL not found:") + 14))
-    'Dim DLLName As String = Path.GetFileName(DLLpath)
-
-    ''Find out which DLL is missing
-    'If DLLName = "Hunspellx64.dll" Then
-    ''Copy the dll to the directory
-    'Try
-    'File.WriteAllBytes(DLLpath, My.Resources.Hunspellx64)
-    'Catch ex2 As Exception
-    'MessageBox.Show("Error writing Hunspellx64.dll" & vbNewLine & ex2.Message)
-    'End Try
-
-    ''Try again
-    'GoTo CreateNewHunspell
-    'ElseIf DLLName = "Hunspellx86.dll" Then 'x86 dll
-    ''Copy the dll to the directory
-    'Try
-    'File.WriteAllBytes(DLLpath, My.Resources.Hunspellx86)
-    'Catch ex3 As Exception
-    'MessageBox.Show("Error writing Hunspellx86.dll" & vbNewLine & ex3.Message)
-    'End Try
-
-    ''Try again
-    'GoTo CreateNewHunspell
-    ''ElseIf DLLName = "NHunspell.dll" Then
-    ''Try
-    ''File.WriteAllBytes(DLLpath, My.Resources.NHunspell)
-    ''Catch ex4 As Exception
-    ''MessageBox.Show("Error writing NHunspell.dll" & vbNewLine & ex4.Message)
-    ''End Try
-    'Else
-    'MessageBox.Show(ex.Message & ex.StackTrace)
-    'End If
-    'Else
-    'MessageBox.Show("SpellChecker cannot be created." & vbNewLine & "Spell checking will be disabled." & _
-    'vbNewLine & vbNewLine & ex.Message & ex.StackTrace)
-    'Return Nothing
-    'End If
-    'End Try
-
-    'Return result
-    'End Function
     Public Shared Function MyResolveEventHandler(ByVal sender As Object, ByVal args As ResolveEventArgs) As Assembly
         For i = 0 To AppDomain.CurrentDomain.GetAssemblies.Count - 1
             MessageBox.Show(args.Name & vbNewLine & AppDomain.CurrentDomain.GetAssemblies(i).GetName().Name)
@@ -2282,7 +2186,6 @@ CreateNewHunspell:
             If Not Directory.Exists(callingDir & "\SpellCheck") Then
                 Directory.CreateDirectory(callingDir & "\SpellCheck")
                 Dim newDirInfo As New DirectoryInfo(callingDir & "\SpellCheck")
-                newDirInfo.Attributes = FileAttributes.Hidden
             End If
 
             'Check if the spell check files already exist.  If not, add it
