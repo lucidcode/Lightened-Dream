@@ -69,7 +69,7 @@ Public Class MainForm
       Try
         If Environment.GetCommandLineArgs.Length > 1 Then
           strImportFileName = New FileInfo(Environment.GetCommandLineArgs(1)).Name
-          Dim xmlReader As XmlReader = xmlReader.Create(Environment.GetCommandLineArgs(1))
+          Dim xmlReader As XmlReader = XmlReader.Create(Environment.GetCommandLineArgs(1))
           xmlReader.Read()
           strImportType = xmlReader.Name
           If xmlReader.Name = "xml" Then
@@ -120,6 +120,7 @@ Public Class MainForm
       Me.DoubleBuffered = True
       LoadGUI()
       LoadTree()
+      LoadSpellCheckLanguages()
       lblStatus.Text = ""
       toolBack.Enabled = False
       m_arrBackHistory.Clear()
@@ -542,66 +543,118 @@ Public Class MainForm
     End Try
   End Sub
 
-    Private Sub LoadExercises()
-        Try
-            ' Create the Exercises node
-            Dim trvExercises As New TreeNode("Exercises")
-            Dim trvDream As TreeNode = Nothing
-            Dim objExercisesFolderTag As New Lucidity.Tags.YearsFolder(m_strPath + "Lucidity\Exercises", "")
-            trvExercises.Tag = objExercisesFolderTag
-            trvMain.Nodes(2).Nodes.Add(trvExercises)
+  Private Sub LoadExercises()
+    Try
+      ' Create the Exercises node
+      Dim trvExercises As New TreeNode("Exercises")
+      Dim trvDream As TreeNode = Nothing
+      Dim objExercisesFolderTag As New Lucidity.Tags.YearsFolder(m_strPath + "Lucidity\Exercises", "")
+      trvExercises.Tag = objExercisesFolderTag
+      trvMain.Nodes(2).Nodes.Add(trvExercises)
 
-            ' Make sure that the Exercises folder exists
-            If Not Directory.Exists(m_strPath + "Lucidity\Exercises") Then
-                Directory.CreateDirectory(m_strPath + "Lucidity\Exercises")
-            End If
+      ' Make sure that the Exercises folder exists
+      If Not Directory.Exists(m_strPath + "Lucidity\Exercises") Then
+        Directory.CreateDirectory(m_strPath + "Lucidity\Exercises")
+      End If
 
-            ' Make sure we have an entry
-            If Directory.GetDirectories(m_strPath + "Lucidity\Exercises").Length = 0 Then
-                CreateWelcomeExercise()
-            End If
+      ' Make sure we have an entry
+      If Directory.GetDirectories(m_strPath + "Lucidity\Exercises").Length = 0 Then
+        CreateWelcomeExercise()
+      End If
 
-            ' Load each year
-            For Each strYearFolder As String In Directory.GetDirectories(m_strPath + "Lucidity\Exercises")
-                Dim trvYear As New TreeNode(New DirectoryInfo(strYearFolder).Name)
-                Dim objYearTag As New Lucidity.Tags.YearFolder(strYearFolder, trvYear.Text)
-                trvYear.Tag = objYearTag
-                trvExercises.Nodes.Add(trvYear)
+      ' Load each year
+      For Each strYearFolder As String In Directory.GetDirectories(m_strPath + "Lucidity\Exercises")
+        Dim trvYear As New TreeNode(New DirectoryInfo(strYearFolder).Name)
+        Dim objYearTag As New Lucidity.Tags.YearFolder(strYearFolder, trvYear.Text)
+        trvYear.Tag = objYearTag
+        trvExercises.Nodes.Add(trvYear)
 
-                ' Load each month
-                For Each strMonthFolder As String In Directory.GetDirectories(strYearFolder)
-                    Dim trvMonth As New TreeNode(New DirectoryInfo(strMonthFolder).Name)
-                    Dim objMonthTag As New Lucidity.Tags.MonthFolder(strMonthFolder, trvYear.Text, trvMonth.Text)
-                    trvMonth.Tag = objMonthTag
-                    trvYear.Nodes.Add(trvMonth)
+        ' Load each month
+        For Each strMonthFolder As String In Directory.GetDirectories(strYearFolder)
+          Dim trvMonth As New TreeNode(New DirectoryInfo(strMonthFolder).Name)
+          Dim objMonthTag As New Lucidity.Tags.MonthFolder(strMonthFolder, trvYear.Text, trvMonth.Text)
+          trvMonth.Tag = objMonthTag
+          trvYear.Nodes.Add(trvMonth)
 
-                    ' Load each dream
-                    For Each strDreamFile As String In Directory.GetFiles(strMonthFolder, "*.ld3")
-                        trvDream = New TreeNode(New FileInfo(strDreamFile).Name.Replace(".ld3", ""))
-                        Dim objDreamTag As New Lucidity.Tags.DreamFile(strDreamFile)
-                        trvDream.Tag = objDreamTag
-                        trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Exercise")
-                        trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Exercise")
-                        trvMonth.Nodes.Add(trvDream)
+          ' Load each dream
+          For Each strDreamFile As String In Directory.GetFiles(strMonthFolder, "*.ld3")
+            trvDream = New TreeNode(New FileInfo(strDreamFile).Name.Replace(".ld3", ""))
+            Dim objDreamTag As New Lucidity.Tags.DreamFile(strDreamFile)
+            trvDream.Tag = objDreamTag
+            trvDream.ImageIndex = lstImgTrv.Images.IndexOfKey("Exercise")
+            trvDream.SelectedImageIndex = lstImgTrv.Images.IndexOfKey("Exercise")
+            trvMonth.Nodes.Add(trvDream)
 
-                        ' Add the loading node
-                        'Dim trvLoading As New TreeNode("Loading Categories...")
-                        'trvDream.Nodes.Add(trvLoading)
-                    Next
+            ' Add the loading node
+            'Dim trvLoading As New TreeNode("Loading Categories...")
+            'trvDream.Nodes.Add(trvLoading)
+          Next
 
-                Next
-            Next
+        Next
+      Next
 
-            'If trvDream IsNot Nothing Then
-            '  trvMain.SelectedNode = trvDream
-            'End If
+      'If trvDream IsNot Nothing Then
+      '  trvMain.SelectedNode = trvDream
+      'End If
 
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, "LightenedDream.LoadExercises()", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
+    Catch ex As Exception
+      MessageBox.Show(ex.Message, "LightenedDream.LoadExercises()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Try
+  End Sub
 
-    Private Function CancelForSave(ByVal trvNode As TreeNode, ByVal boolClosing As Boolean) As Boolean
+  Private Sub LoadSpellCheckLanguages()
+    Try
+      Dim xmlDocSettings As New XmlDocument
+
+      ' Make sure the file exists
+      If Not File.Exists(m_strPath & "\SpellCheck.ld3") Then
+        Dim strXml As String = "<lucidcode>"
+
+        strXml += "<Language>English</Language>"
+        strXml += "<CheckSpelling>True</CheckSpelling>"
+
+        strXml += "</lucidcode>"
+        xmlDocSettings.LoadXml(strXml)
+        xmlDocSettings.Save(m_strPath & "\SpellCheck.ld3")
+      End If
+
+      xmlDocSettings.Load(m_strPath & "\SpellCheck.ld3")
+      If xmlDocSettings.DocumentElement.SelectSingleNode("CheckSpelling").InnerText = "True" Then
+        m_objDreamViewControl.EnableSpellCheck()
+        m_objLucidItemControl.EnableSpellCheck()
+        mnuCheckSpelling.Checked = True
+      Else
+        mnuCheckSpelling.Checked = False
+      End If
+
+    Catch ex As Exception
+      MessageBox.Show(ex.Message, "LightenedDream.LoadSpellCheckLanguages()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Try
+  End Sub
+
+  Private Sub mnuCheckSpelling_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuCheckSpelling.Click
+    Try
+      Dim xmlDocSettings As New XmlDocument
+      xmlDocSettings.Load(m_strPath & "\SpellCheck.ld3")
+
+      If mnuCheckSpelling.Checked Then
+        xmlDocSettings.DocumentElement.SelectSingleNode("CheckSpelling").InnerText = "True"
+        m_objDreamViewControl.EnableSpellCheck()
+        m_objLucidItemControl.EnableSpellCheck()
+      Else
+        xmlDocSettings.DocumentElement.SelectSingleNode("CheckSpelling").InnerText = "False"
+        m_objDreamViewControl.DisableSpellCheck()
+        m_objLucidItemControl.DisableSpellCheck()
+      End If
+
+      xmlDocSettings.Save(m_strPath & "\SpellCheck.ld3")
+
+    Catch ex As Exception
+      MessageBox.Show(ex.Message, "LightenedDream.SetSpellCheck()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Try
+  End Sub
+
+  Private Function CancelForSave(ByVal trvNode As TreeNode, ByVal boolClosing As Boolean) As Boolean
     Try
       If trvMain.SelectedNode Is Nothing Then
         Return False
@@ -1929,7 +1982,7 @@ Public Class MainForm
         i = i + 1
       Next
       ' Create a DataObject containg the array of ListViewItems.
-      sender.DoDragDrop(New  _
+      sender.DoDragDrop(New _
       DataObject("System.Windows.Forms.TreeNode()", myItems), DragDropEffects.Link)
     Catch ex As Exception
       MessageBox.Show(ex.Message, "LightenedDream.Main.ItemDrag()", MessageBoxButtons.OK, MessageBoxIcon.Error)
