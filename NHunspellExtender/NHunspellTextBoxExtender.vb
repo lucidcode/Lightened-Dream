@@ -4,13 +4,11 @@ Imports NHunspell
 Imports System.Reflection
 Imports System.IO
 Imports System.Drawing
-Imports System.Text
-Imports System.Runtime.InteropServices
-Imports System.Collections.Generic
 Imports Microsoft.Win32
+Imports System.Xml
 
-<ToolboxBitmap(GetType(NHunspellTextBoxExtender), "spellcheck.png"), _
- ProvideProperty("SpellCheckEnabled", GetType(Control))> _
+<ToolboxBitmap(GetType(NHunspellTextBoxExtender), "spellcheck.png"),
+ ProvideProperty("SpellCheckEnabled", GetType(Control))>
 Public Class NHunspellTextBoxExtender
     Inherits Component
     Implements IExtenderProvider, ISupportInitialize
@@ -63,7 +61,7 @@ Public Class NHunspellTextBoxExtender
             End Select
         End Sub
 
-        Public Sub New(ByRef CallingTextBox As TextBoxBase, ByRef ThisSpellCheckControl As SpellCheckControl, _
+        Public Sub New(ByRef CallingTextBox As TextBoxBase, ByRef ThisSpellCheckControl As SpellCheckControl,
                        ByRef Parent As NHunspellTextBoxExtender)
             'Set up the CustomPaintTextBox
             parentTextBox = CallingTextBox
@@ -144,7 +142,7 @@ Public Class NHunspellTextBoxExtender
                 Dim ignoreRange As Boolean = False
 
                 For Each currentIgnoreRange In mySpellCheckControl.GetIgnoreRanges
-                    If (currentIgnoreRange.First = CharRanges(i).First) And _
+                    If (currentIgnoreRange.First = CharRanges(i).First) And
                        (currentIgnoreRange.Length = CharRanges(i).Length) Then
                         ignoreRange = True
                     End If
@@ -197,7 +195,7 @@ Public Class NHunspellTextBoxExtender
 
 GetNextLine:
                     'Determine the first line of waves to draw
-                    While (parentTextBox.GetPositionFromCharIndex(curIndex).Y = startPoint.Y) And _
+                    While (parentTextBox.GetPositionFromCharIndex(curIndex).Y = startPoint.Y) And
                           (curIndex <= (currentRange.First + currentRange.Length - 1))
                         curIndex += 1
                     End While
@@ -234,7 +232,7 @@ GetNextLine:
                         GoTo GetNextLine
                     End If
                 Else
-                    Dim offsets As Point = GetOffsets(parentTextBox, currentRange.First, _
+                    Dim offsets As Point = GetOffsets(parentTextBox, currentRange.First,
                                                       (currentRange.First + currentRange.Length - 1), tempRTB)
 
                     'Dim offsetsDiff As TimeSpan = Now.Subtract(startTime)
@@ -279,7 +277,7 @@ GetNextLine:
         ''' <param name="tempRTB"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Private Function GetOffsets(ByRef curTextBox As TextBoxBase, ByVal startingIndex As Integer, _
+        Private Function GetOffsets(ByRef curTextBox As TextBoxBase, ByVal startingIndex As Integer,
                                     ByVal endingIndex As Integer, Optional ByVal tempRTB As RichTextBox = Nothing) As Point
             Dim startTime As DateTime = Now
 
@@ -350,7 +348,7 @@ GetNextLine:
 
             'Now find out how wide the last character is
             Dim offsetX As Integer = 0
-            offsetX = textBoxGraphics.MeasureString(curTextBox.Text(startingIndex + (endingIndex - startingIndex)), _
+            offsetX = textBoxGraphics.MeasureString(curTextBox.Text(startingIndex + (endingIndex - startingIndex)),
                                                     fontToUse).Width
 
             offsets = New Point(offsetX, offsetY)
@@ -458,23 +456,23 @@ GetNextLine:
     Private _Language As String
 
     'Declared functions
-    Private Declare Function GetScrollPos Lib "user32.dll" ( _
-            ByVal hWnd As IntPtr, _
+    Private Declare Function GetScrollPos Lib "user32.dll" (
+            ByVal hWnd As IntPtr,
             ByVal nBar As Integer) As Integer
-    Private Declare Function SetScrollPos Lib "user32.dll" ( _
-            ByVal hWnd As IntPtr, _
-            ByVal nBar As Integer, _
-            ByVal nPos As Integer, _
+    Private Declare Function SetScrollPos Lib "user32.dll" (
+            ByVal hWnd As IntPtr,
+            ByVal nBar As Integer,
+            ByVal nPos As Integer,
             ByVal bRedraw As Boolean) As Integer
-    Private Declare Function PostMessageA Lib "user32.dll" ( _
-            ByVal hwnd As IntPtr, _
-            ByVal wMsg As Integer, _
-            ByVal wParam As Integer, _
+    Private Declare Function PostMessageA Lib "user32.dll" (
+            ByVal hwnd As IntPtr,
+            ByVal wMsg As Integer,
+            ByVal wParam As Integer,
             ByVal lParam As Integer) As Boolean
-    Private Declare Auto Function SendMessage Lib "user32.dll" ( _
-            ByVal hWnd As IntPtr, _
-            ByVal wMsg As Int32, _
-            ByVal wParam As IntPtr, _
+    Private Declare Auto Function SendMessage Lib "user32.dll" (
+            ByVal hWnd As IntPtr,
+            ByVal wMsg As Int32,
+            ByVal wParam As IntPtr,
             ByVal lParam As IntPtr) As IntPtr
 
     ' Scrollbar direction
@@ -520,8 +518,18 @@ GetNextLine:
         Return (TypeOf extendee Is TextBoxBase) And (Not myNHunspell Is Nothing)
     End Function
 
+    Public Shared Function GetFolderPath() As String
+        Dim strPath As String = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\"
+        If (File.Exists(strPath & "LightenedDreamDirectory.ld3")) Then
+            Dim xmlDocDataDirectory As New XmlDocument
+            xmlDocDataDirectory.Load(strPath & "LightenedDreamDirectory.ld3")
+            If Directory.Exists(xmlDocDataDirectory.DocumentElement.SelectSingleNode("Directory").InnerText) Then
+                Return xmlDocDataDirectory.DocumentElement.SelectSingleNode("Directory").InnerText
+            End If
+        End If
 
-
+        Return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\lucidcode\"
+    End Function
 
     ''' <summary>
     ''' We need to make sure that the dic and aff files are on the disk.  Then, we try to create
@@ -542,30 +550,16 @@ GetNextLine:
         Dim USdic, USaff As String
 
         'Get the calling assembly's location
-        Dim callingDir As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location)
+        Dim callingDir As String = GetFolderPath() + "Lightened Dream"
 
         'Try and write to the directory to see if we can
         Dim boolFailed As Boolean = False
 
-        Try
-            Directory.CreateDirectory(callingDir & "\Test")
-        Catch ex As Exception
-            boolFailed = True
-        Finally
-            Directory.Delete(callingDir & "\Test")
-        End Try
-
-        If boolFailed Then
-            callingDir = "C:\Windows\Temp"
-        End If
-
-
         'First see if there is a registry value that tells us where to get the dictionary from.
-        Dim regKey As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender")
-
+        Dim regKey As RegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender2")
 
         If regKey Is Nothing Then
-            regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE", True).CreateSubKey("NHunspellTextBoxExtender")
+            regKey = Registry.CurrentUser.OpenSubKey("SOFTWARE", True).CreateSubKey("NHunspellTextBoxExtender2")
             Dim regKeyLanguage As RegistryKey = regKey.CreateSubKey("Languages")
             regKeyLanguage.SetValue("Default", "English")
 
@@ -728,46 +722,9 @@ CreateNewHunspell:
 
             myNHunspell = New Hunspell(USaff, USdic)
         Catch ex As Exception
-            If TypeOf ex Is System.DllNotFoundException Then
-                'Get where the dll is supposed to be
-                Dim DLLpath As String = Trim(Strings.Mid(ex.Message, InStr(ex.Message, "DLL not found:") + 14))
-                Dim DLLName As String = Path.GetFileName(DLLpath)
-
-                'Find out which DLL is missing
-                If DLLName = "Hunspellx64.dll" Then
-                    'Copy the dll to the directory
-                    Try
-                        File.WriteAllBytes(DLLpath, My.Resources.Hunspellx64)
-                    Catch ex2 As Exception
-                        MessageBox.Show("Error writing Hunspellx64.dll" & vbNewLine & ex2.Message)
-                    End Try
-
-                    'Try again
-                    GoTo CreateNewHunspell
-                ElseIf DLLName = "Hunspellx86.dll" Then 'x86 dll
-                    'Copy the dll to the directory
-                    Try
-                        File.WriteAllBytes(DLLpath, My.Resources.Hunspellx86)
-                    Catch ex3 As Exception
-                        MessageBox.Show("Error writing Hunspellx86.dll" & vbNewLine & ex3.Message)
-                    End Try
-
-                    'Try again
-                    GoTo CreateNewHunspell
-                ElseIf DLLName = "NHunspell.dll" Then
-                    Try
-                        File.WriteAllBytes(DLLpath, My.Resources.NHunspell)
-                    Catch ex4 As Exception
-                        MessageBox.Show("Error writing NHunspell.dll" & vbNewLine & ex4.Message)
-                    End Try
-                Else
-                    MessageBox.Show(ex.Message & ex.StackTrace)
-                End If
-            Else
-                MessageBox.Show("SpellChecker cannot be created." & vbNewLine & "Spell checking will be disabled." & _
-                vbNewLine & vbNewLine & ex.Message & ex.StackTrace)
-                myNHunspell = Nothing
-            End If
+            MessageBox.Show("SpellChecker cannot be created." & vbNewLine & "Spell checking will be disabled." &
+            vbNewLine & vbNewLine & ex.Message & ex.StackTrace)
+            myNHunspell = Nothing
         End Try
 
         'myNHunspell = FromAssembly()
@@ -931,7 +888,7 @@ CreateNewHunspell:
                 If controlEnabled(TextBoxToEnable) Is Nothing Then
                     controlEnabled.Add(TextBoxToEnable, True)
                     mySpellCheckers.Add(TextBoxToEnable, New SpellCheckControl(myNHunspell))
-                    myCustomPaintingTextBoxes.Add(TextBoxToEnable, New CustomPaintTextBox(CType(TextBoxToEnable, TextBoxBase), _
+                    myCustomPaintingTextBoxes.Add(TextBoxToEnable, New CustomPaintTextBox(CType(TextBoxToEnable, TextBoxBase),
                                                   CType(mySpellCheckers(TextBoxToEnable), SpellCheckControl), Me))
                     AddHandler CType(myCustomPaintingTextBoxes(TextBoxToEnable), CustomPaintTextBox).CustomPaintComplete, AddressOf OnCustomPaintComplete
 
@@ -1014,7 +971,7 @@ CreateNewHunspell:
     ''' <param name="extendee">The control being tested</param>
     ''' <returns>A boolean representing whether spell check is enabled</returns>
     ''' <remarks></remarks>
-    <Category("SpellCheck"), DefaultValue(False)> _
+    <Category("SpellCheck"), DefaultValue(False)>
     Public Function GetSpellCheckEnabled(ByVal extendee As Control) As Boolean
         If controlEnabled(extendee) Is Nothing Then
             controlEnabled.Add(extendee, False)
@@ -1046,8 +1003,8 @@ CreateNewHunspell:
             controlEnabled.Add(extendee, (Input And (Not myNHunspell Is Nothing)))
 
             mySpellCheckers.Add(extendee, New SpellCheckControl(myNHunspell))
-            myCustomPaintingTextBoxes.Add(extendee, New CustomPaintTextBox(CType(extendee, TextBoxBase), _
-                                                                           CType(mySpellCheckers(extendee), SpellCheckControl), _
+            myCustomPaintingTextBoxes.Add(extendee, New CustomPaintTextBox(CType(extendee, TextBoxBase),
+                                                                           CType(mySpellCheckers(extendee), SpellCheckControl),
                                                                            Me))
             AddHandler CType(myCustomPaintingTextBoxes(extendee), CustomPaintTextBox).CustomPaintComplete, AddressOf OnCustomPaintComplete
 
@@ -1103,8 +1060,8 @@ CreateNewHunspell:
 
 
 
-    <Description("Sets the key that will bring up the full spell check dialog"), _
-     Browsable(True)> _
+    <Description("Sets the key that will bring up the full spell check dialog"),
+     Browsable(True)>
     Public Property ShortcutKey() As Shortcut
         Get
             Return _shortcutKey
@@ -1116,8 +1073,8 @@ CreateNewHunspell:
 
 
 
-    <Description("Sets the number of suggestions that will be returned on a right-click"), _
-     Browsable(True), DefaultValue(SuggestionNumbers.Five)> _
+    <Description("Sets the number of suggestions that will be returned on a right-click"),
+     Browsable(True), DefaultValue(SuggestionNumbers.Five)>
     Public Property NumberofSuggestions() As SuggestionNumbers
         Get
             Select Case myNumOfSuggestions
@@ -1151,7 +1108,7 @@ CreateNewHunspell:
 
 
 
-    <Description("Enables or disables spell checking as the user types.")> _
+    <Description("Enables or disables spell checking as the user types.")>
     Public Property SpellAsYouType() As Boolean
         Get
             Return _SpellAsYouType
@@ -1169,8 +1126,8 @@ CreateNewHunspell:
     Public Event LanguageChanged(ByVal sender As Object, ByVal NewLanguage As String)
 
 
-    <Description("Selects the language for spell checking. (Will only change the language on the developer's computer)")> _
-    <EditorAttribute(GetType(LanguageEditor), GetType(Drawing.Design.UITypeEditor))> _
+    <Description("Selects the language for spell checking. (Will only change the language on the developer's computer)")>
+    <EditorAttribute(GetType(LanguageEditor), GetType(Drawing.Design.UITypeEditor))>
     Public Property Language() As String
         Get
             Return _Language
@@ -1197,9 +1154,9 @@ CreateNewHunspell:
     End Property
 
 
-    <Description("If selected to false, whenever the program starts up, it will default to the designer selection" & vbNewLine & _
-                 "If selected to true, will disable any direct calls to change the language." & _
-                 "To change the language, use the SelectLanguage method")> _
+    <Description("If selected to false, whenever the program starts up, it will default to the designer selection" & vbNewLine &
+                 "If selected to true, will disable any direct calls to change the language." &
+                 "To change the language, use the SelectLanguage method")>
     Public Property MaintainUserChoice As Boolean
 
 #End Region
@@ -1360,7 +1317,7 @@ CreateNewHunspell:
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Public Sub ContextMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
-         Handles Suggestion1.Click, Suggestion2.Click, Suggestion3.Click, Suggestion4.Click, _
+         Handles Suggestion1.Click, Suggestion2.Click, Suggestion3.Click, Suggestion4.Click,
                  Suggestion5.Click, AddWord.Click, IgnoreWord.Click, IgnoreAll.Click, Spelling.Click
         'Get which button was clicked then perform its action.  Afterwards, remove all buttons
 
@@ -1379,7 +1336,7 @@ CreateNewHunspell:
             Case "qwr3Add"
                 AddWordToDictionary(AddWord.Tag)
             Case "qwr3Ignore"
-                IgnoreSelectedWord(IgnoreWord.Tag, CType(CType(sender, ToolStripMenuItem).Owner, ContextMenuStrip).Left, _
+                IgnoreSelectedWord(IgnoreWord.Tag, CType(CType(sender, ToolStripMenuItem).Owner, ContextMenuStrip).Left,
                                    CType(CType(sender, ToolStripMenuItem).Owner, ContextMenuStrip).Top)
             Case "qwr3IgnoreAll"
                 IgnoreAllWord(IgnoreAll.Tag)
@@ -1403,7 +1360,7 @@ CreateNewHunspell:
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub ContextMenu_Closed(ByVal sender As Object, _
+    Private Sub ContextMenu_Closed(ByVal sender As Object,
                                    ByVal e As System.Windows.Forms.ToolStripDropDownClosedEventArgs)
         If e.CloseReason = ToolStripDropDownCloseReason.ItemClicked Then Return
 
@@ -1462,7 +1419,7 @@ CreateNewHunspell:
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub ContextMenu_Opening(ByVal sender As System.Object, _
+    Private Sub ContextMenu_Opening(ByVal sender As System.Object,
                                     ByVal e As System.ComponentModel.CancelEventArgs)
         If Not _SpellAsYouType Then Return
 
@@ -1577,7 +1534,7 @@ CreateNewHunspell:
                 'Now find out if the mouse could be over the word or is in blank space
                 Using g As Graphics = .CreateGraphics
                     Dim y As Integer
-                    y = g.MeasureString(.GetCharFromPosition(currentMouseLocation), selFont).Height + _
+                    y = g.MeasureString(.GetCharFromPosition(currentMouseLocation), selFont).Height +
                         .GetPositionFromCharIndex(charIndex).Y
                     If currentMouseLocation.Y > y Or currentMouseLocation.Y < 0 Then
                         If CType(sender, ContextMenuStrip).Items.Count <> 0 Then
@@ -1789,7 +1746,7 @@ CreateNewHunspell:
             If wordStart = 0 Then
                 ownerTextBox.Text = Microsoft.VisualBasic.Strings.Replace(ownerTextBox.Text, OriginalWord, NewWord, 1)
             Else
-                ownerTextBox.Text = Microsoft.VisualBasic.Strings.Left(ownerTextBox.Text, wordStart - 1) & _
+                ownerTextBox.Text = Microsoft.VisualBasic.Strings.Left(ownerTextBox.Text, wordStart - 1) &
                                     Microsoft.VisualBasic.Strings.Replace(ownerTextBox.Text, OriginalWord, NewWord, wordStart, 1)
             End If
         End If
@@ -1817,7 +1774,7 @@ CreateNewHunspell:
     Private Sub AddWordToDictionary(ByVal WordToAdd As String)
         If Not boolDisableAddWordPrompt Then
             Dim result As DialogResult
-            result = MyDialog.Show("This will add the word " & Chr(34) & WordToAdd & Chr(34) & "." & _
+            result = MyDialog.Show("This will add the word " & Chr(34) & WordToAdd & Chr(34) & "." &
                                      vbNewLine & vbNewLine & "Are you sure?", "Add Word to Dictionary")
 
             'result = MessageBox.Show("This will add the word " & Chr(34) & WordToAdd & Chr(34) & "." & _
@@ -1922,7 +1879,7 @@ CreateNewHunspell:
     ''' <param name="LeftLocation"></param>
     ''' <param name="TopLocation"></param>
     ''' <remarks></remarks>
-    Private Sub IgnoreSelectedWord(ByVal callingTextBoxName As String, ByVal LeftLocation As Integer, _
+    Private Sub IgnoreSelectedWord(ByVal callingTextBoxName As String, ByVal LeftLocation As Integer,
                                    ByVal TopLocation As Integer)
         'We're only ignoring the currently selected word, so we need to get the range to add it to the spell checker
         Dim callingTextBox As TextBoxBase = Nothing
@@ -1936,7 +1893,7 @@ CreateNewHunspell:
         If callingTextBox Is Nothing Then Return
 
         'Get the range of the original word
-        Dim charIndex As Integer = _
+        Dim charIndex As Integer =
             callingTextBox.GetCharIndexFromPosition(originalMouseLocation)
 
         Dim misspelledRange As New CharacterRange(-1, -1)
@@ -2028,7 +1985,7 @@ CreateNewHunspell:
     Public Function GetAvailableLanguages() As String()
         Dim languageList() As String
 
-        Dim regKey As RegistryKey = _
+        Dim regKey As RegistryKey =
             Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender\Languages")
         languageList = TryCast(regKey.GetValue("LanguageList"), String())
 
@@ -2047,12 +2004,12 @@ CreateNewHunspell:
         Next
 
         If Not boolFound Then
-            Throw New ArgumentException("LanguageToRemove does not exist!", "LanguageToRemove", _
+            Throw New ArgumentException("LanguageToRemove does not exist!", "LanguageToRemove",
                     New Exception("The language " & NewLanguage & " is not currently loaded."))
         End If
 
         'Open the registry
-        Dim regKey As RegistryKey = _
+        Dim regKey As RegistryKey =
             Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender\Languages", True)
 
         Dim paths() As String = TryCast(regKey.GetValue(NewLanguage), String())
@@ -2133,9 +2090,9 @@ CreateNewHunspell:
         End Try
 
         'See if there are any words to add
-        If File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) & _
+        If File.Exists(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) &
                        "\SpellCheck\" & _Language & "AddedWords.dat") Then
-            Using r As New StreamReader(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) & _
+            Using r As New StreamReader(Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location) &
                                         "\SpellCheck\" & _Language & "AddedWords.dat")
                 While Not r.EndOfStream
                     myNHunspell.Add(Trim(Replace(r.ReadLine, vbNewLine, "")))
@@ -2250,12 +2207,12 @@ CreateNewHunspell:
         Next
 
         If Not boolFound Then
-            Throw New ArgumentException("LanguageToRemove does not exist!", "LanguageToRemove", _
+            Throw New ArgumentException("LanguageToRemove does not exist!", "LanguageToRemove",
                     New Exception("The language " & LanguageToRemove & " is not currently loaded."))
         End If
 
         'Open the registry
-        Dim regKey As RegistryKey = _
+        Dim regKey As RegistryKey =
             Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender\Languages", True)
 
         'Remove the language from the LanguageList
@@ -2311,7 +2268,7 @@ CreateNewHunspell:
         'Get the calling assembly's location
         Dim callingDir As String = Path.GetDirectoryName(Assembly.GetExecutingAssembly.Location)
 
-        Dim regKey As RegistryKey = _
+        Dim regKey As RegistryKey =
             Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender\Languages", True)
 
         Dim paths() As String = TryCast(regKey.GetValue("English"), String())
@@ -2383,9 +2340,9 @@ CreateNewHunspell:
 
     End Sub
 
-    Public Sub UpdateLanguageFiles(ByVal LanguageToUpdate As String, ByVal NewAffFileLocation As String, _
-                                   ByVal NewDicFileLocation As String, _
-                                   Optional ByVal OverwriteExistingFiles As Boolean = False, _
+    Public Sub UpdateLanguageFiles(ByVal LanguageToUpdate As String, ByVal NewAffFileLocation As String,
+                                   ByVal NewDicFileLocation As String,
+                                   Optional ByVal OverwriteExistingFiles As Boolean = False,
                                    Optional ByVal RemoveOlderFiles As Boolean = False)
         'Check if the language exists
         Dim boolFound As Boolean = False
@@ -2395,8 +2352,8 @@ CreateNewHunspell:
         Next
 
         If Not boolFound Then
-            Throw New ArgumentException("LanguageToRemove does not exist!", "LanguageToRemove", _
-                    New Exception("The language " & LanguageToUpdate & " is not currently loaded and cannot be updated." & _
+            Throw New ArgumentException("LanguageToRemove does not exist!", "LanguageToRemove",
+                    New Exception("The language " & LanguageToUpdate & " is not currently loaded and cannot be updated." &
                                   vbNewLine & "If you are trying to add a new language, use teh AddLanguage() method"))
         End If
 
@@ -2410,7 +2367,7 @@ CreateNewHunspell:
         End If
 
         'Open the registry key
-        Dim regKey As RegistryKey = _
+        Dim regKey As RegistryKey =
             Registry.CurrentUser.OpenSubKey("SOFTWARE\NHunspellTextBoxExtender\Languages", True)
 
         Dim paths() As String
@@ -2475,7 +2432,7 @@ CreateNewHunspell:
     Public Sub RunFullSpellChecker(ByRef callingTextBox As TextBoxBase)
         'first see if there is anything misspelled
         If Not CType(mySpellCheckers(callingTextBox), SpellCheckControl).HasSpellingErrors Then
-            MessageBox.Show("No spelling errors were detected." & vbNewLine & _
+            MessageBox.Show("No spelling errors were detected." & vbNewLine &
                             vbNewLine & "Spell check is complete.")
             Return
         End If
@@ -2491,9 +2448,9 @@ CreateNewHunspell:
         End If
 
         'Create the new spell checking form
-        Dim newSpellCheckForm As New SpellCheckForm(callingTextBox, _
-                                                    CType(mySpellCheckers(callingTextBox),  _
-                                                    SpellCheckControl), _
+        Dim newSpellCheckForm As New SpellCheckForm(callingTextBox,
+                                                    CType(mySpellCheckers(callingTextBox),
+                                                    SpellCheckControl),
                                                     boolDisableAddWordPrompt)
 
         'Show the form
