@@ -53,14 +53,6 @@ Public Class DreamViewControl
     Next
   End Sub
 
-  Public Sub EnableSpellCheck()
-    NHunspellTextBoxExtender1.SetSpellCheckEnabled(txtDream, True)
-  End Sub
-
-  Public Sub DisableSpellCheck()
-    NHunspellTextBoxExtender1.SetSpellCheckEnabled(txtDream, False)
-  End Sub
-
   Public Sub LoadDream(ByVal strFileName As String, ByVal locked As Boolean)
     Try
       If FileName <> strFileName Then

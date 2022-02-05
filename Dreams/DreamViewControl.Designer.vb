@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class DreamViewControl
     Inherits System.Windows.Forms.UserControl
 
     'UserControl1 overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class DreamViewControl
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(DreamViewControl))
@@ -47,7 +47,6 @@ Partial Class DreamViewControl
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lstImg = New System.Windows.Forms.ImageList(Me.components)
-        Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender()
         Me.lstImgDreams = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel3D2.SuspendLayout()
@@ -60,7 +59,6 @@ Partial Class DreamViewControl
         CType(Me.pbDream, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mnuThumbnail.SuspendLayout()
         Me.Panel3D4.SuspendLayout()
-        CType(Me.NHunspellTextBoxExtender1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel3D2
@@ -337,13 +335,6 @@ Partial Class DreamViewControl
         Me.lstImg.Images.SetKeyName(0, "Categories.ico")
         Me.lstImg.Images.SetKeyName(1, "Lucidity.ico")
         '
-        'NHunspellTextBoxExtender1
-        '
-        Me.NHunspellTextBoxExtender1.Language = "English"
-        Me.NHunspellTextBoxExtender1.MaintainUserChoice = False
-        Me.NHunspellTextBoxExtender1.ShortcutKey = System.Windows.Forms.Shortcut.F7
-        Me.NHunspellTextBoxExtender1.SpellAsYouType = True
-        '
         'lstImgDreams
         '
         Me.lstImgDreams.ImageStream = CType(resources.GetObject("lstImgDreams.ImageStream"), System.Windows.Forms.ImageListStreamer)
@@ -396,7 +387,6 @@ Partial Class DreamViewControl
         CType(Me.pbDream, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mnuThumbnail.ResumeLayout(False)
         Me.Panel3D4.ResumeLayout(False)
-        CType(Me.NHunspellTextBoxExtender1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -414,7 +404,6 @@ Partial Class DreamViewControl
     Public WithEvents dtDate As System.Windows.Forms.DateTimePicker
     Friend WithEvents objDreamSlider As lucidcode.Controls.MultiSliderControl.SliderControl
     Friend WithEvents cmbLucidity As System.Windows.Forms.ComboBox
-    Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender
     Friend WithEvents pnlDreamImage As lucidcode.Controls.Panel3D
     Friend WithEvents pbDream As System.Windows.Forms.PictureBox
     Friend WithEvents pnlText As lucidcode.Controls.Panel3D

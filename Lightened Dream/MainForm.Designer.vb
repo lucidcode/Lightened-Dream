@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MainForm
   Inherits System.Windows.Forms.Form
 
   'Form overrides dispose to clean up the component list.
-  <System.Diagnostics.DebuggerNonUserCode()> _
+  <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
       If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class MainForm
   'NOTE: The following procedure is required by the Windows Form Designer
   'It can be modified using the Windows Form Designer.  
   'Do not modify it using the code editor.
-  <System.Diagnostics.DebuggerStepThrough()> _
+  <System.Diagnostics.DebuggerStepThrough()>
   Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container()
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
@@ -101,10 +101,6 @@ Partial Class MainForm
     Me.mnuToolsWILD = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsWhyLD = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripSeparator()
-    Me.SpellingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuCheckSpelling = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuSpellingLanguage = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuEnglish = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsDataDirectory = New System.Windows.Forms.ToolStripMenuItem()
     Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -613,7 +609,7 @@ Partial Class MainForm
     'ToolsToolStripMenuItem
     '
     Me.ToolsToolStripMenuItem.BackColor = Global.LightenedDream.My.MySettings.Default.FormBackColor
-    Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsPlay, Me.ToolStripMenuItem22, Me.mnuToolsDreamSignBuilder, Me.mnuToolsRecentDreamSigns, Me.mnuToolsCompareDreams, Me.mnuToolsDreamTypeCount, Me.mnuToolsFIELD, Me.mnuToolsWILD, Me.mnuToolsWhyLD, Me.ToolStripMenuItem5, Me.SpellingToolStripMenuItem, Me.mnuToolsDataDirectory})
+    Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuToolsPlay, Me.ToolStripMenuItem22, Me.mnuToolsDreamSignBuilder, Me.mnuToolsRecentDreamSigns, Me.mnuToolsCompareDreams, Me.mnuToolsDreamTypeCount, Me.mnuToolsFIELD, Me.mnuToolsWILD, Me.mnuToolsWhyLD, Me.ToolStripMenuItem5, Me.mnuToolsDataDirectory})
     Me.ToolsToolStripMenuItem.ForeColor = Global.LightenedDream.My.MySettings.Default.FormForeColor
     Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
     Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(57, 24)
@@ -685,39 +681,6 @@ Partial Class MainForm
     '
     Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
     Me.ToolStripMenuItem5.Size = New System.Drawing.Size(208, 6)
-    '
-    'SpellingToolStripMenuItem
-    '
-    Me.SpellingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCheckSpelling, Me.mnuSpellingLanguage})
-    Me.SpellingToolStripMenuItem.Image = CType(resources.GetObject("SpellingToolStripMenuItem.Image"), System.Drawing.Image)
-    Me.SpellingToolStripMenuItem.Name = "SpellingToolStripMenuItem"
-    Me.SpellingToolStripMenuItem.Size = New System.Drawing.Size(211, 24)
-    Me.SpellingToolStripMenuItem.Text = "&Spelling"
-    '
-    'mnuCheckSpelling
-    '
-    Me.mnuCheckSpelling.Checked = True
-    Me.mnuCheckSpelling.CheckOnClick = True
-    Me.mnuCheckSpelling.CheckState = System.Windows.Forms.CheckState.Checked
-    Me.mnuCheckSpelling.Name = "mnuCheckSpelling"
-    Me.mnuCheckSpelling.Size = New System.Drawing.Size(175, 24)
-    Me.mnuCheckSpelling.Text = "Check Spelling"
-    '
-    'mnuSpellingLanguage
-    '
-    Me.mnuSpellingLanguage.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEnglish})
-    Me.mnuSpellingLanguage.Name = "mnuSpellingLanguage"
-    Me.mnuSpellingLanguage.Size = New System.Drawing.Size(175, 24)
-    Me.mnuSpellingLanguage.Text = "&Language"
-    '
-    'mnuEnglish
-    '
-    Me.mnuEnglish.Checked = True
-    Me.mnuEnglish.CheckOnClick = True
-    Me.mnuEnglish.CheckState = System.Windows.Forms.CheckState.Checked
-    Me.mnuEnglish.Name = "mnuEnglish"
-    Me.mnuEnglish.Size = New System.Drawing.Size(125, 24)
-    Me.mnuEnglish.Text = "&English"
     '
     'mnuToolsDataDirectory
     '
@@ -1493,10 +1456,6 @@ Partial Class MainForm
   Friend WithEvents ToolStripMenuItem19 As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ToolStripMenuItem20 As System.Windows.Forms.ToolStripSeparator
   Friend WithEvents ToolStripMenuItem21 As System.Windows.Forms.ToolStripSeparator
-  Friend WithEvents SpellingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuCheckSpelling As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuSpellingLanguage As System.Windows.Forms.ToolStripMenuItem
-  Friend WithEvents mnuEnglish As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents ExerciseToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuFileNewExercise As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuTrvNewExercise As System.Windows.Forms.ToolStripMenuItem
