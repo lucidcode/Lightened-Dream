@@ -248,7 +248,7 @@ Public Class SplashForm
           End Try
         End If
       Else
-        MessageBox.Show(ex.Message, "LightenedDream.Splash.LoadGraph()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        MessageBox.Show(ex.Message + vbNewLine + ex.StackTrace, "LightenedDream.Splash.LoadGraph()", MessageBoxButtons.OK, MessageBoxIcon.Error)
       End If
       Application.Exit()
     End Try

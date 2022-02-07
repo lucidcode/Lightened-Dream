@@ -1,9 +1,11 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿Imports NHunspellExtender
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ExerciseViewControl
   Inherits System.Windows.Forms.UserControl
 
   'UserControl1 overrides dispose to clean up the component list.
-  <System.Diagnostics.DebuggerNonUserCode()> _
+  <System.Diagnostics.DebuggerNonUserCode()>
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
     Try
       If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +22,11 @@ Partial Class ExerciseViewControl
   'NOTE: The following procedure is required by the Windows Form Designer
   'It can be modified using the Windows Form Designer.  
   'Do not modify it using the code editor.
-  <System.Diagnostics.DebuggerStepThrough()> _
+  <System.Diagnostics.DebuggerStepThrough()>
   Private Sub InitializeComponent()
     Me.components = New System.ComponentModel.Container
-        Dim MySettings1 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
-        Dim MySettings2 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
+    Dim MySettings1 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
+    Dim MySettings2 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings
     Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ExerciseViewControl))
     Me.txtExercise = New System.Windows.Forms.TextBox
     Me.Panel3D2 = New lucidcode.Controls.Panel3D
@@ -38,7 +40,7 @@ Partial Class ExerciseViewControl
     Me.lblTitle = New System.Windows.Forms.Label
     Me.Label2 = New System.Windows.Forms.Label
     Me.lstImg = New System.Windows.Forms.ImageList(Me.components)
-        Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender
+    Me.NHunspellTextBoxExtender1 = New NHunspellTextBoxExtender
     Me.Panel3D2.SuspendLayout()
     Me.Panel3D4.SuspendLayout()
     CType(Me.NHunspellTextBoxExtender1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -204,7 +206,7 @@ Partial Class ExerciseViewControl
     '
     Me.NHunspellTextBoxExtender1.Language = "English"
     Me.NHunspellTextBoxExtender1.MaintainUserChoice = False
-        Me.NHunspellTextBoxExtender1.NumberofSuggestions = NHunspellTextBoxExtender.SuggestionNumbers.Five
+    Me.NHunspellTextBoxExtender1.NumberofSuggestions = NHunspellTextBoxExtender.SuggestionNumbers.Five
     Me.NHunspellTextBoxExtender1.ShortcutKey = System.Windows.Forms.Shortcut.F7
     Me.NHunspellTextBoxExtender1.SpellAsYouType = True
     '
@@ -239,7 +241,7 @@ Partial Class ExerciseViewControl
   Public WithEvents dtDate As System.Windows.Forms.DateTimePicker
   Public WithEvents txtExercise As System.Windows.Forms.TextBox
   Friend WithEvents cmbLucidity As System.Windows.Forms.ComboBox
-    Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender
+  Friend WithEvents NHunspellTextBoxExtender1 As NHunspellTextBoxExtender
   Public WithEvents txtTask As System.Windows.Forms.TextBox
 
 End Class

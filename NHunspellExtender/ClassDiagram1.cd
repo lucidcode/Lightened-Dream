@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NHunspellExtender.AddLanguage" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAECCAAIQCgACAAAQCCBAAAAAAAAIAAAAAAAQ=</HashCode>
+      <FileName>AddLanguage.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHunspellExtender.LanguageEditor" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LanguageEditor.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHunspellExtender.LanguageListBox" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKQAAAAAAAAAAA=</HashCode>
+      <FileName>LanguageListBox.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHunspellExtender.MyDialog" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEYABQCCAAAAAAAACAAQACABAEAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>MyDialog.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHunspellExtender.NHunspellTextBoxExtender" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="0.5" Width="2" />
+    <Members>
+      <Field Name="_Language" Hidden="true" />
+      <Field Name="_shortcutKey" Hidden="true" />
+      <Field Name="_SpellAsYouType" Hidden="true" />
+      <Field Name="AddWord" Hidden="true" />
+      <Method Name="AddWordToDictionary" Hidden="true" />
+      <Field Name="boolDisableAddWordPrompt" Hidden="true" />
+      <Method Name="ContextMenu_Closed" Hidden="true" />
+      <Method Name="ContextMenu_Opening" Hidden="true" />
+      <Method Name="ContextMenuItem_Click" Hidden="true" />
+      <Field Name="controlEnabled" Hidden="true" />
+      <Field Name="controlPressed" Hidden="true" />
+      <Field Name="currentMouseLocation" Hidden="true" />
+      <Field Name="currentTextBox" Hidden="true" />
+      <Field Name="drawTest" Hidden="true" />
+      <Field Name="IgnoreAll" Hidden="true" />
+      <Method Name="IgnoreAllWord" Hidden="true" />
+      <Method Name="IgnoreSelectedWord" Hidden="true" />
+      <Field Name="IgnoreWord" Hidden="true" />
+      <Field Name="myContextMenus" Hidden="true" />
+      <Field Name="myControls" Hidden="true" />
+      <Field Name="myCustomPaintingTextBoxes" Hidden="true" />
+      <Field Name="myNHunspell" Hidden="true" />
+      <Field Name="myNumOfSuggestions" Hidden="true" />
+      <Field Name="mySpellCheckers" Hidden="true" />
+      <Field Name="originalMouseLocation" Hidden="true" />
+      <Field Name="ownerTextBox" Hidden="true" />
+      <Method Name="ReplaceWord" Hidden="true" />
+      <Field Name="SB_THUMBPOSITION" Hidden="true" />
+      <Field Name="SBS_HORZ" Hidden="true" />
+      <Field Name="SBS_VERT" Hidden="true" />
+      <Field Name="Separator1" Hidden="true" />
+      <Field Name="Separator2" Hidden="true" />
+      <Field Name="Spelling" Hidden="true" />
+      <Field Name="Suggestion1" Hidden="true" />
+      <Field Name="Suggestion2" Hidden="true" />
+      <Field Name="Suggestion3" Hidden="true" />
+      <Field Name="Suggestion4" Hidden="true" />
+      <Field Name="Suggestion5" Hidden="true" />
+      <Method Name="TextBox_KeyDown" Hidden="true" />
+      <Method Name="TextBox_KeyPress" Hidden="true" />
+      <Method Name="TextBox_MouseMove" Hidden="true" />
+      <Method Name="TextBox_TextChanged" Hidden="true" />
+      <Field Name="WM_HSCROLL" Hidden="true" />
+      <Field Name="WM_SETREDRAW" Hidden="true" />
+      <Field Name="WM_VSCROLL" Hidden="true" />
+    </Members>
+    <NestedTypes>
+      <Class Name="NHunspellExtender.NHunspellTextBoxExtender.CustomPaintTextBox">
+        <Members>
+          <Field Name="bufferGraphics" Hidden="true" />
+          <Method Name="CustomPaint" Hidden="true" />
+          <Method Name="DrawWave" Hidden="true" />
+          <Method Name="GetOffsets" Hidden="true" />
+          <Field Name="myBitmap" Hidden="true" />
+          <Field Name="myParent" Hidden="true" />
+          <Field Name="mySpellCheckControl" Hidden="true" />
+          <Field Name="parentTextBox" Hidden="true" />
+          <Method Name="TextBoxBase_ClientSizeChanged" Hidden="true" />
+          <Method Name="TextBoxBase_HandleCreated" Hidden="true" />
+          <Field Name="textBoxGraphics" Hidden="true" />
+        </Members>
+        <TypeIdentifier>
+          <NewMemberFileName>NHunspellTextBoxExtender.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Enum Name="NHunspellExtender.NHunspellTextBoxExtender.SuggestionNumbers" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>NHunspellTextBoxExtender.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CTkYCDhDiJGWBJgDAAFDAUYAAAAEkFADAAAlHAAQFGQ=</HashCode>
+      <FileName>NHunspellTextBoxExtender.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NHunspellExtender.SpellCheckControl">
+    <Position X="4.75" Y="1.25" Width="2" />
+    <Members>
+      <Field Name="_dontResetIgnoreRanges" Hidden="true" />
+      <Field Name="_ignoreRange" Hidden="true" />
+      <Field Name="_setTextCalledFirst" Hidden="true" />
+      <Field Name="_spellingErrorRanges" Hidden="true" />
+      <Field Name="_spellingErrors" Hidden="true" />
+      <Field Name="_Text" Hidden="true" />
+      <Method Name="FindFirstLetterOrDigitFromPosition" Hidden="true" />
+      <Method Name="FindLastLetterOrDigitFromPosition" Hidden="true" />
+      <Field Name="FullText" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>QAAICAABgABAACQDAIICACAAABAEAQAEAwJEAAAAAAA=</HashCode>
+      <FileName>SpellCheckControl.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHunspellExtender.SpellCheckForm" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BASYRAEQECACAAAQARShgAJGAAAYAUAEAAgQAAAgAAA=</HashCode>
+      <FileName>SpellCheckForm.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NHunspellExtender.My.MySettings" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="NHunspellExtender.My.Resources.Resources" Collapsed="true">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAABEEAAAQAAABAIAQAAAAAAAIQ=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="NHunspellExtender.My.MySettingsProperty" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

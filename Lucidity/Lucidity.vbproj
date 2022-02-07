@@ -100,10 +100,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\References\lucidcode.Controls.ColorPicker.dll</HintPath>
     </Reference>
-    <Reference Include="Spell Checker, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\References\Spell Checker.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -365,6 +361,10 @@
     <ProjectReference Include="..\Dreams\Dreams.vbproj">
       <Project>{3CBCDCC5-6CE6-4D50-AD8C-B60F73EF489D}</Project>
       <Name>Dreams</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NHunspellExtender\NHunspellExtender.vbproj">
+      <Project>{58e377e9-c3b8-440f-ad1b-3aa40a6958f3}</Project>
+      <Name>NHunspellExtender</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

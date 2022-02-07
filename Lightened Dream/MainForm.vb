@@ -69,7 +69,7 @@ Public Class MainForm
       Try
         If Environment.GetCommandLineArgs.Length > 1 Then
           strImportFileName = New FileInfo(Environment.GetCommandLineArgs(1)).Name
-          Dim xmlReader As XmlReader = xmlReader.Create(Environment.GetCommandLineArgs(1))
+          Dim xmlReader As XmlReader = XmlReader.Create(Environment.GetCommandLineArgs(1))
           xmlReader.Read()
           strImportType = xmlReader.Name
           If xmlReader.Name = "xml" Then
@@ -121,7 +121,6 @@ Public Class MainForm
       LoadGUI()
       LoadTree()
       LoadSpellCheckLanguages()
-      'Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
       lblStatus.Text = ""
       toolBack.Enabled = False
       m_arrBackHistory.Clear()
@@ -608,7 +607,7 @@ Public Class MainForm
       Dim xmlDocSettings As New XmlDocument
 
       ' Make sure the file exists
-      If Not File.Exists(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\lucidcode\SpellCheck.xml") Then
+      If Not File.Exists(m_strPath & "\SpellCheck.ld3") Then
         Dim strXml As String = "<lucidcode>"
 
         strXml += "<Language>English</Language>"
@@ -616,10 +615,10 @@ Public Class MainForm
 
         strXml += "</lucidcode>"
         xmlDocSettings.LoadXml(strXml)
-        xmlDocSettings.Save(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\lucidcode\SpellCheck.xml")
+        xmlDocSettings.Save(m_strPath & "\SpellCheck.ld3")
       End If
 
-      xmlDocSettings.Load(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\lucidcode\SpellCheck.xml")
+      xmlDocSettings.Load(m_strPath & "\SpellCheck.ld3")
       If xmlDocSettings.DocumentElement.SelectSingleNode("CheckSpelling").InnerText = "True" Then
         m_objDreamViewControl.EnableSpellCheck()
         m_objLucidItemControl.EnableSpellCheck()
@@ -636,7 +635,7 @@ Public Class MainForm
   Private Sub mnuCheckSpelling_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuCheckSpelling.Click
     Try
       Dim xmlDocSettings As New XmlDocument
-      xmlDocSettings.Load(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\lucidcode\SpellCheck.xml")
+      xmlDocSettings.Load(m_strPath & "\SpellCheck.ld3")
 
       If mnuCheckSpelling.Checked Then
         xmlDocSettings.DocumentElement.SelectSingleNode("CheckSpelling").InnerText = "True"
@@ -648,7 +647,7 @@ Public Class MainForm
         m_objLucidItemControl.DisableSpellCheck()
       End If
 
-      xmlDocSettings.Save(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) & "\lucidcode\SpellCheck.xml")
+      xmlDocSettings.Save(m_strPath & "\SpellCheck.ld3")
 
     Catch ex As Exception
       MessageBox.Show(ex.Message, "LightenedDream.SetSpellCheck()", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -1983,7 +1982,7 @@ Public Class MainForm
         i = i + 1
       Next
       ' Create a DataObject containg the array of ListViewItems.
-      sender.DoDragDrop(New  _
+      sender.DoDragDrop(New _
       DataObject("System.Windows.Forms.TreeNode()", myItems), DragDropEffects.Link)
     Catch ex As Exception
       MessageBox.Show(ex.Message, "LightenedDream.Main.ItemDrag()", MessageBoxButtons.OK, MessageBoxIcon.Error)
