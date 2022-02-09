@@ -292,6 +292,7 @@ Public Class MainForm
       ' Make sure we have an entry
       If Directory.GetDirectories(m_strPath + "Dreams").Length = 0 Then
         CreateWelcomeDream()
+        CreateDefaultCategories()
       End If
 
       ' Load each year
@@ -341,6 +342,14 @@ Public Class MainForm
     Catch ex As Exception
       MessageBox.Show(ex.Message, "LightenedDream.LoadDreams()", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Try
+  End Sub
+
+  Private Sub CreateDefaultCategories()
+    Directory.CreateDirectory(m_strPath + "Categories\Characters")
+    Directory.CreateDirectory(m_strPath + "Categories\Objects")
+    Directory.CreateDirectory(m_strPath + "Categories\Themes")
+    Directory.CreateDirectory(m_strPath + "Categories\Actions")
+    Directory.CreateDirectory(m_strPath + "Categories\Locations")
   End Sub
 
   Private Sub CreateWelcomeDream()
