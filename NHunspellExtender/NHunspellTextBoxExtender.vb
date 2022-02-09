@@ -624,7 +624,6 @@ GetNextLine:
                     'Check if the spell check directory already exists.  If not, add it
                     If Not Directory.Exists(callingDir & "\SpellCheck") Then
                         Directory.CreateDirectory(callingDir & "\SpellCheck")
-                        Dim newDirInfo As New DirectoryInfo(callingDir & "\SpellCheck")
                     End If
 
                     'Check if the spell check files already exist.  If not, add it
@@ -676,6 +675,10 @@ GetNextLine:
             End If
             USaff = paths(0)
             USdic = paths(1)
+
+            If Not Directory.Exists(callingDir & "\SpellCheck") Then
+                Directory.CreateDirectory(callingDir & "\SpellCheck")
+            End If
 
             'check if these files exist
             If Not File.Exists(USaff) Then
@@ -2185,7 +2188,6 @@ CreateNewHunspell:
             'Check if the spell check directory already exists.  If not, add it
             If Not Directory.Exists(callingDir & "\SpellCheck") Then
                 Directory.CreateDirectory(callingDir & "\SpellCheck")
-                Dim newDirInfo As New DirectoryInfo(callingDir & "\SpellCheck")
             End If
 
             'Check if the spell check files already exist.  If not, add it
