@@ -2653,4 +2653,19 @@ Public Class MainForm
       mnuToolNewCategoryItem.Enabled = True
     End If
   End Sub
+
+  Private Sub ToggleFullScreen()
+    If Me.FormBorderStyle = FormBorderStyle.None Then
+      Me.FormBorderStyle = FormBorderStyle.Sizable
+    Else
+      Me.WindowState = FormWindowState.Normal
+      Me.FormBorderStyle = FormBorderStyle.None
+      Me.WindowState = FormWindowState.Maximized
+    End If
+
+  End Sub
+
+  Private Sub mnuFullScreen_Click(sender As Object, e As EventArgs) Handles mnuFullScreen.Click
+    ToggleFullScreen()
+  End Sub
 End Class
