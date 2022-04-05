@@ -2245,17 +2245,28 @@ Public Class MainForm
       mnuTrvPlay.Enabled = False
       mnuTrvDelete.Enabled = False
       mnuTrvSendTo.Enabled = False
+      mnuTrvSendToDesktop.Enabled = False
       mnuTrvExplorer.Enabled = False
     Else
       mnuTrvPlay.Enabled = mnuToolsPlay.Enabled
       mnuTrvDelete.Enabled = toolDelete.Enabled
       mnuTrvSendTo.Enabled = toolDelete.Enabled
+      mnuTrvSendToDesktop.Enabled = toolDelete.Enabled
       mnuTrvExplorer.Enabled = True
     End If
 
     mnuTreeNewCategoryItem.Enabled = False
     If TypeOf (trvMain.SelectedNode.Tag) Is Categories.Tags.CategoryFolder Then
       mnuTreeNewCategoryItem.Enabled = True
+    End If
+
+    mnuTrvSendToFile.Enabled = False
+    If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Or
+      TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamsFolder Or
+      TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.MonthFolder Or
+      TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.YearFolder Or TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.YearsFolder Then
+      mnuTrvSendToFile.Enabled = True
+      mnuTrvSendTo.Enabled = True
     End If
   End Sub
 
@@ -2667,5 +2678,113 @@ Public Class MainForm
 
   Private Sub mnuFullScreen_Click(sender As Object, e As EventArgs) Handles mnuFullScreen.Click
     ToggleFullScreen()
+  End Sub
+
+  Dim xmlDocDreamTypes As New XmlDocument
+  Private Sub mnuTrvSendToFile_Click(sender As Object, e As EventArgs) Handles mnuTrvSendToFile.Click
+    Try
+
+      Dim saveFileDialog As New SaveFileDialog()
+      saveFileDialog.Filter = "Text Files|*.txt"
+
+      If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Then
+        Dim dreamFileName As String = CType(trvMain.SelectedNode.Tag, Dreams.Tags.DreamFile).Path
+        Dim dream As New XmlDocument
+        dream.Load(dreamFileName)
+
+        Dim dreamDate As New Date
+        Try
+          Dim arrDate() As String = Split(dream.DocumentElement.SelectSingleNode("Date").InnerText, "-")
+          Dim arrTime() As String = Split(dream.DocumentElement.SelectSingleNode("Time").InnerText, ":")
+          dreamDate = New Date(arrDate(0), arrDate(1), arrDate(2), arrTime(0), arrTime(1), 0)
+        Catch ex As Exception
+        End Try
+
+        Dim dreamTitle As String = $"{Format(dreamDate, "yyyy-MM-dd")} - {dream.DocumentElement.SelectSingleNode("Title").InnerText}"
+
+        saveFileDialog.FileName = dreamTitle
+
+      End If
+
+      If saveFileDialog.ShowDialog() = DialogResult.OK Then
+        Dim exportFileName As String = saveFileDialog.FileName
+
+        If File.Exists(exportFileName) Then
+          File.Delete(exportFileName)
+        End If
+
+        xmlDocDreamTypes.Load(m_strPath & "DreamTypes.ld3")
+
+        If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Then
+          Dim dreamFileName As String = CType(trvMain.SelectedNode.Tag, Dreams.Tags.DreamFile).Path
+          ExportDream(exportFileName, dreamFileName)
+        Else
+          Dim dreamFolder As String = m_strPath + "Dreams"
+
+          If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.MonthFolder Then
+            dreamFolder = CType(trvMain.SelectedNode.Tag, Dreams.Tags.MonthFolder).Path
+          End If
+          If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.YearFolder Then
+            dreamFolder = CType(trvMain.SelectedNode.Tag, Dreams.Tags.YearFolder).Path
+          End If
+
+          For Each dreamFile As String In Directory.GetFiles(dreamFolder, "*.ld3", SearchOption.AllDirectories)
+            ExportDream(exportFileName, dreamFile)
+          Next
+
+        End If
+
+        Shell("explorer /select, """ & New FileInfo(exportFileName).DirectoryName & "\" & New FileInfo(exportFileName).Name & """", AppWinStyle.NormalFocus)
+
+      End If
+
+
+      If TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamFile Or
+    TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.DreamsFolder Or
+    TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.MonthFolder Or
+    TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.YearFolder Or TypeOf (trvMain.SelectedNode.Tag) Is Dreams.Tags.YearsFolder Then
+
+      End If
+
+    Catch ex As Exception
+      MessageBox.Show(ex.Message, "LightenedDream.ExportToFile()", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End Try
+  End Sub
+
+  Private Sub ExportDream(exportFileName As String, dreamFileName As String)
+    Dim dream As New XmlDocument
+    dream.Load(dreamFileName)
+
+    Dim dreamDate As New Date
+    Try
+      Dim arrDate() As String = Split(dream.DocumentElement.SelectSingleNode("Date").InnerText, "-")
+      Dim arrTime() As String = Split(dream.DocumentElement.SelectSingleNode("Time").InnerText, ":")
+      dreamDate = New Date(arrDate(0), arrDate(1), arrDate(2), arrTime(0), arrTime(1), 0)
+    Catch ex As Exception
+    End Try
+
+    Dim dreamExport As String = $"{Format(dreamDate, "yyyy-MM-dd")} - {dream.DocumentElement.SelectSingleNode("Title").InnerText}"
+    dreamExport += $" ({dream.DocumentElement.SelectSingleNode("Sleep").InnerText} - {dream.DocumentElement.SelectSingleNode("Awake").InnerText})"
+    dreamExport += vbNewLine
+
+    If Not dream.DocumentElement.SelectSingleNode("Lucidity") Is Nothing Then
+      For Each xmlDreamType As XmlNode In xmlDocDreamTypes.DocumentElement.SelectNodes("DreamType")
+        If xmlDreamType.InnerText.StartsWith(dream.DocumentElement.SelectSingleNode("Lucidity").InnerText) Then
+          dreamExport += xmlDreamType.InnerText
+          dreamExport += vbNewLine
+          Exit For
+        End If
+      Next
+    End If
+
+    dreamExport += dream.DocumentElement.SelectSingleNode("Dream").InnerText
+    dreamExport += vbNewLine
+
+    If Not dream.DocumentElement.SelectSingleNode("Comments") Is Nothing Then
+      dreamExport += dream.DocumentElement.SelectSingleNode("Comments").InnerText
+      dreamExport += vbNewLine
+    End If
+
+    File.AppendAllText(exportFileName, dreamExport)
   End Sub
 End Class
