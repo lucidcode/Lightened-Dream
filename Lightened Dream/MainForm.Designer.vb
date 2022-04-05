@@ -5,13 +5,13 @@ Partial Class MainForm
   'Form overrides dispose to clean up the component list.
   <System.Diagnostics.DebuggerNonUserCode()> _
   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-    Try
-      If disposing AndAlso components IsNot Nothing Then
-        components.Dispose()
-      End If
-    Finally
-      MyBase.Dispose(disposing)
-    End Try
+  Try
+    If disposing AndAlso components IsNot Nothing Then
+    components.Dispose()
+    End If
+  Finally
+    MyBase.Dispose(disposing)
+  End Try
   End Sub
 
   'Required by the Windows Form Designer
@@ -22,25 +22,25 @@ Partial Class MainForm
   'Do not modify it using the code editor.
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
-    Me.components = New System.ComponentModel.Container()
-    Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
-    Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Node0")
-    Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Dreams", New System.Windows.Forms.TreeNode() {TreeNode13})
-    Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Characters")
-    Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Locations")
-    Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Objects")
-    Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Actions")
-    Dim TreeNode19 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Themes")
-    Dim TreeNode20 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Categories", New System.Windows.Forms.TreeNode() {TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19})
-    Dim TreeNode21 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("REM Cycles")
-    Dim TreeNode22 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Reality Checks")
-    Dim TreeNode23 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Dream Inductions")
-    Dim TreeNode24 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Lucidity", New System.Windows.Forms.TreeNode() {TreeNode21, TreeNode22, TreeNode23})
-    Dim MySettings2 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings()
-    Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-    Dim CustomLabel3 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-    Dim CustomLabel4 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
-    Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+  Me.components = New System.ComponentModel.Container()
+  Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
+    Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Node0")
+    Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Dreams", New System.Windows.Forms.TreeNode() {TreeNode1})
+    Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Characters")
+    Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Locations")
+    Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Objects")
+    Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Actions")
+    Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Themes")
+    Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Categories", New System.Windows.Forms.TreeNode() {TreeNode3, TreeNode4, TreeNode5, TreeNode6, TreeNode7})
+    Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("REM Cycles")
+    Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Reality Checks")
+    Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Dream Inductions")
+    Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Lucidity", New System.Windows.Forms.TreeNode() {TreeNode9, TreeNode10, TreeNode11})
+    Dim MySettings1 As lucidcode.LightenedDream.Dreams.My.MySettings = New lucidcode.LightenedDream.Dreams.My.MySettings()
+    Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+    Dim CustomLabel1 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+    Dim CustomLabel2 As System.Windows.Forms.DataVisualization.Charting.CustomLabel = New System.Windows.Forms.DataVisualization.Charting.CustomLabel()
+    Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
     Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
     Me.toolNew = New System.Windows.Forms.ToolStripDropDownButton()
     Me.mnuToolNewDream = New System.Windows.Forms.ToolStripMenuItem()
@@ -106,6 +106,8 @@ Partial Class MainForm
     Me.mnuSpellingLanguage = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuEnglish = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuToolsDataDirectory = New System.Windows.Forms.ToolStripMenuItem()
+    Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuFullScreen = New System.Windows.Forms.ToolStripMenuItem()
     Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuHelpAbout = New System.Windows.Forms.ToolStripMenuItem()
     Me.mnuQuickStart = New System.Windows.Forms.ToolStripMenuItem()
@@ -159,8 +161,7 @@ Partial Class MainForm
     Me.pnlSearching = New lucidcode.Controls.Panel3D()
     Me.graph = New System.Windows.Forms.DataVisualization.Charting.Chart()
     Me.tmrSaving = New System.Windows.Forms.Timer(Me.components)
-    Me.ViewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-    Me.mnuFullScreen = New System.Windows.Forms.ToolStripMenuItem()
+    Me.mnuTrvSendToFile = New System.Windows.Forms.ToolStripMenuItem()
     Me.ToolStrip1.SuspendLayout()
     Me.Panel3D3.SuspendLayout()
     Me.Panel3D6.SuspendLayout()
@@ -183,7 +184,7 @@ Partial Class MainForm
     'ToolStrip1
     '
     Me.ToolStrip1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.ToolStrip1.AutoSize = False
     Me.ToolStrip1.BackColor = System.Drawing.Color.Transparent
     Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
@@ -380,7 +381,7 @@ Partial Class MainForm
     'Panel3D6
     '
     Me.Panel3D6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.Panel3D6.BackColor = Global.LightenedDream.My.MySettings.Default.TitleBackColor
     Me.Panel3D6.Controls.Add(Me.Label16)
     Me.Panel3D6.Controls.Add(Me.Label4)
@@ -393,7 +394,7 @@ Partial Class MainForm
     'Label16
     '
     Me.Label16.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.Label16.BackColor = System.Drawing.Color.Transparent
     Me.Label16.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.LightenedDream.My.MySettings.Default, "TitleForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.Label16.Font = New System.Drawing.Font("Verdana", 8.0!, System.Drawing.FontStyle.Bold)
@@ -447,7 +448,7 @@ Partial Class MainForm
     Me.NewToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText
     Me.NewToolStripMenuItem.Image = CType(resources.GetObject("NewToolStripMenuItem.Image"), System.Drawing.Image)
     Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-    Me.NewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+    Me.NewToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
     Me.NewToolStripMenuItem.Text = "&New"
     '
     'DreamToolStripMenuItem
@@ -533,7 +534,7 @@ Partial Class MainForm
     Me.mnuFileSave.Image = CType(resources.GetObject("mnuFileSave.Image"), System.Drawing.Image)
     Me.mnuFileSave.Name = "mnuFileSave"
     Me.mnuFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-    Me.mnuFileSave.Size = New System.Drawing.Size(180, 22)
+    Me.mnuFileSave.Size = New System.Drawing.Size(158, 22)
     Me.mnuFileSave.Text = "&Save"
     '
     'mnuFileDelete
@@ -541,14 +542,14 @@ Partial Class MainForm
     Me.mnuFileDelete.Image = CType(resources.GetObject("mnuFileDelete.Image"), System.Drawing.Image)
     Me.mnuFileDelete.Name = "mnuFileDelete"
     Me.mnuFileDelete.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Delete), System.Windows.Forms.Keys)
-    Me.mnuFileDelete.Size = New System.Drawing.Size(180, 22)
+    Me.mnuFileDelete.Size = New System.Drawing.Size(158, 22)
     Me.mnuFileDelete.Text = "&Delete"
     '
     'ImportToolStripMenuItem
     '
     Me.ImportToolStripMenuItem.Image = Global.LightenedDream.My.Resources.Resources.Graph_Import
     Me.ImportToolStripMenuItem.Name = "ImportToolStripMenuItem"
-    Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+    Me.ImportToolStripMenuItem.Size = New System.Drawing.Size(158, 22)
     Me.ImportToolStripMenuItem.Text = "&Import..."
     Me.ImportToolStripMenuItem.Visible = False
     '
@@ -556,21 +557,21 @@ Partial Class MainForm
     '
     Me.mnuFileExport.Image = Global.LightenedDream.My.Resources.Resources.Graph_Export
     Me.mnuFileExport.Name = "mnuFileExport"
-    Me.mnuFileExport.Size = New System.Drawing.Size(180, 22)
+    Me.mnuFileExport.Size = New System.Drawing.Size(158, 22)
     Me.mnuFileExport.Text = "Ex&port"
     Me.mnuFileExport.Visible = False
     '
     'ToolStripMenuItem3
     '
     Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-    Me.ToolStripMenuItem3.Size = New System.Drawing.Size(177, 6)
+    Me.ToolStripMenuItem3.Size = New System.Drawing.Size(155, 6)
     '
     'mnuFileExit
     '
     Me.mnuFileExit.Image = Global.LightenedDream.My.Resources.Resources.Graph_Import
     Me.mnuFileExit.Name = "mnuFileExit"
     Me.mnuFileExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-    Me.mnuFileExit.Size = New System.Drawing.Size(180, 22)
+    Me.mnuFileExit.Size = New System.Drawing.Size(158, 22)
     Me.mnuFileExit.Text = "E&xit"
     '
     'LucidityToolStripMenuItem
@@ -585,7 +586,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityREMCycles.Image = CType(resources.GetObject("mnuLucidityREMCycles.Image"), System.Drawing.Image)
     Me.mnuLucidityREMCycles.Name = "mnuLucidityREMCycles"
-    Me.mnuLucidityREMCycles.Size = New System.Drawing.Size(180, 22)
+    Me.mnuLucidityREMCycles.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityREMCycles.Tag = "REM Cycles"
     Me.mnuLucidityREMCycles.Text = "&REM Cycles"
     '
@@ -593,7 +594,7 @@ Partial Class MainForm
     '
     Me.mnuLuciditySubliminals.Image = CType(resources.GetObject("mnuLuciditySubliminals.Image"), System.Drawing.Image)
     Me.mnuLuciditySubliminals.Name = "mnuLuciditySubliminals"
-    Me.mnuLuciditySubliminals.Size = New System.Drawing.Size(180, 22)
+    Me.mnuLuciditySubliminals.Size = New System.Drawing.Size(135, 22)
     Me.mnuLuciditySubliminals.Tag = "Subliminals"
     Me.mnuLuciditySubliminals.Text = "&Subliminals"
     '
@@ -601,7 +602,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityRecordings.Image = CType(resources.GetObject("mnuLucidityRecordings.Image"), System.Drawing.Image)
     Me.mnuLucidityRecordings.Name = "mnuLucidityRecordings"
-    Me.mnuLucidityRecordings.Size = New System.Drawing.Size(180, 22)
+    Me.mnuLucidityRecordings.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityRecordings.Tag = "Recordings"
     Me.mnuLucidityRecordings.Text = "&Recordings"
     '
@@ -609,7 +610,7 @@ Partial Class MainForm
     '
     Me.mnuLucidityReadings.Image = CType(resources.GetObject("mnuLucidityReadings.Image"), System.Drawing.Image)
     Me.mnuLucidityReadings.Name = "mnuLucidityReadings"
-    Me.mnuLucidityReadings.Size = New System.Drawing.Size(180, 22)
+    Me.mnuLucidityReadings.Size = New System.Drawing.Size(135, 22)
     Me.mnuLucidityReadings.Tag = "Readings"
     Me.mnuLucidityReadings.Text = "&Readings"
     '
@@ -627,74 +628,74 @@ Partial Class MainForm
     Me.mnuToolsPlay.Image = CType(resources.GetObject("mnuToolsPlay.Image"), System.Drawing.Image)
     Me.mnuToolsPlay.Name = "mnuToolsPlay"
     Me.mnuToolsPlay.ShortcutKeys = System.Windows.Forms.Keys.F5
-    Me.mnuToolsPlay.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsPlay.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsPlay.Text = "&Play"
     '
     'ToolStripMenuItem22
     '
     Me.ToolStripMenuItem22.Name = "ToolStripMenuItem22"
-    Me.ToolStripMenuItem22.Size = New System.Drawing.Size(177, 6)
+    Me.ToolStripMenuItem22.Size = New System.Drawing.Size(176, 6)
     '
     'mnuToolsDreamSignBuilder
     '
     Me.mnuToolsDreamSignBuilder.Image = CType(resources.GetObject("mnuToolsDreamSignBuilder.Image"), System.Drawing.Image)
     Me.mnuToolsDreamSignBuilder.Name = "mnuToolsDreamSignBuilder"
-    Me.mnuToolsDreamSignBuilder.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsDreamSignBuilder.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsDreamSignBuilder.Text = "&Dream Sign Builder"
     '
     'mnuToolsRecentDreamSigns
     '
     Me.mnuToolsRecentDreamSigns.Image = CType(resources.GetObject("mnuToolsRecentDreamSigns.Image"), System.Drawing.Image)
     Me.mnuToolsRecentDreamSigns.Name = "mnuToolsRecentDreamSigns"
-    Me.mnuToolsRecentDreamSigns.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsRecentDreamSigns.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsRecentDreamSigns.Text = "&Recent Dream Signs"
     '
     'mnuToolsCompareDreams
     '
     Me.mnuToolsCompareDreams.Image = Global.LightenedDream.My.Resources.Resources.Dream4
     Me.mnuToolsCompareDreams.Name = "mnuToolsCompareDreams"
-    Me.mnuToolsCompareDreams.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsCompareDreams.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsCompareDreams.Text = "&Compare Dreams"
     '
     'mnuToolsDreamTypeCount
     '
     Me.mnuToolsDreamTypeCount.Image = Global.LightenedDream.My.Resources.Resources.Dream4
     Me.mnuToolsDreamTypeCount.Name = "mnuToolsDreamTypeCount"
-    Me.mnuToolsDreamTypeCount.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsDreamTypeCount.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsDreamTypeCount.Text = "&Dream Type Count"
     '
     'mnuToolsFIELD
     '
     Me.mnuToolsFIELD.Image = Global.LightenedDream.My.Resources.Resources.Lucidity2
     Me.mnuToolsFIELD.Name = "mnuToolsFIELD"
-    Me.mnuToolsFIELD.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsFIELD.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsFIELD.Text = "FIELD Inducer"
     '
     'mnuToolsWILD
     '
     Me.mnuToolsWILD.Image = CType(resources.GetObject("mnuToolsWILD.Image"), System.Drawing.Image)
     Me.mnuToolsWILD.Name = "mnuToolsWILD"
-    Me.mnuToolsWILD.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsWILD.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsWILD.Text = "&WILD Inducer"
     '
     'mnuToolsWhyLD
     '
     Me.mnuToolsWhyLD.Image = CType(resources.GetObject("mnuToolsWhyLD.Image"), System.Drawing.Image)
     Me.mnuToolsWhyLD.Name = "mnuToolsWhyLD"
-    Me.mnuToolsWhyLD.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsWhyLD.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsWhyLD.Text = "Wh&y LD"
     '
     'ToolStripMenuItem5
     '
     Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-    Me.ToolStripMenuItem5.Size = New System.Drawing.Size(177, 6)
+    Me.ToolStripMenuItem5.Size = New System.Drawing.Size(176, 6)
     '
     'SpellingToolStripMenuItem
     '
     Me.SpellingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCheckSpelling, Me.mnuSpellingLanguage})
     Me.SpellingToolStripMenuItem.Image = CType(resources.GetObject("SpellingToolStripMenuItem.Image"), System.Drawing.Image)
     Me.SpellingToolStripMenuItem.Name = "SpellingToolStripMenuItem"
-    Me.SpellingToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+    Me.SpellingToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
     Me.SpellingToolStripMenuItem.Text = "&Spelling"
     '
     'mnuCheckSpelling
@@ -726,8 +727,26 @@ Partial Class MainForm
     '
     Me.mnuToolsDataDirectory.Image = CType(resources.GetObject("mnuToolsDataDirectory.Image"), System.Drawing.Image)
     Me.mnuToolsDataDirectory.Name = "mnuToolsDataDirectory"
-    Me.mnuToolsDataDirectory.Size = New System.Drawing.Size(180, 22)
+    Me.mnuToolsDataDirectory.Size = New System.Drawing.Size(179, 22)
     Me.mnuToolsDataDirectory.Text = "D&ata Directory"
+    '
+    'ViewToolStripMenuItem
+    '
+    Me.ViewToolStripMenuItem.BackColor = Global.LightenedDream.My.MySettings.Default.FormBackColor
+    Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFullScreen})
+    Me.ViewToolStripMenuItem.ForeColor = Global.LightenedDream.My.MySettings.Default.FormForeColor
+    Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
+    Me.ViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
+    Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+    Me.ViewToolStripMenuItem.Text = "&View"
+    '
+    'mnuFullScreen
+    '
+    Me.mnuFullScreen.Image = Global.LightenedDream.My.Resources.Resources.Dream_Final
+    Me.mnuFullScreen.Name = "mnuFullScreen"
+    Me.mnuFullScreen.ShortcutKeys = System.Windows.Forms.Keys.F11
+    Me.mnuFullScreen.Size = New System.Drawing.Size(156, 22)
+    Me.mnuFullScreen.Text = "&Full Screen"
     '
     'HelpToolStripMenuItem
     '
@@ -742,40 +761,40 @@ Partial Class MainForm
     '
     Me.mnuHelpAbout.Image = CType(resources.GetObject("mnuHelpAbout.Image"), System.Drawing.Image)
     Me.mnuHelpAbout.Name = "mnuHelpAbout"
-    Me.mnuHelpAbout.Size = New System.Drawing.Size(180, 22)
+    Me.mnuHelpAbout.Size = New System.Drawing.Size(132, 22)
     Me.mnuHelpAbout.Text = "&About"
     '
     'mnuQuickStart
     '
     Me.mnuQuickStart.Image = CType(resources.GetObject("mnuQuickStart.Image"), System.Drawing.Image)
     Me.mnuQuickStart.Name = "mnuQuickStart"
-    Me.mnuQuickStart.Size = New System.Drawing.Size(180, 22)
+    Me.mnuQuickStart.Size = New System.Drawing.Size(132, 22)
     Me.mnuQuickStart.Text = "&Quick Start"
     '
     'ToolStripMenuItem11
     '
     Me.ToolStripMenuItem11.Name = "ToolStripMenuItem11"
-    Me.ToolStripMenuItem11.Size = New System.Drawing.Size(177, 6)
+    Me.ToolStripMenuItem11.Size = New System.Drawing.Size(129, 6)
     '
     'mnuHelpUpdate
     '
     Me.mnuHelpUpdate.Image = CType(resources.GetObject("mnuHelpUpdate.Image"), System.Drawing.Image)
     Me.mnuHelpUpdate.Name = "mnuHelpUpdate"
-    Me.mnuHelpUpdate.Size = New System.Drawing.Size(180, 22)
+    Me.mnuHelpUpdate.Size = New System.Drawing.Size(132, 22)
     Me.mnuHelpUpdate.Text = "&Register..."
     '
     'mnuHelpSupport
     '
     Me.mnuHelpSupport.Image = CType(resources.GetObject("mnuHelpSupport.Image"), System.Drawing.Image)
     Me.mnuHelpSupport.Name = "mnuHelpSupport"
-    Me.mnuHelpSupport.Size = New System.Drawing.Size(180, 22)
+    Me.mnuHelpSupport.Size = New System.Drawing.Size(132, 22)
     Me.mnuHelpSupport.Text = "&Support..."
     '
     'SplitContainer1
     '
     Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-        Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Left) _
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.SplitContainer1.Location = New System.Drawing.Point(12, 113)
     Me.SplitContainer1.Name = "SplitContainer1"
     '
@@ -805,7 +824,7 @@ Partial Class MainForm
     'Panel3D8
     '
     Me.Panel3D8.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.Panel3D8.BackColor = Global.LightenedDream.My.MySettings.Default.TitleBackColor
     Me.Panel3D8.Controls.Add(Me.Label3)
     Me.Panel3D8.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.LightenedDream.My.MySettings.Default, "TitleBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
@@ -817,7 +836,7 @@ Partial Class MainForm
     'Label3
     '
     Me.Label3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.Label3.BackColor = System.Drawing.Color.Transparent
     Me.Label3.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.LightenedDream.My.MySettings.Default, "TitleForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.Label3.Font = New System.Drawing.Font("Verdana", 8.0!, System.Drawing.FontStyle.Bold)
@@ -833,8 +852,8 @@ Partial Class MainForm
     '
     Me.trvMain.AllowDrop = True
     Me.trvMain.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-        Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Left) _
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.trvMain.BackColor = Global.LightenedDream.My.MySettings.Default.TextBackColor
     Me.trvMain.BorderStyle = System.Windows.Forms.BorderStyle.None
     Me.trvMain.ContextMenuStrip = Me.mnuTrv
@@ -849,31 +868,31 @@ Partial Class MainForm
     Me.trvMain.ItemHeight = 18
     Me.trvMain.Location = New System.Drawing.Point(2, 25)
     Me.trvMain.Name = "trvMain"
-    TreeNode13.Name = "Node0"
-    TreeNode13.Text = "Node0"
-    TreeNode14.Name = "Node0"
-    TreeNode14.Text = "Dreams"
-    TreeNode15.Name = "Node1"
-    TreeNode15.Text = "Characters"
-    TreeNode16.Name = "Node3"
-    TreeNode16.Text = "Locations"
-    TreeNode17.Name = "Node4"
-    TreeNode17.Text = "Objects"
-    TreeNode18.Name = "Node0"
-    TreeNode18.Text = "Actions"
-    TreeNode19.Name = "Node5"
-    TreeNode19.Text = "Themes"
-    TreeNode20.Name = "Node14"
-    TreeNode20.Text = "Categories"
-    TreeNode21.Name = "Node10"
-    TreeNode21.Text = "REM Cycles"
-    TreeNode22.Name = "Node11"
-    TreeNode22.Text = "Reality Checks"
-    TreeNode23.Name = "Node12"
-    TreeNode23.Text = "Dream Inductions"
-    TreeNode24.Name = "Node8"
-    TreeNode24.Text = "Lucidity"
-    Me.trvMain.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode14, TreeNode20, TreeNode24})
+    TreeNode1.Name = "Node0"
+    TreeNode1.Text = "Node0"
+    TreeNode2.Name = "Node0"
+    TreeNode2.Text = "Dreams"
+    TreeNode3.Name = "Node1"
+    TreeNode3.Text = "Characters"
+    TreeNode4.Name = "Node3"
+    TreeNode4.Text = "Locations"
+    TreeNode5.Name = "Node4"
+    TreeNode5.Text = "Objects"
+    TreeNode6.Name = "Node0"
+    TreeNode6.Text = "Actions"
+    TreeNode7.Name = "Node5"
+    TreeNode7.Text = "Themes"
+    TreeNode8.Name = "Node14"
+    TreeNode8.Text = "Categories"
+    TreeNode9.Name = "Node10"
+    TreeNode9.Text = "REM Cycles"
+    TreeNode10.Name = "Node11"
+    TreeNode10.Text = "Reality Checks"
+    TreeNode11.Name = "Node12"
+    TreeNode11.Text = "Dream Inductions"
+    TreeNode12.Name = "Node8"
+    TreeNode12.Text = "Lucidity"
+    Me.trvMain.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode2, TreeNode8, TreeNode12})
     Me.trvMain.SelectedImageIndex = 1
     Me.trvMain.ShowLines = False
     Me.trvMain.Size = New System.Drawing.Size(240, 578)
@@ -883,7 +902,7 @@ Partial Class MainForm
     '
     Me.mnuTrv.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem20, Me.mnuTrvDelete, Me.mnuTrvPlay, Me.ToolStripMenuItem21, Me.mnuTrvExplorer, Me.mnuTrvSendTo})
     Me.mnuTrv.Name = "mnuTrv"
-    Me.mnuTrv.Size = New System.Drawing.Size(174, 126)
+    Me.mnuTrv.Size = New System.Drawing.Size(181, 148)
     '
     'ToolStripMenuItem1
     '
@@ -892,26 +911,26 @@ Partial Class MainForm
     Me.ToolStripMenuItem1.ForeColor = System.Drawing.SystemColors.ControlText
     Me.ToolStripMenuItem1.Image = CType(resources.GetObject("ToolStripMenuItem1.Image"), System.Drawing.Image)
     Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-    Me.ToolStripMenuItem1.Size = New System.Drawing.Size(173, 22)
+    Me.ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
     Me.ToolStripMenuItem1.Text = "&New"
     '
     'ToolStripMenuItem2
     '
     Me.ToolStripMenuItem2.Image = Global.LightenedDream.My.Resources.Resources.Dream_Final2
     Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-    Me.ToolStripMenuItem2.Size = New System.Drawing.Size(164, 22)
+    Me.ToolStripMenuItem2.Size = New System.Drawing.Size(180, 22)
     Me.ToolStripMenuItem2.Text = "&Dream"
     '
     'ToolStripSeparator1
     '
     Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-    Me.ToolStripSeparator1.Size = New System.Drawing.Size(161, 6)
+    Me.ToolStripSeparator1.Size = New System.Drawing.Size(177, 6)
     '
     'mnuTreeNewCategoryFolder
     '
     Me.mnuTreeNewCategoryFolder.Image = Global.LightenedDream.My.Resources.Resources.Folder_16
     Me.mnuTreeNewCategoryFolder.Name = "mnuTreeNewCategoryFolder"
-    Me.mnuTreeNewCategoryFolder.Size = New System.Drawing.Size(164, 22)
+    Me.mnuTreeNewCategoryFolder.Size = New System.Drawing.Size(180, 22)
     Me.mnuTreeNewCategoryFolder.Tag = "Category"
     Me.mnuTreeNewCategoryFolder.Text = "Category"
     '
@@ -919,27 +938,27 @@ Partial Class MainForm
     '
     Me.mnuTreeNewCategoryItem.Image = Global.LightenedDream.My.Resources.Resources.Categories
     Me.mnuTreeNewCategoryItem.Name = "mnuTreeNewCategoryItem"
-    Me.mnuTreeNewCategoryItem.Size = New System.Drawing.Size(164, 22)
+    Me.mnuTreeNewCategoryItem.Size = New System.Drawing.Size(180, 22)
     Me.mnuTreeNewCategoryItem.Tag = "CategoryItem"
     Me.mnuTreeNewCategoryItem.Text = "Category Item"
     '
     'ToolStripSeparator2
     '
     Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-    Me.ToolStripSeparator2.Size = New System.Drawing.Size(161, 6)
+    Me.ToolStripSeparator2.Size = New System.Drawing.Size(177, 6)
     '
     'ToolStripMenuItem15
     '
     Me.ToolStripMenuItem15.Image = CType(resources.GetObject("ToolStripMenuItem15.Image"), System.Drawing.Image)
     Me.ToolStripMenuItem15.Name = "ToolStripMenuItem15"
-    Me.ToolStripMenuItem15.Size = New System.Drawing.Size(164, 22)
+    Me.ToolStripMenuItem15.Size = New System.Drawing.Size(180, 22)
     Me.ToolStripMenuItem15.Text = "&REM Cycle"
     '
     'ToolStripMenuItem17
     '
     Me.ToolStripMenuItem17.Image = CType(resources.GetObject("ToolStripMenuItem17.Image"), System.Drawing.Image)
     Me.ToolStripMenuItem17.Name = "ToolStripMenuItem17"
-    Me.ToolStripMenuItem17.Size = New System.Drawing.Size(164, 22)
+    Me.ToolStripMenuItem17.Size = New System.Drawing.Size(180, 22)
     Me.ToolStripMenuItem17.Tag = "Subliminal"
     Me.ToolStripMenuItem17.Text = "&Subliminal"
     '
@@ -947,7 +966,7 @@ Partial Class MainForm
     '
     Me.ToolStripMenuItem18.Image = CType(resources.GetObject("ToolStripMenuItem18.Image"), System.Drawing.Image)
     Me.ToolStripMenuItem18.Name = "ToolStripMenuItem18"
-    Me.ToolStripMenuItem18.Size = New System.Drawing.Size(164, 22)
+    Me.ToolStripMenuItem18.Size = New System.Drawing.Size(180, 22)
     Me.ToolStripMenuItem18.Tag = "Recording"
     Me.ToolStripMenuItem18.Text = "&Recording"
     '
@@ -955,7 +974,7 @@ Partial Class MainForm
     '
     Me.ToolStripMenuItem19.Image = CType(resources.GetObject("ToolStripMenuItem19.Image"), System.Drawing.Image)
     Me.ToolStripMenuItem19.Name = "ToolStripMenuItem19"
-    Me.ToolStripMenuItem19.Size = New System.Drawing.Size(164, 22)
+    Me.ToolStripMenuItem19.Size = New System.Drawing.Size(180, 22)
     Me.ToolStripMenuItem19.Tag = "Reading"
     Me.ToolStripMenuItem19.Text = "&Reading"
     '
@@ -963,66 +982,66 @@ Partial Class MainForm
     '
     Me.mnuTrvNewExercise.Image = Global.LightenedDream.My.Resources.Resources.Dream_Final1
     Me.mnuTrvNewExercise.Name = "mnuTrvNewExercise"
-    Me.mnuTrvNewExercise.Size = New System.Drawing.Size(164, 22)
+    Me.mnuTrvNewExercise.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvNewExercise.Text = "&Exercise"
     '
     'RandomExerciseToolStripMenuItem1
     '
     Me.RandomExerciseToolStripMenuItem1.Image = Global.LightenedDream.My.Resources.Resources.Dream_Final_2
     Me.RandomExerciseToolStripMenuItem1.Name = "RandomExerciseToolStripMenuItem1"
-    Me.RandomExerciseToolStripMenuItem1.Size = New System.Drawing.Size(164, 22)
+    Me.RandomExerciseToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
     Me.RandomExerciseToolStripMenuItem1.Text = "&Random Exercise"
     '
     'ToolStripMenuItem20
     '
     Me.ToolStripMenuItem20.Name = "ToolStripMenuItem20"
-    Me.ToolStripMenuItem20.Size = New System.Drawing.Size(170, 6)
+    Me.ToolStripMenuItem20.Size = New System.Drawing.Size(177, 6)
     '
     'mnuTrvDelete
     '
     Me.mnuTrvDelete.Image = CType(resources.GetObject("mnuTrvDelete.Image"), System.Drawing.Image)
     Me.mnuTrvDelete.Name = "mnuTrvDelete"
-    Me.mnuTrvDelete.Size = New System.Drawing.Size(173, 22)
+    Me.mnuTrvDelete.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvDelete.Text = "&Delete"
     '
     'mnuTrvPlay
     '
     Me.mnuTrvPlay.Image = CType(resources.GetObject("mnuTrvPlay.Image"), System.Drawing.Image)
     Me.mnuTrvPlay.Name = "mnuTrvPlay"
-    Me.mnuTrvPlay.Size = New System.Drawing.Size(173, 22)
+    Me.mnuTrvPlay.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvPlay.Text = "&Play"
     '
     'ToolStripMenuItem21
     '
     Me.ToolStripMenuItem21.Name = "ToolStripMenuItem21"
-    Me.ToolStripMenuItem21.Size = New System.Drawing.Size(170, 6)
+    Me.ToolStripMenuItem21.Size = New System.Drawing.Size(177, 6)
     '
     'mnuTrvExplorer
     '
     Me.mnuTrvExplorer.Image = Global.LightenedDream.My.Resources.Resources.Folder_Launch_16
     Me.mnuTrvExplorer.Name = "mnuTrvExplorer"
-    Me.mnuTrvExplorer.Size = New System.Drawing.Size(173, 22)
+    Me.mnuTrvExplorer.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvExplorer.Text = "&Open File Location"
     '
     'mnuTrvSendTo
     '
-    Me.mnuTrvSendTo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTrvSendToDesktop, Me.mnuTrvSendToLD4All})
+    Me.mnuTrvSendTo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTrvSendToFile, Me.mnuTrvSendToDesktop, Me.mnuTrvSendToLD4All})
     Me.mnuTrvSendTo.Image = Global.LightenedDream.My.Resources.Resources.Graph_Export
     Me.mnuTrvSendTo.Name = "mnuTrvSendTo"
-    Me.mnuTrvSendTo.Size = New System.Drawing.Size(173, 22)
+    Me.mnuTrvSendTo.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvSendTo.Text = "&Send To"
     '
     'mnuTrvSendToDesktop
     '
     Me.mnuTrvSendToDesktop.Image = CType(resources.GetObject("mnuTrvSendToDesktop.Image"), System.Drawing.Image)
     Me.mnuTrvSendToDesktop.Name = "mnuTrvSendToDesktop"
-    Me.mnuTrvSendToDesktop.Size = New System.Drawing.Size(117, 22)
+    Me.mnuTrvSendToDesktop.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvSendToDesktop.Text = "&Desktop"
     '
     'mnuTrvSendToLD4All
     '
     Me.mnuTrvSendToLD4All.Name = "mnuTrvSendToLD4All"
-    Me.mnuTrvSendToLD4All.Size = New System.Drawing.Size(117, 22)
+    Me.mnuTrvSendToLD4All.Size = New System.Drawing.Size(180, 22)
     Me.mnuTrvSendToLD4All.Text = "LD4All"
     Me.mnuTrvSendToLD4All.Visible = False
     '
@@ -1072,7 +1091,7 @@ Partial Class MainForm
     'Panel3D7
     '
     Me.Panel3D7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.Panel3D7.BackColor = Global.LightenedDream.My.MySettings.Default.TitleBackColor
     Me.Panel3D7.Controls.Add(Me.Label6)
     Me.Panel3D7.Controls.Add(Me.Label2)
@@ -1098,7 +1117,7 @@ Partial Class MainForm
     'Label2
     '
     Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.Label2.BackColor = System.Drawing.Color.Transparent
     Me.Label2.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.LightenedDream.My.MySettings.Default, "TitleForeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.Label2.Font = New System.Drawing.Font("Verdana", 8.0!, System.Drawing.FontStyle.Bold)
@@ -1203,7 +1222,7 @@ Partial Class MainForm
     'lblStatus
     '
     Me.lblStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.lblStatus.Location = New System.Drawing.Point(12, 708)
     Me.lblStatus.Name = "lblStatus"
     Me.lblStatus.Size = New System.Drawing.Size(984, 18)
@@ -1257,8 +1276,8 @@ Partial Class MainForm
     'pnlProcessing
     '
     Me.pnlProcessing.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-        Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Left) _
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.pnlProcessing.BackColor = Global.LightenedDream.My.MySettings.Default.FormBackColor
     Me.pnlProcessing.Controls.Add(Me.pnlSearching)
     Me.pnlProcessing.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.LightenedDream.My.MySettings.Default, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
@@ -1271,20 +1290,20 @@ Partial Class MainForm
     'pnlSearching
     '
     Me.pnlSearching.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-        Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    MySettings2.Font = New System.Drawing.Font("Verdana", 8.25!)
-    MySettings2.FormBackColor = System.Drawing.Color.LightSteelBlue
-    MySettings2.FormForeColor = System.Drawing.Color.MidnightBlue
-    MySettings2.LastAsleep = New Date(CType(0, Long))
-    MySettings2.LastAwake = New Date(CType(0, Long))
-    MySettings2.SettingsKey = ""
-    MySettings2.TextBackColor = System.Drawing.Color.White
-    MySettings2.TitleBackColor = System.Drawing.Color.SteelBlue
-    MySettings2.TitleForeColor = System.Drawing.Color.White
-    Me.pnlSearching.BackColor = MySettings2.FormBackColor
+      Or System.Windows.Forms.AnchorStyles.Left) _
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+    MySettings1.Font = New System.Drawing.Font("Verdana", 8.25!)
+    MySettings1.FormBackColor = System.Drawing.Color.LightSteelBlue
+    MySettings1.FormForeColor = System.Drawing.Color.MidnightBlue
+    MySettings1.LastAsleep = New Date(CType(0, Long))
+    MySettings1.LastAwake = New Date(CType(0, Long))
+    MySettings1.SettingsKey = ""
+    MySettings1.TextBackColor = System.Drawing.Color.White
+    MySettings1.TitleBackColor = System.Drawing.Color.SteelBlue
+    MySettings1.TitleForeColor = System.Drawing.Color.White
+    Me.pnlSearching.BackColor = MySettings1.FormBackColor
     Me.pnlSearching.Controls.Add(Me.graph)
-    Me.pnlSearching.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings2, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+    Me.pnlSearching.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", MySettings1, "FormBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.pnlSearching.Location = New System.Drawing.Point(0, 0)
     Me.pnlSearching.Name = "pnlSearching"
     Me.pnlSearching.Size = New System.Drawing.Size(984, 691)
@@ -1293,68 +1312,68 @@ Partial Class MainForm
     'graph
     '
     Me.graph.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-        Or System.Windows.Forms.AnchorStyles.Left) _
-        Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Or System.Windows.Forms.AnchorStyles.Left) _
+      Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.graph.BackColor = System.Drawing.Color.Transparent
-    ChartArea2.Area3DStyle.Enable3D = True
-    ChartArea2.Area3DStyle.Inclination = 10
-    ChartArea2.Area3DStyle.IsClustered = True
-    ChartArea2.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic
-    ChartArea2.Area3DStyle.PointDepth = 200
-    ChartArea2.Area3DStyle.PointGapDepth = 0
-    ChartArea2.Area3DStyle.Rotation = 10
-    ChartArea2.Area3DStyle.WallWidth = 0
-    ChartArea2.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
-    ChartArea2.AxisX.IsLabelAutoFit = False
-    ChartArea2.AxisX.LabelStyle.Angle = 90
-    ChartArea2.AxisX.LabelStyle.Enabled = False
-    ChartArea2.AxisX.LabelStyle.Interval = 0R
-    ChartArea2.AxisX.LineColor = System.Drawing.Color.Transparent
-    ChartArea2.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
-    ChartArea2.AxisX.LineWidth = 0
-    ChartArea2.AxisX.MajorGrid.Enabled = False
-    ChartArea2.AxisX.MajorGrid.LineWidth = 0
-    ChartArea2.AxisX.MajorTickMark.Enabled = False
-    ChartArea2.AxisX.MajorTickMark.LineWidth = 0
-    ChartArea2.AxisX.MajorTickMark.Size = 0!
-    ChartArea2.AxisX.MinorGrid.LineWidth = 0
-    ChartArea2.AxisX.MinorTickMark.LineWidth = 0
-    ChartArea2.AxisX.MinorTickMark.Size = 0!
-    ChartArea2.AxisX.TitleForeColor = System.Drawing.Color.LightSteelBlue
-    CustomLabel3.Text = "x"
-    CustomLabel4.Text = "x"
-    ChartArea2.AxisX2.CustomLabels.Add(CustomLabel3)
-    ChartArea2.AxisX2.CustomLabels.Add(CustomLabel4)
-    ChartArea2.AxisX2.LineWidth = 0
-    ChartArea2.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
-    ChartArea2.AxisY.LabelStyle.Enabled = False
-    ChartArea2.AxisY.LineWidth = 0
-    ChartArea2.AxisY.MajorGrid.Enabled = False
-    ChartArea2.AxisY.MajorTickMark.Enabled = False
-    ChartArea2.AxisY.TitleForeColor = System.Drawing.Color.LightSteelBlue
-    ChartArea2.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
-    ChartArea2.AxisY2.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount
-    ChartArea2.AxisY2.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
-    ChartArea2.AxisY2.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
-    ChartArea2.AxisY2.LineWidth = 0
-    ChartArea2.AxisY2.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash
-    ChartArea2.AxisY2.Maximum = 11.0R
-    ChartArea2.AxisY2.Minimum = -11.0R
-    ChartArea2.AxisY2.ScaleBreakStyle.BreakLineStyle = System.Windows.Forms.DataVisualization.Charting.BreakLineStyle.Wave
-    ChartArea2.AxisY2.ScaleBreakStyle.Enabled = True
-    ChartArea2.BackColor = System.Drawing.Color.LightSteelBlue
-    ChartArea2.BackImageTransparentColor = System.Drawing.Color.White
-    ChartArea2.BackSecondaryColor = System.Drawing.Color.Transparent
-    ChartArea2.BorderColor = System.Drawing.Color.LightSteelBlue
-    ChartArea2.BorderWidth = 0
-    ChartArea2.Name = "ChartArea1"
-    ChartArea2.ShadowColor = System.Drawing.Color.Transparent
-    Me.graph.ChartAreas.Add(ChartArea2)
+    ChartArea1.Area3DStyle.Enable3D = True
+    ChartArea1.Area3DStyle.Inclination = 10
+    ChartArea1.Area3DStyle.IsClustered = True
+    ChartArea1.Area3DStyle.LightStyle = System.Windows.Forms.DataVisualization.Charting.LightStyle.Realistic
+    ChartArea1.Area3DStyle.PointDepth = 200
+    ChartArea1.Area3DStyle.PointGapDepth = 0
+    ChartArea1.Area3DStyle.Rotation = 10
+    ChartArea1.Area3DStyle.WallWidth = 0
+    ChartArea1.AxisX.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+    ChartArea1.AxisX.IsLabelAutoFit = False
+    ChartArea1.AxisX.LabelStyle.Angle = 90
+    ChartArea1.AxisX.LabelStyle.Enabled = False
+    ChartArea1.AxisX.LabelStyle.Interval = 0R
+    ChartArea1.AxisX.LineColor = System.Drawing.Color.Transparent
+    ChartArea1.AxisX.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.NotSet
+    ChartArea1.AxisX.LineWidth = 0
+    ChartArea1.AxisX.MajorGrid.Enabled = False
+    ChartArea1.AxisX.MajorGrid.LineWidth = 0
+    ChartArea1.AxisX.MajorTickMark.Enabled = False
+    ChartArea1.AxisX.MajorTickMark.LineWidth = 0
+    ChartArea1.AxisX.MajorTickMark.Size = 0!
+    ChartArea1.AxisX.MinorGrid.LineWidth = 0
+    ChartArea1.AxisX.MinorTickMark.LineWidth = 0
+    ChartArea1.AxisX.MinorTickMark.Size = 0!
+    ChartArea1.AxisX.TitleForeColor = System.Drawing.Color.LightSteelBlue
+    CustomLabel1.Text = "x"
+    CustomLabel2.Text = "x"
+    ChartArea1.AxisX2.CustomLabels.Add(CustomLabel1)
+    ChartArea1.AxisX2.CustomLabels.Add(CustomLabel2)
+    ChartArea1.AxisX2.LineWidth = 0
+    ChartArea1.AxisY.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[True]
+    ChartArea1.AxisY.LabelStyle.Enabled = False
+    ChartArea1.AxisY.LineWidth = 0
+    ChartArea1.AxisY.MajorGrid.Enabled = False
+    ChartArea1.AxisY.MajorTickMark.Enabled = False
+    ChartArea1.AxisY.TitleForeColor = System.Drawing.Color.LightSteelBlue
+    ChartArea1.AxisY2.Enabled = System.Windows.Forms.DataVisualization.Charting.AxisEnabled.[False]
+    ChartArea1.AxisY2.IntervalAutoMode = System.Windows.Forms.DataVisualization.Charting.IntervalAutoMode.VariableCount
+    ChartArea1.AxisY2.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
+    ChartArea1.AxisY2.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number
+    ChartArea1.AxisY2.LineWidth = 0
+    ChartArea1.AxisY2.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dash
+    ChartArea1.AxisY2.Maximum = 11.0R
+    ChartArea1.AxisY2.Minimum = -11.0R
+    ChartArea1.AxisY2.ScaleBreakStyle.BreakLineStyle = System.Windows.Forms.DataVisualization.Charting.BreakLineStyle.Wave
+    ChartArea1.AxisY2.ScaleBreakStyle.Enabled = True
+    ChartArea1.BackColor = System.Drawing.Color.LightSteelBlue
+    ChartArea1.BackImageTransparentColor = System.Drawing.Color.White
+    ChartArea1.BackSecondaryColor = System.Drawing.Color.Transparent
+    ChartArea1.BorderColor = System.Drawing.Color.LightSteelBlue
+    ChartArea1.BorderWidth = 0
+    ChartArea1.Name = "ChartArea1"
+    ChartArea1.ShadowColor = System.Drawing.Color.Transparent
+    Me.graph.ChartAreas.Add(ChartArea1)
     Me.graph.Location = New System.Drawing.Point(3, 3)
     Me.graph.Name = "graph"
-    Series2.ChartArea = "ChartArea1"
-    Series2.Name = "Series1"
-    Me.graph.Series.Add(Series2)
+    Series1.ChartArea = "ChartArea1"
+    Series1.Name = "Series1"
+    Me.graph.Series.Add(Series1)
     Me.graph.Size = New System.Drawing.Size(978, 685)
     Me.graph.TabIndex = 283
     '
@@ -1362,21 +1381,12 @@ Partial Class MainForm
     '
     Me.tmrSaving.Interval = 128
     '
-    'ViewToolStripMenuItem
+    'mnuTrvSendToFile
     '
-    Me.ViewToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFullScreen})
-    Me.ViewToolStripMenuItem.Name = "ViewToolStripMenuItem"
-    Me.ViewToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11
-    Me.ViewToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
-    Me.ViewToolStripMenuItem.Text = "&View"
-    '
-    'mnuFullScreen
-    '
-    Me.mnuFullScreen.Image = Global.LightenedDream.My.Resources.Resources.Dream_Final
-    Me.mnuFullScreen.Name = "mnuFullScreen"
-    Me.mnuFullScreen.ShortcutKeys = System.Windows.Forms.Keys.F11
-    Me.mnuFullScreen.Size = New System.Drawing.Size(180, 22)
-    Me.mnuFullScreen.Text = "&Full Screen"
+    Me.mnuTrvSendToFile.Image = CType(resources.GetObject("mnuTrvSendToFile.Image"), System.Drawing.Image)
+    Me.mnuTrvSendToFile.Name = "mnuTrvSendToFile"
+    Me.mnuTrvSendToFile.Size = New System.Drawing.Size(180, 22)
+    Me.mnuTrvSendToFile.Text = "&File"
     '
     'MainForm
     '
@@ -1543,6 +1553,7 @@ Partial Class MainForm
   Friend WithEvents mnuToolsDreamTypeCount As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuTreeNewCategoryItem As System.Windows.Forms.ToolStripMenuItem
   Friend WithEvents mnuToolsRecentDreamSigns As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuFullScreen As ToolStripMenuItem
+  Friend WithEvents ViewToolStripMenuItem As ToolStripMenuItem
+  Friend WithEvents mnuFullScreen As ToolStripMenuItem
+  Friend WithEvents mnuTrvSendToFile As ToolStripMenuItem
 End Class
