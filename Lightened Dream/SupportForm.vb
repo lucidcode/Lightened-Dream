@@ -10,8 +10,8 @@
     End Try
     txtReplyAddress.Focus()
     Application.DoEvents()
-        webSupport.Url = New Uri("http://www.lucid-code.com/LightenedDream/Support")
-    End Sub
+    webSupport.Url = New Uri("https://www.lucid-code.com/LightenedDream/Support")
+  End Sub
 
     Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
         Close()

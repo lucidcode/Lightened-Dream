@@ -24,10 +24,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Lightened_Dream_III_EmailService_EmailService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://lucid-code.com/Services/Communication/EmailService.asmx</Value>
+      <Value Profile="(Default)">https://lucid-code.com/Services/Communication/EmailService.asmx</Value>
     </Setting>
     <Setting Name="Liquid_Dream_III_EmailService_EmailService" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://lucid-code.com/Services/Communication/EmailService.asmx</Value>
+      <Value Profile="(Default)">https://lucid-code.com/Services/Communication/EmailService.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>
