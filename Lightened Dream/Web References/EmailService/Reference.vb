@@ -24,10 +24,10 @@ Imports System.Xml.Serialization
 Namespace EmailService
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code"),  _
-     System.Web.Services.WebServiceBindingAttribute(Name:="EmailServiceSoap", [Namespace]:="http://www.lucid-code.com/")>  _
+     System.Web.Services.WebServiceBindingAttribute(Name:="EmailServiceSoap", [Namespace]:="https://www.lucid-code.com/")>  _
     Partial Public Class EmailService
         Inherits System.Web.Services.Protocols.SoapHttpClientProtocol
         
@@ -80,7 +80,7 @@ Namespace EmailService
         Public Event SendCompleted As SendCompletedEventHandler
         
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.lucid-code.com/HelloWorld", RequestNamespace:="http://www.lucid-code.com/", ResponseNamespace:="http://www.lucid-code.com/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://www.lucid-code.com/HelloWorld", RequestNamespace:="https://www.lucid-code.com/", ResponseNamespace:="https://www.lucid-code.com/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
         Public Function HelloWorld(ByVal strTest As String) As String
             Dim results() As Object = Me.Invoke("HelloWorld", New Object() {strTest})
             Return CType(results(0),String)
@@ -107,7 +107,7 @@ Namespace EmailService
         End Sub
         
         '''<remarks/>
-        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://www.lucid-code.com/Send", RequestNamespace:="http://www.lucid-code.com/", ResponseNamespace:="http://www.lucid-code.com/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
+        <System.Web.Services.Protocols.SoapDocumentMethodAttribute("https://www.lucid-code.com/Send", RequestNamespace:="https://www.lucid-code.com/", ResponseNamespace:="https://www.lucid-code.com/", Use:=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle:=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)>  _
         Public Function Send(ByVal ReplyAddress As String, ByVal MessageType As String, ByVal OS As String, ByVal Message As String) As Object
             Dim results() As Object = Me.Invoke("Send", New Object() {ReplyAddress, MessageType, OS, Message})
             Return CType(results(0),Object)
@@ -153,11 +153,11 @@ Namespace EmailService
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")>  _
     Public Delegate Sub HelloWorldCompletedEventHandler(ByVal sender As Object, ByVal e As HelloWorldCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class HelloWorldCompletedEventArgs
@@ -180,11 +180,11 @@ Namespace EmailService
     End Class
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")>  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")>  _
     Public Delegate Sub SendCompletedEventHandler(ByVal sender As Object, ByVal e As SendCompletedEventArgs)
     
     '''<remarks/>
-    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0"),  _
+    <System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0"),  _
      System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.ComponentModel.DesignerCategoryAttribute("code")>  _
     Partial Public Class SendCompletedEventArgs

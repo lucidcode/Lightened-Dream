@@ -15,7 +15,7 @@ Option Explicit On
 Namespace My
     
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
-     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0"),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0"),  _
      Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
     Partial Friend NotInheritable Class MySettings
         Inherits Global.System.Configuration.ApplicationSettingsBase
@@ -141,7 +141,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://lucid-code.com/Services/Communication/EmailService.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://lucid-code.com/Services/Communication/EmailService.asmx")>  _
         Public ReadOnly Property Lightened_Dream_III_EmailService_EmailService() As String
             Get
                 Return CType(Me("Lightened_Dream_III_EmailService_EmailService"),String)
@@ -151,7 +151,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.WebServiceUrl),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://lucid-code.com/Services/Communication/EmailService.asmx")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://lucid-code.com/Services/Communication/EmailService.asmx")>  _
         Public ReadOnly Property Liquid_Dream_III_EmailService_EmailService() As String
             Get
                 Return CType(Me("Liquid_Dream_III_EmailService_EmailService"),String)

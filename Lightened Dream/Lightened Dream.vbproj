@@ -198,16 +198,16 @@
     <Compile Include="UpdateControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Web References\EmailService\Reference.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="DataDirectoryForm.Designer.vb">
       <DependentUpon>DataDirectoryForm.vb</DependentUpon>
     </Compile>
     <Compile Include="DataDirectoryForm.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Web References\EmailService\Reference.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

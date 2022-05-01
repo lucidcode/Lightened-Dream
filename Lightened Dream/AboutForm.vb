@@ -102,7 +102,7 @@ Public Class AboutForm
             Try
 
                 WebRequest.DefaultWebProxy.Credentials = CredentialCache.DefaultCredentials
-                Dim objRequest As HttpWebRequest = CType(WebRequest.Create("http://www.lucid-code.com/LightenedDream/updates/LatestVersion.html"), HttpWebRequest)
+                Dim objRequest As HttpWebRequest = CType(WebRequest.Create("https://www.lucid-code.com/LightenedDream/updates/LatestVersion.html"), HttpWebRequest)
                 objRequest.Method = "GET"
                 Dim objWebResponse As HttpWebResponse = CType(objRequest.GetResponse(), HttpWebResponse)
                 Dim objResponseStream As StreamReader = New StreamReader(objWebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding(1252))
